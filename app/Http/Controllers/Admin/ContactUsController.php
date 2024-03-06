@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ContactUsController extends Controller
 {
     public function index(){
-        $message = contact::all();
-        return view('contact.index',compact('message'));
+        // $message = contact::all();
+        return view('pages.contact.index');
     }
 }
