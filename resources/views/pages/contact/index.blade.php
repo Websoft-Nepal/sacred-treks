@@ -1,8 +1,19 @@
 @extends('layouts.app')
-@section('page-title', 'Admin - Dashboard')
+@section('page-title', 'Contact Message')
 @section('main-section')
     <!-- Begin Page Content -->
     <div class="container-fluid">
+        <div>
+            <h4 class="page-title text-left">ContactUs Management</h4>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a>
+                </li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">ContactUs</a>
+                </li>
+                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">ContactUs List</a></li>
+
+            </ol>
+        </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Contact Message</h6>
@@ -24,7 +35,7 @@
                                 <td>System Architect</td>
                                 <td>Edinburgh</td>
                                 <td>
-                                    <!-- Button trigger modal -->
+                                    <!-- Button view modal -->
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#exampleModalCenter_">
                                         view
@@ -51,11 +62,12 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close</button>
-                                                    <button type="button"  class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                   
+                                    {{-- delete button--------- --}}
                                     <form action="" method="post" class="d-inline">
                                        @csrf
                                        @method('delete')
