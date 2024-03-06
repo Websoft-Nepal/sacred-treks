@@ -97,6 +97,16 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Charts</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.trekking.index')}}">
+            <i class="fas fa-fw fa-mountain"></i>
+            <span>Trekking</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.contactus.index')}}">
+            <i class="fas fa-fw fa-phone"></i>
+            <span>Contact Us</span></a>
+    </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
