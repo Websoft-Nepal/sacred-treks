@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Trekking extends Model
 {
     use HasFactory;
+    protected $fillable = ['title','image','slug','description'];
 }
