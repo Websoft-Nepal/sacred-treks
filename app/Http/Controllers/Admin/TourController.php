@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Storage;
 class TourController extends BaseController
 {
     public function index(){
-        $tour = Tour::latest()->paginate(10);
-        return view();
+        $tours = Tour::latest()->paginate(10);
+        return view('pages.tour.index',compact('tours'));
     }
-    public function create(){
 
+    public function create(){
+        return view('pages.tour.create');
     }
+
     public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
