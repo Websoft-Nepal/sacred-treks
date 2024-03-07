@@ -21,11 +21,31 @@ class TourController extends BaseController
     public function store(Request $request){
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
+            'image' => 'required|image|max:255',
             'description' => 'nullable|string',
         ]);
         $tour = new Tour();
         $tour->title = $request->title;
+        $tour->slug = $this->generateSlug($request->title, $tour);
         $tour->image = $this->uploadImage($request->image, "uploads/tour");
+        $tour->description = $request->description;
+        $tour->save();
+        return redirect()->route('admin.tour.index');
+    }
+
+    public function show($id){
+
+    }
+    public function edit($id){
+        $tour = Tour::findOrFail($id);
+        return redirect();
+    }
+
+    public function update(Request $request,$id){
+
+    }
+
+    public function destroy($id){
+
     }
 }
