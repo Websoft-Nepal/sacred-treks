@@ -37,6 +37,7 @@ Route::prefix('admin')->name("admin.")->group(function () {
     // Tour Route
     Route::prefix('tour')->name('tour.')->group(function () {
         Route::get('/', [TourController::class, 'index'])->name('index');
+        Route::post('store',[TourController::class,'store'])->name('store');
         Route::get('create', [TourController::class, 'create'])->name('create');
         Route::get('/{tour}/edit',[TourController::class,'edit'])->name('edit');
         Route::get('/update/{tour}',[TourController::class,'update'])->name('update');
