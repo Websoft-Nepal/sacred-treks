@@ -37,112 +37,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>
-                                    <img width="50px"
-                                        src="https://media.istockphoto.com/id/1672317574/photo/ama-dablam-mountain-peak.webp?b=1&s=170667a&w=0&k=20&c=Ea8yDEHpUemrRuMZUKGPDBE11YTWVksIupMN8FkEBf8="
-                                        alt="">
-                                </td>
-                                <td>
-                                    <!-- Button view modal -->
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#viewTrekking_">
-                                        view
-                                    </button>
+                            @foreach ($blogs as $blog)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $blog->title }}</td>
+                                    <td>{{ $blog->slug }}</td>
+                                    <td>
+                                        <img width="50px"
+                                            src="https://media.istockphoto.com/id/1672317574/photo/ama-dablam-mountain-peak.webp?b=1&s=170667a&w=0&k=20&c=Ea8yDEHpUemrRuMZUKGPDBE11YTWVksIupMN8FkEBf8="
+                                            alt="">
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.blog.edit', $blog->id) }}"
+                                            class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('admin.blog.show', $blog->id) }}"
+                                            class="btn btn-success btn-sm">View</a>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="viewTrekking_" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">View Description</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
+                                        {{-- delete button------- --}}
+                                        <form action="" method="post" class="d-inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger btn-sm"
+                                                onclick="return confirm('are you want to delete')">delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
 
-
-                                                    <div class="mb-3">
-                                                        <label for="message" class="form-label">Description</label>
-                                                        <textarea class="form-control" id="message" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Button edit modal -->
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                                        data-target="#editTrekking_">
-                                        edit
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="editTrekking_" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Blog</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form action="" method="POST">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="title" class="form-label">Title</label>
-                                                            <input type="text" class="form-control" name="title"
-                                                                id="title">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="slug" class="form-label">Slug</label>
-                                                            <input type="text" class="form-control" name="slug"
-                                                                id="slug">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="image" class="form-label">Image</label>
-                                                            <input type="file" class="form-control" name="image"
-                                                                id="image">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="description"
-                                                                class="form-label">Description</label>
-                                                            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </tbody>
+                    </table>
                 </div>
-                {{-- delete button------- --}}
-                <form action="" method="post" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger btn-sm"
-                        onclick="return confirm('are you want to delete')">delete</button>
-                </form>
-                </td>
-                </tr>
-                </tbody>
-                </table>
             </div>
         </div>
     </div>

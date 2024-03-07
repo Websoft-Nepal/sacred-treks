@@ -103,6 +103,16 @@
             <span>Trekking</span></a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.blog.index')}}">
+            <i class="fas fa-fw fa-mountain"></i>
+            <span>Blog</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.tour.index')}}">
+            <i class="fas fa-fw fa-mountain"></i>
+            <span>Tour</span></a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{route('admin.contactus.index')}}">
             <i class="fas fa-fw fa-phone"></i>
             <span>Contact Us</span></a>
