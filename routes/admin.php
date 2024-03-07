@@ -40,6 +40,8 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::post('store',[TourController::class,'store'])->name('store');
         Route::get('create', [TourController::class, 'create'])->name('create');
         Route::get('/{tour}/edit',[TourController::class,'edit'])->name('edit');
+        Route::get('/{tour}/show', [TourController::class, 'show'])->name('show');
         Route::get('/update/{tour}',[TourController::class,'update'])->name('update');
+        Route::delete('/destroy/{tour}', [TourController::class, 'destroy'])->name('destroy');
     });
 });

@@ -49,9 +49,9 @@
                                         alt="">
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.blog.edit', $tour->id) }}"
+                                    <a href="{{ route('admin.tour.edit', $tour->id) }}"
                                         class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('admin.blog.show', $tour->id) }}"
+                                    <a href="{{ route('admin.tour.show', $tour->id) }}"
                                         class="btn btn-success btn-sm">View</a>
 
                                     {{-- delete button------- --}}
