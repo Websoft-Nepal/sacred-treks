@@ -15,6 +15,7 @@
 
             </ol>
         </div>
+        <x:notify-messages/>
         {{-- </div> --}}
         <div class="p-1">
 
