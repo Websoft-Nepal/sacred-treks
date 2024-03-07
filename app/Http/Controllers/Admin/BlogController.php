@@ -55,7 +55,22 @@ class BlogController extends BaseController
         $blog->title = $request->title;
         $blog->slug = str::slug($request->slug);
         $blog->image = $this->uploadImage($request->image);
-        $blog->update();
+        if ($request->hasFile('image')) {
+            // Delete the previous image if exists
+            if ($blog->image) {
+                try {
+                    $filePath = storage_path('app/public/uploads/blog/' . $blog->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+            // Upload the new image
+            $blog->image = $request->file('image')->store('uploads/blog');
+        }
+
+        $blog->save();
         return redirect()->route('admin.blog.index');
     }
 }
