@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\TrekkingController;
@@ -17,5 +18,10 @@ Route::prefix('admin')->name("admin.")->group(function () {
     Route::prefix('trekking')->name('trekking.')->group(function () {
         Route::get('/', [TrekkingController::class, 'index'])->name('index');
         Route::get('create', [TrekkingController::class, 'create'])->name('create');
+    });
+    // blog Route
+    Route::prefix('blog')->name('blog.')->group(function () {
+        Route::get('/', [BlogController::class, 'index'])->name('index');
+        Route::get('create', [BlogController::class, 'create'])->name('create');
     });
 });
