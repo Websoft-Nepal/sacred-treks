@@ -28,7 +28,11 @@
                 @method('put')
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="title" aria-describedby="textHelp">
+                    <input type="text" name="title"  value="{{$trekking->title}}" class="form-control" id="title" aria-describedby="textHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text" name="slug"  value="{{$trekking->slug}}" class="form-control" id="slug" aria-describedby="textHelp">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>

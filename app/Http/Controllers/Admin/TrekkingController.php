@@ -39,12 +39,13 @@ class TrekkingController extends BaseController
 
     public function show($id){
         $trekking = Trekking::findOrFail($id);
-        return view();
+        return view('pages.trekking.view',compact('trekking'));
     }
 
     public function edit(string $id)
     {
         $trekking = Trekking::findorFail($id);
+        return view('pages.trekking.edit',compact('trekking'));
     }
 
     public function update(Request $request, string $id)
