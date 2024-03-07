@@ -37,9 +37,10 @@ Route::prefix('admin')->name("admin.")->group(function () {
     // Tour Route
     Route::prefix('tour')->name('tour.')->group(function () {
         Route::get('/', [TourController::class, 'index'])->name('index');
+        Route::post('store',[TourController::class,'store'])->name('store');
         Route::get('create', [TourController::class, 'create'])->name('create');
         Route::post('store',[TourController::class,'store'])->name('store');
-        Route::get('/show/{blog}',[TourController::class,'show'])->name('show');
+        Route::get('/show/{tour}',[TourController::class,'show'])->name('show');
         Route::get('/{tour}/edit',[TourController::class,'edit'])->name('edit');
         Route::put('/update/{tour}',[TourController::class,'update'])->name('update');
         Route::delete('/destroy/{tour}',[TourController::class,'destroy'])->name('destroy');
