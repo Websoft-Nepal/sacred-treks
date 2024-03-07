@@ -23,14 +23,20 @@
                 <h6 class="m-0 font-weight-bold text-primary">View Trekking</h6>
             </div>
             <div class="card-body">
-            
+
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text"  class="form-control" id="title" aria-describedby="textHelp">
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
-                    <input type="file" class="form-control"  id="image">
+                    <label for="title" class="form-label">Image</label>
+                    <div>
+                        <a href="{{ asset('storage/uploads/trekking/' . $trekking->image) }}"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="{{ asset('storage/uploads/trekking/' . $trekking->image) }}"
+                               class="img-fluid" width="400px" alt="Trekking image" srcset="">
+                        </a>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>

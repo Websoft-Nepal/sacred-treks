@@ -43,23 +43,25 @@
                                     <td>{{ $trekking->title }}</td>
                                     <td>{{ $trekking->slug }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/uploads/trekking/' . $trekking->image) }}" target="_blank"
-                                            rel="noopener noreferrer">
-                                            <img src="{{ asset('storage/uploads/trekking/' . $trekking->image) }}" width="60px"
-                                                alt="Trekking image" srcset="">
+                                        <a href="{{ asset('storage/uploads/trekking/' . $trekking->image) }}"
+                                            target="_blank" rel="noopener noreferrer">
+                                            <img src="{{ asset('storage/uploads/trekking/' . $trekking->image) }}"
+                                                width="60px" alt="Trekking image" srcset="">
                                         </a>
                                     </td>
                                     <td>
                                         <!-- Button view modal -->
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#viewTrekking_">
-                                            view
-                                        </button>
+                                        <a name="" id="" class="btn btn-sm btn-success"
+                                            href="{{ route('admin.trekking.show', $trekking->id) }}" role="button">View</a>
+                                        <a name="" id="" class="btn btn-sm btn-primary"
+                                            href="{{ route('admin.trekking.edit', $trekking->id) }}" role="button">Edit</a>
+
 
 
 
                                         {{-- delete button------- --}}
-                                        <form action="{{route('admin.trekking.destroy',$trekking->id)}}" method="post" class="d-inline">
+                                        <form action="{{ route('admin.trekking.destroy', $trekking->id) }}" method="post"
+                                            class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

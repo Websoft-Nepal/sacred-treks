@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\TrekkingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name("admin.")->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     //ContactUs Route
     Route::prefix('contactus')->name('contactus.')->group(function () {
@@ -20,6 +20,7 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::get('/', [TrekkingController::class, 'index'])->name('index');
         Route::get('create', [TrekkingController::class, 'create'])->name('create');
         Route::post('store',[TrekkingController::class,'store'])->name('store');
+        Route::get('store/{trekking}',[TrekkingController::class,'show'])->name('show');
         Route::get('/{trekking}/edit',[TrekkingController::class,'edit'])->name('edit');
         Route::put('update/{trekking}',[TrekkingController::class,'update'])->name('update');
         Route::delete('destroy/{trekking}',[TrekkingController::class,'destroy'])->name('destroy');
