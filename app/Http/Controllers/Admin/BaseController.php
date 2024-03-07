@@ -11,7 +11,9 @@ class BaseController extends Controller
 {
     public function uploadImage($image, $location = 'uploads/'){
         $filename = Str::uuid()->toString() . '-' . time() . '.' . $image->getClientOriginalExtension();
-        $image->move($location, $filename);
+        // $image->move($location, $filename);
+        // $filepath = $filename->store($location);
+        $filepath = $image->storeAs($location, $filename,'public');
 
         return $filename;
     }

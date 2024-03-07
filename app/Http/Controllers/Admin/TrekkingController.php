@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BaseController;
 use App\Models\Trekking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class TrekkingController extends BaseController
 {
@@ -31,7 +32,7 @@ class TrekkingController extends BaseController
         $trekking = new Trekking();
         $trekking->title = $request->title;
         $trekking->slug = $this->generateSlug($request->title, $trekking);
-        $trekking->image = $this->uploadImage($request->image);
+        $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
         $trekking->description = $request->description;
         $trekking->save();
         return redirect()->route('admin.trekking.index');
@@ -47,19 +48,52 @@ class TrekkingController extends BaseController
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|max:2048',
-            'slug' => $this->slugValidate($request->slug,$id),
+            'slug' => $this->slugValidate($request->slug, $id),
             'description' => 'nullable|string',
         ]);
         $trekking = Trekking::findOrFail($id);
         $trekking->title = $request->title;
         $trekking->slug = str::slug($request->slug);
-        $trekking->image = $this->uploadImage($request->image);
+        $trekking->image = $this->uploadImage($request->uploads('image'), "uploads/trekking");
         $trekking->description = $request->description;
+
+        // Check if a new image is uploaded
+        if ($request->hasFile('image')) {
+            // Delete the previous image if exists
+            if ($trekking->image) {
+                try {
+                    $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                    unlink($filePath);
+
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+            // Upload the new image
+            $trekking->image = $request->file('image')->store('uploads/trekking');
+        }
+
+        $trekking->save();
+
+        return redirect()->route('admin.trekking.index');
     }
 
     public function destroy(string $id)
     {
         $trekking = Trekking::findOrFail($id);
+
+        if ($trekking->image) {
+            try {
+                // Storage::delete($trekking->image);
+                $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                unlink($filePath);
+
+            } catch (\Exception $e) {
+                // Handle deletion error
+                dd($e->getMessage());
+            }
+        }
         $trekking->delete();
         return redirect()->route('admin.trekking.index');
     }
