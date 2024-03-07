@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\BaseController;
 use App\Models\Trekking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class TrekkingController extends BaseController
 {
@@ -36,6 +35,11 @@ class TrekkingController extends BaseController
         $trekking->description = $request->description;
         $trekking->save();
         return redirect()->route('admin.trekking.index');
+    }
+
+    public function show($id){
+        $trekking = Trekking::findOrFail($id);
+        return view();
     }
 
     public function edit(string $id)

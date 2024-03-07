@@ -30,7 +30,7 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::post('store',[BlogController::class,'store'])->name('store');
         Route::get('create', [BlogController::class, 'create'])->name('create');
         Route::get('/{blog}/edit', [BlogController::class, 'edit'])->name('edit');
-        Route::get('/{blog}/show', [BlogController::class, 'show'])->name('show');
+        Route::get('/show/{blog}', [BlogController::class, 'show'])->name('show');
         Route::put('/update/{blog}', [BlogController::class, 'update'])->name('update');
         Route::delete('/destroy/{blog}', [BlogController::class, 'destroy'])->name('destroy');
     });
@@ -38,7 +38,10 @@ Route::prefix('admin')->name("admin.")->group(function () {
     Route::prefix('tour')->name('tour.')->group(function () {
         Route::get('/', [TourController::class, 'index'])->name('index');
         Route::get('create', [TourController::class, 'create'])->name('create');
+        Route::post('store',[TourController::class,'store'])->name('store');
+        Route::get('/show/{blog}',[TourController::class,'show'])->name('show');
         Route::get('/{tour}/edit',[TourController::class,'edit'])->name('edit');
-        Route::get('/update/{tour}',[TourController::class,'update'])->name('update');
+        Route::put('/update/{tour}',[TourController::class,'update'])->name('update');
+        Route::delete('/destroy/{tour}',[TourController::class,'destroy'])->name('destroy');
     });
 });
