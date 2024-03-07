@@ -37,15 +37,16 @@ class TrekkingController extends BaseController
         return redirect()->route('admin.trekking.index');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $trekking = Trekking::findOrFail($id);
-        return view('pages.trekking.view',['trekking'=>$trekking]);
+        return view('pages.trekking.view', ['trekking' => $trekking]);
     }
 
     public function edit(string $id)
     {
         $trekking = Trekking::findorFail($id);
-        return view('pages.trekking.edit',['trekking'=>$trekking]);
+        return view('pages.trekking.edit', ['trekking' => $trekking]);
     }
 
     public function update(Request $request, string $id)
@@ -69,7 +70,6 @@ class TrekkingController extends BaseController
                 try {
                     $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                     unlink($filePath);
-
                 } catch (\Exception $e) {
                     // Handle deletion error
                     dd($e->getMessage());
@@ -80,6 +80,16 @@ class TrekkingController extends BaseController
         }
 
         $trekking->save();
+
+        notify()->success('Welcome to Laravel Notify ⚡️');
+
+        // drakify('success'); // for success alert
+
+        // drakify('error'); // for error alert
+
+        // smilify('success', 'You are successfully reconnected');
+
+        // emotify('success', 'You are awesome, your data was successfully created')
 
         return redirect()->route('admin.trekking.index');
     }
@@ -93,7 +103,6 @@ class TrekkingController extends BaseController
                 // Storage::delete($trekking->image);
                 $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                 unlink($filePath);
-
             } catch (\Exception $e) {
                 // Handle deletion error
                 dd($e->getMessage());

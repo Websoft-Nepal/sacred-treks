@@ -24,6 +24,7 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @notifyCss
 
 </head>
 
