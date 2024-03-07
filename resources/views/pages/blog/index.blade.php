@@ -15,7 +15,7 @@
 
             </ol>
         </div>
-        <x:notify-messages/>
+        @include('notify::components.notify')
         {{-- </div> --}}
         <div class="p-1">
 
