@@ -23,17 +23,19 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit Trekking</h6>
             </div>
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.trekking.update', $trekking->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title"  value="{{$trekking->title}}" class="form-control" id="title" value="{{$trekking->title}}"
-                            aria-describedby="textHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="slug" class="form-label">Slug</label>
-                    <input type="text" name="slug"  value="{{$trekking->slug}}" class="form-control" id="slug" aria-describedby="textHelp">
+                        <input type="text" name="title" value="{{ $trekking->title }}" class="form-control"
+                            id="title" value="{{ $trekking->title }}" aria-describedby="textHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="slug" class="form-label">Slug</label>
+                        <input type="text" name="slug" value="{{ $trekking->slug }}" class="form-control"
+                            id="slug" aria-describedby="textHelp">
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
@@ -50,10 +52,11 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                        <label for="editor" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="editor" rows="3">{{ $trekking->description }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+
+                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
 
                 </form>
             </div>
@@ -62,3 +65,10 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+@endpush

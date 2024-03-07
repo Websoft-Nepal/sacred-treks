@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @notifyCss
 
+    {{-- For ckeditor --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
+
 </head>
 
 <body id="page-top">

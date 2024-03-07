@@ -15,7 +15,7 @@
 
             </ol>
         </div>
-        <x:notify-messages/>
+        @include('notify::components.notify')
         {{-- </div> --}}
         <div class="p-1">
 
@@ -56,12 +56,6 @@
                                             href="{{ route('admin.trekking.show', $trekking->id) }}" role="button">View</a>
                                         <a name="" id="" class="btn btn-sm btn-primary"
                                             href="{{ route('admin.trekking.edit', $trekking->id) }}" role="button">Edit</a>
-
-
-                                        <a href="{{ route('admin.trekking.edit', $trekking->id) }}"
-                                            class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="{{ route('admin.trekking.show', $trekking->id) }}"
-                                            class="btn btn-success btn-sm">View</a>
 
 
                                         {{-- delete button------- --}}

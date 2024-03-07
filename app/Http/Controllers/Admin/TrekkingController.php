@@ -34,6 +34,9 @@ class TrekkingController extends BaseController
         $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
         $trekking->description = $request->description;
         $trekking->save();
+
+        drakify('success');
+
         return redirect()->route('admin.trekking.index');
     }
 
@@ -53,14 +56,12 @@ class TrekkingController extends BaseController
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|image|max:2048',
-            'slug' => $this->slugValidate($request->slug, $id),
+            'slug' => $this->slugValidate('trekkings', $id),
             'description' => 'nullable|string',
         ]);
         $trekking = Trekking::findOrFail($id);
         $trekking->title = $request->title;
         $trekking->slug = str::slug($request->slug);
-        $trekking->image = $this->uploadImage($request->uploads('image'), "uploads/trekking");
         $trekking->description = $request->description;
 
         // Check if a new image is uploaded
@@ -81,15 +82,15 @@ class TrekkingController extends BaseController
 
         $trekking->save();
 
-        notify()->success('Welcome to Laravel Notify ⚡️');
+        // notify()->success('Welcome to Laravel Notify ⚡️');
 
-        // drakify('success'); // for success alert
+        drakify('success'); // for success alert
 
         // drakify('error'); // for error alert
 
         // smilify('success', 'You are successfully reconnected');
 
-        // emotify('success', 'You are awesome, your data was successfully created')
+        // emotify('success', 'You are awesome, your data was successfully created');
 
         return redirect()->route('admin.trekking.index');
     }
@@ -109,6 +110,9 @@ class TrekkingController extends BaseController
             }
         }
         $trekking->delete();
+
+        drakify('success');
+
         return redirect()->route('admin.trekking.index');
     }
 }

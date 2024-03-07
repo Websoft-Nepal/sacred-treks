@@ -33,6 +33,9 @@ class TourController extends BaseController
         $tour->image = $this->uploadImage($request->image, "uploads/tour");
         $tour->description = $request->description;
         $tour->save();
+
+        drakify('success');
+
         return redirect()->route('admin.tour.index');
     }
 
@@ -76,6 +79,9 @@ class TourController extends BaseController
             // Upload the new image
             $tour->image = $request->file('image')->store('uploads/tour');
             $tour->save();
+
+            drakify('success');
+
             return redirect()->route('admin.tour.index');
         }
     }
@@ -95,6 +101,9 @@ class TourController extends BaseController
             }
         }
         $tour->delete();
+
+        drakify('success');
+
         return redirect()->route('admin.tour.index');
     }
 }

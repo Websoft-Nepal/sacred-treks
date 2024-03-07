@@ -40,10 +40,10 @@
                         <input type="text" class="form-control" value="{{$blog->slug}}" name="slug" id="slug">
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="3">{{$blog->description}}</textarea>
+                        <label for="editor" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="editor" rows="3">{{$blog->description}}</textarea>
                     </div>
-                   
+
                     <button type="submit" class="btn btn-primary">Edit</button>
 
                 </form>
@@ -53,3 +53,10 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+@endpush
