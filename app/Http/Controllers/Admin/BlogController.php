@@ -18,7 +18,7 @@ class BlogController extends BaseController
         return view('pages.blog.create');
     }
 
-    public function show(string $id){
+    public function show($id){
         $blog = Blog::where('id',$id)->first();
         return view('pages.blog.view',compact('blog'));
     }
@@ -39,7 +39,7 @@ class BlogController extends BaseController
         return redirect()->route('admin.blog.index');
     }
 
-    public function edit(string $id){
+    public function edit($id){
         $blog = Blog::where('id',$id)->first();
         return view('pages.blog.edit',compact('blog'));
     }

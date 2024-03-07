@@ -22,6 +22,7 @@ Route::prefix('admin')->name("admin.")->group(function () {
         Route::post('store',[TrekkingController::class,'store'])->name('store');
         Route::get('store/{trekking}',[TrekkingController::class,'show'])->name('show');
         Route::get('/{trekking}/edit',[TrekkingController::class,'edit'])->name('edit');
+        Route::get('/show/{trekking}', [TrekkingController::class, 'show'])->name('show');
         Route::put('update/{trekking}',[TrekkingController::class,'update'])->name('update');
         Route::delete('destroy/{trekking}',[TrekkingController::class,'destroy'])->name('destroy');
     });

@@ -26,7 +26,11 @@
 
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text"  class="form-control" id="title" aria-describedby="textHelp">
+                    <input type="text"  class="form-control" value="{{$trekking->title}}" id="title" aria-describedby="textHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text"  class="form-control" value="{{$trekking->slug}}" id="slug" aria-describedby="textHelp">
                 </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Image</label>
@@ -40,7 +44,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control"  id="description" rows="3"></textarea>
+                    <textarea class="form-control"  id="description" rows="3">{{$trekking->description}}</textarea>
                 </div>
 
             </div>

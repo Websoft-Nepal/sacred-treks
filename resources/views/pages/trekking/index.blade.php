@@ -57,6 +57,10 @@
                                             href="{{ route('admin.trekking.edit', $trekking->id) }}" role="button">Edit</a>
 
 
+                                        <a href="{{ route('admin.trekking.edit', $trekking->id) }}"
+                                            class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('admin.trekking.show', $trekking->id) }}"
+                                            class="btn btn-success btn-sm">View</a>
 
 
                                         {{-- delete button------- --}}
