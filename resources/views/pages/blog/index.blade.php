@@ -55,7 +55,7 @@
                                             class="btn btn-success btn-sm">View</a>
 
                                         {{-- delete button------- --}}
-                                        <form action="" method="post" class="d-inline">
+                                        <form action="{{route('admin.blog.destroy',$blog->id)}}" method="post" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

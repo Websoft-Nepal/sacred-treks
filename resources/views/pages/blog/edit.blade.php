@@ -34,6 +34,16 @@
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="image">
+                        <div class="my-3">
+                            <label for="image" class="form-label">Current Image</label>
+                            <div>
+                                <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
+                                        width="400px" alt="blog image" srcset="">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
