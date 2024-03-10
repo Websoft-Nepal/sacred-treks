@@ -14,4 +14,7 @@ class HomeController extends Controller
     public function table(){
         return view('pages.test.table');
     }
+    public function profile(){
+        return view('pages.profile.index');
+    }
 }

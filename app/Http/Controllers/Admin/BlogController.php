@@ -33,7 +33,7 @@ class BlogController extends BaseController
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->slug = $this->generateSlug($request->title, $blog);
-        $blog->image = $this->uploadImage($request->image);
+        $blog->image = $this->uploadImage($request->image,"uploads/blog");
         $blog->description = $request->description;
         $blog->save();
         return redirect()->route('admin.blog.index');
@@ -54,7 +54,6 @@ class BlogController extends BaseController
         $blog = Blog::findorFail($id);
         $blog->title = $request->title;
         $blog->slug = str::slug($request->slug);
-        $blog->image = $this->uploadImage($request->image);
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
             if ($blog->image) {
@@ -71,6 +70,21 @@ class BlogController extends BaseController
         }
 
         $blog->save();
+        return redirect()->route('admin.blog.index');
+    }
+    public function destroy($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        if ($blog->image) {
+            try {
+                $filePath = storage_path('app/public/uploads/blog/' . $blog->image);
+                unlink($filePath);
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+            }
+        }
+        $blog->delete();
         return redirect()->route('admin.blog.index');
     }
 }

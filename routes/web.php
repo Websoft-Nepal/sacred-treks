@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/table',[HomeController::class,'table'])->name('admin.table');
+Route::get('/admin/profile',[HomeController::class,'profile'])->name('admin.profile');
 
 // Admin routes
 
