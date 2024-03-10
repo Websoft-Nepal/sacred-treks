@@ -44,7 +44,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control"  id="description" rows="3">{!! $trekking->description !!}</textarea>
+                    <div class="form-control">{!! $trekking->description !!}</div>
                 </div>
 
             </div>

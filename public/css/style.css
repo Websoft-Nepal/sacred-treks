@@ -17,3 +17,8 @@
     max-width: 80%;
     margin: 20px auto;
 }
+[type=button],[type=reset],[type=submit],button :not(.btn-danger){
+    color: #fff!important;
+    background-color: #4e73df!important;
+    border-color: #4e73df !important;
+  }
