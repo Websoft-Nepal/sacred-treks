@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class SocialMediaController extends Controller
 {
     public function index(){
-        $socials = SocialMedia::first();
-        return view('pages.social_media.index',compact('socials'));
+        $social = SocialMedia::first();
+        return view('pages.social_media.index',compact('social'));
     }
 
     public function update(Request $request,$id){
