@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PrivacyController;
@@ -65,5 +66,10 @@ Route::prefix('admin')->name("admin.")->group(function () {
     Route::prefix('terms')->name('terms.')->group(function(){
         Route::get('/',[TermsConditionController::class,'index'])->name('index');
         Route::put('update{terms}',[TermsConditionController::class,'update'])->name('update');
+    });
+    // contact
+    Route::prefix('contact')->name('contact.')->group(function(){
+        Route::get('/',[ContactController::class,'index'])->name('index');
+        Route::put('update{contact}',[ContactController::class,'update'])->name('update');
     });
 });

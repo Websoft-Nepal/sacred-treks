@@ -127,6 +127,11 @@
             <i class="fas fa-fw fa-phone"></i>
             <span>Terms</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.contact.index')}}">
+            <i class="fas fa-fw fa-phone"></i>
+            <span>Contact</span></a>
+    </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
