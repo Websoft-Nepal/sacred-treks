@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('social_media', function (Blueprint $table) {
             $table->id();
+            $table->string('youtube');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('instagram');
             $table->timestamps();
         });
     }

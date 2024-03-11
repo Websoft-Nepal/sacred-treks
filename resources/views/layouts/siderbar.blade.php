@@ -113,9 +113,9 @@
             <span>Tour</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.contactus.index')}}">
+        <a class="nav-link" href="{{route('admin.social.index')}}">
             <i class="fas fa-fw fa-phone"></i>
-            <span>Contact Us</span></a>
+            <span>Social Media</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
