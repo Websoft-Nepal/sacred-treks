@@ -117,6 +117,16 @@
             <i class="fas fa-fw fa-phone"></i>
             <span>Social Media</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.privacy.index')}}">
+            <i class="fas fa-fw fa-phone"></i>
+            <span>Privacy</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.terms.index')}}">
+            <i class="fas fa-fw fa-phone"></i>
+            <span>Terms</span></a>
+    </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">

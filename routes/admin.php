@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\TrekkingController;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +53,17 @@ Route::prefix('admin')->name("admin.")->group(function () {
     Route::prefix('social')->name('social.')->group(function () {
         Route::get('/', [SocialMediaController::class, 'index'])->name('index');
         Route::put('update/{social}',[SocialMediaController::class,'update'])->name('update');
+    });
+
+    // privacy 
+    Route::prefix('privacy')->name('privacy.')->group(function(){
+        Route::get('/',[PrivacyController::class,'index'])->name('index');
+        Route::put('update/{privacy}',[PrivacyController::class,'update'])->name('update');
+    });
+
+    // terms and condition 
+    Route::prefix('terms')->name('terms.')->group(function(){
+        Route::get('/',[TermsConditionController::class,'index'])->name('index');
+        Route::put('update{terms}',[TermsConditionController::class,'update'])->name('update');
     });
 });
