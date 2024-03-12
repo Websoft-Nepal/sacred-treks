@@ -32,6 +32,7 @@ class BlogController extends BaseController
 
         $blog = new Blog();
         $blog->title = $request->title;
+        $blog->status = $request->has('status') ? true : false;
         $blog->slug = $this->generateSlug($request->title, $blog);
         $blog->image = $this->uploadImage($request->image,"uploads/blog");
         $blog->description = $request->description;
@@ -53,6 +54,7 @@ class BlogController extends BaseController
         ]);
         $blog = Blog::findorFail($id);
         $blog->title = $request->title;
+        $blog->status = $request->has('status') ? true : false;
         $blog->slug = str::slug($request->slug);
         if ($request->hasFile('image')) {
             // Delete the previous image if exists

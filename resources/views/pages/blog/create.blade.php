@@ -34,6 +34,21 @@
                     <input type="file" class="form-control" name="image" id="image">
                 </div>
                 <div class="mb-3">
+                    <label for="status" class="form-label">
+                        Status</label>
+                    <div class="custom-control custom-switch form-control" style="min-height: 55px;">
+                        <input type="checkbox" class="custom-control-input" name="status" id="status" checked>
+                        <label class="custom-control-label" for="status">Status</label>
+                        <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not. (active or not)</small>
+                    </div>
+                </div>
+                @error('status')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
+
+                <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                 </div>
