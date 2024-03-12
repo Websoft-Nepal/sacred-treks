@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactUsController;
@@ -9,7 +10,9 @@ use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\TrekkingController;
+use App\Http\Controllers\Admin\TestimonialController;
 use Illuminate\Support\Facades\Route;
+use Monolog\Handler\RotatingFileHandler;
 
 Route::prefix('admin')->name("admin.")->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -53,23 +56,42 @@ Route::prefix('admin')->name("admin.")->group(function () {
     // social media
     Route::prefix('social')->name('social.')->group(function () {
         Route::get('/', [SocialMediaController::class, 'index'])->name('index');
-        Route::put('update/{social}',[SocialMediaController::class,'update'])->name('update');
+        Route::put('update/{social}', [SocialMediaController::class, 'update'])->name('update');
     });
 
     // privacy 
-    Route::prefix('privacy')->name('privacy.')->group(function(){
-        Route::get('/',[PrivacyController::class,'index'])->name('index');
-        Route::put('update/{privacy}',[PrivacyController::class,'update'])->name('update');
+    Route::prefix('privacy')->name('privacy.')->group(function () {
+        Route::get('/', [PrivacyController::class, 'index'])->name('index');
+        Route::put('update/{privacy}', [PrivacyController::class, 'update'])->name('update');
     });
 
     // terms and condition 
-    Route::prefix('terms')->name('terms.')->group(function(){
-        Route::get('/',[TermsConditionController::class,'index'])->name('index');
-        Route::put('update{terms}',[TermsConditionController::class,'update'])->name('update');
+    Route::prefix('terms')->name('terms.')->group(function () {
+        Route::get('/', [TermsConditionController::class, 'index'])->name('index');
+        Route::put('update{terms}', [TermsConditionController::class, 'update'])->name('update');
     });
     // contact
-    Route::prefix('contact')->name('contact.')->group(function(){
-        Route::get('/',[ContactController::class,'index'])->name('index');
-        Route::put('update{contact}',[ContactController::class,'update'])->name('update');
+    Route::prefix('contact')->name('contact.')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('index');
+        Route::put('update{contact}', [ContactController::class, 'update'])->name('update');
+    });
+
+    // About Us
+
+    Route::prefix('about')->name('about.')->group(function () {
+        Route::get('/', [AboutUsController::class, 'index'])->name('index');
+        Route::put('update{about}', [AboutUsController::class, 'update'])->name('update');
+    });
+
+    // testimonials 
+
+    Route::prefix('testimonial')->name('testimonial.')->group(function () {
+        Route::get('/', [TestimonialController::class, 'index'])->name('index');
+        Route::get('create',[TestimonialController::class,'create'])->name('create');
+        Route::post('store',[TestimonialController::class,'store'])->name('store');
+        Route::get('show/{testimonial}', [TestimonialController::class, 'show'])->name('show');
+        Route::get('edit/{testimonial}', [TestimonialController::class, 'edit'])->name('edit');
+        Route::put('update/{testimonial}', [TestimonialController::class, 'update'])->name('update');
+        Route::delete('delete/{testimonial}', [TestimonialController::class, 'destroy'])->name('destroy');
     });
 });
