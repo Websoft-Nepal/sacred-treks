@@ -58,8 +58,9 @@ class TourController extends BaseController
     }
     public function edit($id)
     {
+        $transportations = TourTransportation::all();
         $tour = Tour::findOrFail($id);
-        return view('pages.tour.edit', compact('tour'));
+        return view('pages.tour.edit', compact('tour','transportations'));
     }
 
     public function update(Request $request, $id)
@@ -72,7 +73,7 @@ class TourController extends BaseController
             'cost' => 'required|numeric',
             'boundary' => 'required|in:national,international',
             'transportation_id' => 'required|exists:tour_transportations,id',
-            'slug' => $this->slugValidate($request->slug, $id),
+            'slug' => $this->slugValidate("tours", $id),
             'description' => 'nullable|string',
         ]);
         $tour = Tour::findOrFail($id);

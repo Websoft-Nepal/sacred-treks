@@ -41,7 +41,7 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="slug" class="form-label"><span class="text-danger h3"><sup>*</sup></span> Slug</label>
-                            <input type="text"  class="form-control" value="{{$transportation->slug}}" id="slug" aria-describedby="textHelp">
+                            <input type="text"  class="form-control" name="slug" value="{{$tour->slug}}" id="slug" aria-describedby="textHelp">
                         </div>
                         @error('slug')
                             <div class="text-danger">
@@ -54,10 +54,10 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Current Image</label>
                             <div>
-                                <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
                                     rel="noopener noreferrer">
-                                    <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
-                                        width="400px" alt="blog image" srcset="">
+                                    <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                        width="400px" alt="tour image" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -78,10 +78,10 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Map image</label>
                             <div>
-                                <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
                                     rel="noopener noreferrer">
-                                    <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
-                                        width="400px" alt="blog image" srcset="">
+                                    <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                        width="400px" alt="tour image" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -167,14 +167,14 @@
                         <div class="form-group">
                             <label for="transportation"><span class="text-danger h3"><sup>*</sup></span> Transportation
                                 Medium</label>
-                            <select class="form-control" name="transportation" id="transportation">
+                            <select class="form-control" name="transportation_id" id="transportation">
                                 @foreach ($transportations as $transport)
-                                    <option value="$transport->id" @selected($transport->id == $tour->transportation_id)>$transport->name</option>
+                                    <option value="{{$transport->id}}" @selected($transport->id == $tour->transportation_id)>{{$transport->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    @error('transportation')
+                    @error('transportation_id')
                         <div class="text-danger">
                             {{ $message }}
                         </div>
