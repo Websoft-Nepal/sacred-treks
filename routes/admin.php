@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\Admin\TourTransportationController;
 use App\Http\Controllers\Admin\TrekkingController;
+use App\Http\Controllers\Admin\TrekkingLocationController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name("admin.")->group(function () {
@@ -51,5 +53,21 @@ Route::prefix('admin')->name("admin.")->group(function () {
     Route::prefix('social')->name('social.')->group(function () {
         Route::get('/', [SocialMediaController::class, 'index'])->name('index');
         Route::put('update/{social}',[SocialMediaController::class,'update'])->name('update');
+    });
+
+    // Trekking location
+    Route::prefix('Trekking-location')->name('location.')->group(function (){
+        Route::get('/',[TrekkingLocationController::class,'index'])->name('index');
+        Route::post('store',[TrekkingLocationController::class,'store'])->name('store');
+        Route::put('update/{id}',[TrekkingLocationController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[TrekkingLocationController::class,'destroy'])->name('destroy');
+    });
+
+    // Tour Transportaion
+    Route::prefix('Tour-transportaion')->name('transportation.')->group(function (){
+        Route::get('/',[TourTransportationController::class,'index'])->name('index');
+        Route::post('store',[TourTransportationController::class,'store'])->name('store');
+        Route::put('update/{id}',[TourTransportationController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[TourTransportationController::class,'destroy'])->name('destroy');
     });
 });

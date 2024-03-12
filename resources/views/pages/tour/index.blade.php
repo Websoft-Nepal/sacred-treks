@@ -39,15 +39,17 @@
                         </thead>
                         <tbody>
                             @foreach ($tours as $tour)
-                                
+
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$tour->title}}</td>
                                 <td>{{$tour->slug}}</td>
                                 <td>
-                                    <img width="50px"
-                                        src="https://media.istockphoto.com/id/1672317574/photo/ama-dablam-mountain-peak.webp?b=1&s=170667a&w=0&k=20&c=Ea8yDEHpUemrRuMZUKGPDBE11YTWVksIupMN8FkEBf8="
-                                        alt="">
+                                    <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}"
+                                        target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}"
+                                            width="60px" alt="tour image" srcset="">
+                                    </a>
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.tour.edit', $tour->id) }}"
@@ -56,7 +58,7 @@
                                         class="btn btn-success btn-sm">View</a>
 
                                     {{-- delete button------- --}}
-                                    <form action="" method="post" class="d-inline">
+                                    <form action="{{route('admin.tour.destroy',$tour->id)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"

@@ -27,7 +27,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" class="form-control" id="title"
+                        <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}"
                             aria-describedby="textHelp">
                         @error('title')
                             <div class="text-danger">
@@ -35,6 +35,7 @@
                             </div>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="image">
@@ -44,6 +45,62 @@
                             </div>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Duration</label>
+                        <input type="text" name="duration" class="form-control" value="{{ old('duration') }}"
+                            id="duration" aria-describedby="textHelp" placeholder="5 days">
+                    </div>
+                    @error('duration')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Status</label>
+                        <div class="custom-control custom-switch form-control" style="min-height: 55px;">
+                            <input type="checkbox" class="custom-control-input" name="status" id="status" checked>
+                            <label class="custom-control-label" for="status">Status</label>
+                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not. (active or not)</small>
+                        </div>
+                    </div>
+                    @error('status')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label for="cost" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Cost</label>
+                        <input type="text" name="cost" class="form-control" value="{{ old('cost') }}"
+                            id="cost" placeholder="50.00" aria-describedby="textHelp">
+                    </div>
+                    @error('cost')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label for="location"><span class="text-danger h3"><sup>*</sup></span> Location</label>
+                            <select class="form-control" name="location_id" id="transportation">
+                                @foreach ($locations as $location)
+                                    <option value="{{$location->id}}">{{$location->location}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @error('location_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="3"></textarea>

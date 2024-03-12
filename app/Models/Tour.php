@@ -4,9 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Tour extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','image','slug','description'];
+    protected $fillable = ['title','status','image','slug','description','duration','cost','boundary','maps','transportation_id'];
+
+    public function transportation(): BelongsTo
+    {
+        return $this->belongsTo(TourTransportation::class, 'transporation_id', 'id');
+    }
 }

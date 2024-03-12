@@ -28,30 +28,33 @@
                     @method('put')
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" value="{{$blog->title}}" class="form-control" id="title"
+                        <input type="text" name="title" value="{{ $blog->title }}" class="form-control" id="title"
                             aria-describedby="textHelp">
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="image">
-                        <div class="my-3">
-                            <label for="image" class="form-label">Current Image</label>
-                            <div>
-                                <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
-                                        width="400px" alt="blog image" srcset="">
-                                </a>
+                        @if ($blog->image != null)
+                            <div class="my-3">
+                                <label for="image" class="form-label">Current Image</label>
+                                <div>
+                                    <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                        rel="noopener noreferrer">
+                                        <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
+                                            width="400px" alt="blog image" srcset="">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
-                        <input type="text" class="form-control" value="{{$blog->slug}}" name="slug" id="slug">
+                        <input type="text" class="form-control" value="{{ $blog->slug }}" name="slug"
+                            id="slug">
                     </div>
                     <div class="mb-3">
                         <label for="editor" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="editor" rows="3">{{$blog->description}}</textarea>
+                        <textarea class="form-control" name="description" id="editor" rows="3">{{ $blog->description }}</textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Edit</button>

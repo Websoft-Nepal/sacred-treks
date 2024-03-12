@@ -44,9 +44,11 @@
                                     <td>{{ $blog->title }}</td>
                                     <td>{{ $blog->slug }}</td>
                                     <td>
-                                        <img width="50px"
-                                            src="https://media.istockphoto.com/id/1672317574/photo/ama-dablam-mountain-peak.webp?b=1&s=170667a&w=0&k=20&c=Ea8yDEHpUemrRuMZUKGPDBE11YTWVksIupMN8FkEBf8="
-                                            alt="">
+                                        <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}"
+                                            target="_blank" rel="noopener noreferrer">
+                                            <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}"
+                                                width="60px" alt="Trekking image" srcset="">
+                                        </a>
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.blog.edit', $blog->id) }}"
@@ -55,7 +57,8 @@
                                             class="btn btn-success btn-sm">View</a>
 
                                         {{-- delete button------- --}}
-                                        <form action="{{route('admin.blog.destroy',$blog->id)}}" method="post" class="d-inline">
+                                        <form action="{{ route('admin.blog.destroy', $blog->id) }}" method="post"
+                                            class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"

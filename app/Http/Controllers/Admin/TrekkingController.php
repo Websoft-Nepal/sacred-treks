@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Trekking;
+use App\Models\TrekkingLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,19 +18,29 @@ class TrekkingController extends BaseController
 
     public function create()
     {
-        return view('pages.trekking.create');
+        $locations = TrekkingLocation::all();
+        return view('pages.trekking.create',['locations' => $locations]);
     }
 
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|max:2048',
+            'status' => 'in:on',
+            'duration' => 'required|string',
+            'cost' => 'required|numeric',
+            'location_id' => 'required|exists:trekking_locations,id',
             'description' => 'nullable|string',
         ]);
 
         $trekking = new Trekking();
         $trekking->title = $request->title;
+        $trekking->status = $request->has('status') ? true : false;
+        $trekking->duration = $request->duration;
+        $trekking->cost = $request->cost;
+        $trekking->location_id = $request->location_id;
         $trekking->slug = $this->generateSlug($request->title, $trekking);
         $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
         $trekking->description = $request->description;
@@ -49,7 +60,8 @@ class TrekkingController extends BaseController
     public function edit(string $id)
     {
         $trekking = Trekking::findorFail($id);
-        return view('pages.trekking.edit', ['trekking' => $trekking]);
+        $locations = TrekkingLocation::all();
+        return view('pages.trekking.edit', ['trekking' => $trekking,'locations'=>$locations]);
     }
 
     public function update(Request $request, string $id)
@@ -57,10 +69,19 @@ class TrekkingController extends BaseController
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => $this->slugValidate('trekkings', $id),
+            'image' => 'image|max:2048',
+            'status' => 'in:on',
+            'duration' => 'required|string',
+            'cost' => 'required|numeric',
+            'location_id' => 'required|exists:trekking_locations,id',
             'description' => 'nullable|string',
         ]);
         $trekking = Trekking::findOrFail($id);
         $trekking->title = $request->title;
+        $trekking->status = $request->has('status') ? true : false;
+        $trekking->duration = $request->duration;
+        $trekking->cost = $request->cost;
+        $trekking->location_id = $request->location_id;
         $trekking->slug = str::slug($request->slug);
         $trekking->description = $request->description;
 

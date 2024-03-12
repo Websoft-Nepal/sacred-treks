@@ -26,37 +26,119 @@
                 <form action="{{ route('admin.trekking.update', $trekking->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-                    @method('put')
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" value="{{ $trekking->title }}" class="form-control"
-                            id="title" value="{{ $trekking->title }}" aria-describedby="textHelp">
+                        <input type="text" name="title" class="form-control" value="{{ $trekking->title }}"
+                            id="title" aria-describedby="textHelp">
+                        @error('title')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
+
                     <div class="mb-3">
-                        <label for="slug" class="form-label">Slug</label>
-                        <input type="text" name="slug" value="{{ $trekking->slug }}" class="form-control"
-                            id="slug" aria-describedby="textHelp">
+                        <div class="mb-3">
+                            <label for="slug" class="form-label">Slug</label>
+                            <input type="text" name="slug" class="form-control" value="{{$trekking->slug}}" id="slug" aria-describedby="textHelp">
+                        </div>
+                        @error('slug')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" name="image" id="image">
+
+                    @if ($trekking->image != null)
                         <div class="my-3">
                             <label for="image" class="form-label">Current Image</label>
                             <div>
                                 <a href="{{ asset('storage/uploads/trekking/' . $trekking->image) }}" target="_blank"
                                     rel="noopener noreferrer">
                                     <img src="{{ asset('storage/uploads/trekking/' . $trekking->image) }}" class="img-fluid"
-                                        width="400px" alt="Trekking image" srcset="">
+                                        width="400px" alt="blog image" srcset="">
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
                     <div class="mb-3">
-                        <label for="editor" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="editor" rows="3">{{ $trekking->description }}</textarea>
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                        @error('image')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Duration</label>
+                        <input type="text" name="duration" class="form-control" value="{{ $trekking->duration }}"
+                            id="duration" aria-describedby="textHelp" placeholder="5 days">
+                    </div>
+                    @error('duration')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Status</label>
+                        <div class="custom-control custom-switch form-control" style="min-height: 55px;">
+                            <input type="checkbox" class="custom-control-input" name="status" id="status" @checked($trekking->status)>
+                            <label class="custom-control-label" for="status">Status</label>
+                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not.
+                                (active or not)</small>
+                        </div>
+                    </div>
+                    @error('status')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label for="cost" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Cost</label>
+                        <input type="text" name="cost" class="form-control" value="{{ $trekking->cost }}"
+                            id="cost" placeholder="50.00" aria-describedby="textHelp">
+                    </div>
+                    @error('cost')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label for="location"><span class="text-danger h3"><sup>*</sup></span> Location</label>
+                            <select class="form-control" name="location_id" id="transportation">
+                                @foreach ($locations as $location)
+                                    <option value="{{$location->id}}" @selected($location->id == $trekking->location_id)>{{$location->location}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @error('location_id')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="description" rows="3">{{ $trekking->description }}</textarea>
+                        @error('description')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
 
                 </form>
             </div>
@@ -67,7 +149,7 @@
 @endsection
 @push('scriptaddon')
     ClassicEditor
-    .create( document.querySelector( '#editor' ) )
+    .create( document.querySelector( '#description' ) )
     .catch( error => {
     console.error( error );
     } );

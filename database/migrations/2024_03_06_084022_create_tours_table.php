@@ -15,8 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
+            $table->boolean('status')->default(true);
             $table->string('image');
+            $table->string('map')->nullable();
+            $table->string('duration');
+            $table->double('cost')->default(0);
+            $table->enum('boundary', ['national', 'international'])->default('national');
+            $table->unsignedBigInteger('transportation_id');
             $table->longText('description');
+            $table->foreign('transportation_id')->references('id')->on('tour_transportations')->onDelete('cascade');
             $table->timestamps();
         });
     }

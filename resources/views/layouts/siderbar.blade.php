@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{env('APP_NAME')}}</div>
+        <div class="sidebar-brand-text mx-3">{{ env('APP_NAME') }}</div>
     </a>
 
     <!-- Divider -->
@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{route('admin.home')}}">
+        <a class="nav-link" href="{{ route('admin.home') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -50,8 +50,7 @@
             <i class="fas fa-fw fa-wrench"></i>
             <span>Utilities</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <a class="collapse-item" href="utilities-color.html">Colors</a>
@@ -97,30 +96,60 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Charts</span></a>
     </li>
+
+    {{-- Trekking  --}}
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.trekking.index')}}">
-            <i class="fas fa-fw fa-mountain"></i>
-            <span>Trekking</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTrekking"
+            aria-expanded="true" aria-controls="collapseTrekking">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Trekking</span>
+        </a>
+        <div id="collapseTrekking" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Trekking:</h6>
+                <a class="collapse-item" href="{{ route('admin.trekking.create') }}">create</a>
+                <a class="collapse-item" href="{{ route('admin.trekking.index') }}">index</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Location:</h6>
+                <a class="collapse-item" href="{{ route('admin.location.index') }}">index</a>
+            </div>
+        </div>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.blog.index')}}">
+        <a class="nav-link" href="{{ route('admin.blog.index') }}">
             <i class="fas fa-fw fa-mountain"></i>
             <span>Blog</span></a>
     </li>
+
+    {{-- Tour  --}}
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.tour.index')}}">
-            <i class="fas fa-fw fa-mountain"></i>
-            <span>Tour</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTour"
+            aria-expanded="true" aria-controls="collapseTour">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Tour</span>
+        </a>
+        <div id="collapseTour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Tour:</h6>
+                <a class="collapse-item" href="{{ route('admin.tour.create') }}">create</a>
+                <a class="collapse-item" href="{{ route('admin.tour.index') }}">index</a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Transportation:</h6>
+                <a class="collapse-item" href="{{ route('admin.transportation.index') }}">index</a>
+            </div>
+        </div>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.contactus.index')}}">
+        <a class="nav-link" href="{{ route('admin.contactus.index') }}">
             <i class="fas fa-fw fa-phone"></i>
             <span>Contact Us</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.table')}}">
+        <a class="nav-link" href="{{ route('admin.table') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
     </li>

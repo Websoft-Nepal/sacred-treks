@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('trekkings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->boolean('status')->default(true);
             $table->string('image');
+            $table->string('duration');
+            $table->double('cost')->default(0);
+            $table->unsignedBigInteger('location_id');
             $table->string('slug');
+            $table->foreign('location_id')->references('id')->on('trekking_locations')->onDelete('cascade');
             $table->longText('description')->nullable();
             $table->timestamps();
         });
