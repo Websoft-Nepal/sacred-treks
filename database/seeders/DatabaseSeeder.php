@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TourTransportationSeeder::class,
             TrekkingLocationSeeder::class,
+            AboutUsSeeder::class,
+            ContactSeeder::class,
+            PrivacySeeder::class,
+            SocialMediaSeeder::class,
+            TermsConditionSeeder::class,
+            
         ]);
     }
 }
