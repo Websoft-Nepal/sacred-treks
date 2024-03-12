@@ -48,7 +48,7 @@ class BlogController extends BaseController
         $request->validate([
             'title' => 'required|string|max:255',
             // 'slug' => $this->slugValidate($request->slug,$id),
-            'image' => 'required|image|max:2048',
+            'image' => 'image|max:2048',
             'description' => 'nullable|string',
         ]);
         $blog = Blog::findorFail($id);

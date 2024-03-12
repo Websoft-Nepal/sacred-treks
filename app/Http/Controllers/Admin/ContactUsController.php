@@ -10,6 +10,6 @@ class ContactUsController extends Controller
 {
     public function index(){
         // $message = contact::all();
-        return view('pages.contact.index');
+        return view('pages.contact_us.index');
     }
 }
