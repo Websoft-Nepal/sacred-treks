@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Tour;
+use App\Models\TourTransportation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,7 +18,8 @@ class TourController extends BaseController
 
     public function create()
     {
-        return view('pages.tour.create');
+        $transportations = TourTransportation::all();
+        return view('pages.tour.create',['transportations' => $transportations]);
     }
 
     public function store(Request $request)
@@ -29,7 +31,7 @@ class TourController extends BaseController
             'duration' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'boundary' => 'required|in:national,international',
-            'transportation_id' => 'required|exists:transportations,id',
+            'transportation_id' => 'required|exists:tour_transportations,id',
             'description' => 'nullable|string',
         ]);
         $tour = new Tour();
@@ -69,7 +71,7 @@ class TourController extends BaseController
             'duration' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'boundary' => 'required|in:national,international',
-            'transportation_id' => 'required|exists:transportations,id',
+            'transportation_id' => 'required|exists:tour_transportations,id',
             'slug' => $this->slugValidate($request->slug, $id),
             'description' => 'nullable|string',
         ]);

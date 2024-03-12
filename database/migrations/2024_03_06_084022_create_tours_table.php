@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('cost')->default(0);
             $table->enum('boundary', ['national', 'international'])->default('national');
             $table->unsignedBigInteger('transportation_id');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->foreign('transportation_id')->references('id')->on('tour_transportations')->onDelete('cascade');
             $table->timestamps();
         });

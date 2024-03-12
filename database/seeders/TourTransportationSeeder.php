@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\TourTransportation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class TourTransportationSeeder extends Seeder
 {
@@ -14,10 +15,10 @@ class TourTransportationSeeder extends Seeder
     public function run(): void
     {
         $transportations = [
-            ['name' => 'Bus'],
-            ['name' => 'Jeep'],
-            ['name' => 'Helicopter'],
-            ['name' => 'Aeroplane'],
+            ['name' => 'Bus', 'created_at' => Carbon::now()],
+            ['name' => 'Jeep', 'created_at' => Carbon::now()],
+            ['name' => 'Helicopter', 'created_at' => Carbon::now()],
+            ['name' => 'Aeroplane', 'created_at' => Carbon::now()],
         ];
 
         TourTransportation::insert($transportations);

@@ -28,7 +28,7 @@
                     <div class="mb-3">
                         <label for="title" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Title</label>
-                        <input type="text" name="title" class="form-control" value="{{ old('value') }}" id="title"
+                        <input type="text" name="title" class="form-control" value="{{ old('title') }}" id="title"
                             aria-describedby="textHelp">
                     </div>
                     @error('title')
@@ -60,7 +60,7 @@
                     <div class="mb-3">
                         <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Duration</label>
-                        <input type="text" name="duration" class="form-control" value="{{ old('value') }}"
+                        <input type="text" name="duration" class="form-control" value="{{ old('duration') }}"
                             id="duration" aria-describedby="textHelp" placeholder="5 days">
                     </div>
                     @error('duration')
@@ -73,7 +73,7 @@
                         <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Status</label>
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">
-                            <input type="checkbox" class="custom-control-input" id="status" checked>
+                            <input type="checkbox" class="custom-control-input" name="status" id="status" checked>
                             <label class="custom-control-label" for="status">Status</label>
                             <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not. (active or not)</small>
                         </div>
@@ -87,7 +87,7 @@
                     <div class="mb-3">
                         <label for="cost" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Cost</label>
-                        <input type="text" name="cost" class="form-control" value="{{ old('value') }}"
+                        <input type="text" name="cost" class="form-control" value="{{ old('cost') }}"
                             id="cost" placeholder="50.00" aria-describedby="textHelp">
                     </div>
                     @error('cost')
@@ -126,14 +126,14 @@
                         <div class="form-group">
                             <label for="transportation"><span class="text-danger h3"><sup>*</sup></span> Transportation
                                 Medium</label>
-                            <select class="form-control" name="transportation" id="transportation">
+                            <select class="form-control" name="transportation_id" id="transportation">
                                 @foreach ($transportations as $transport)
-                                    <option value="$transport->id">$transport->name</option>
+                                    <option value="{{$transport->id}}">{{$transport->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    @error('transportation')
+                    @error('transportation_id')
                         <div class="text-danger">
                             {{ $message }}
                         </div>
