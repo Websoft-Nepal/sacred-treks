@@ -29,17 +29,23 @@
                         <input type="text"  value="{{$blog->title}}" class="form-control" id="title"
                             aria-describedby="textHelp">
                     </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control"  id="image">
+                    <div class="my-3">
+                        <label for="image" class="form-label">Current Image</label>
+                        <div>
+                            <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                rel="noopener noreferrer">
+                                <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
+                                    width="200px" alt="blog image" srcset="">
+                            </a>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
                         <input type="text" class="form-control" value="{{$blog->slug}}"  id="slug">
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control"  id="description" rows="3">{{$blog->description}}</textarea>
+                        <label for="editor" class="form-label">Description</label>
+                        <textarea class="form-control"  id="editor" rows="3">{{$blog->description}}</textarea>
                     </div>
                    
 
@@ -50,3 +56,10 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+@endpush

@@ -41,7 +41,7 @@
                                     <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
                                         rel="noopener noreferrer">
                                         <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
-                                            width="400px" alt="blog image" srcset="">
+                                            width="200px" alt="blog image" srcset="">
                                     </a>
                                 </div>
                             </div>

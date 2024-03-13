@@ -54,6 +54,7 @@ class BlogController extends BaseController
         ]);
         $blog = Blog::findorFail($id);
         $blog->title = $request->title;
+        $blog->description = $request->description;
         $blog->status = $request->has('status') ? true : false;
         $blog->slug = str::slug($request->slug);
         if ($request->hasFile('image')) {
