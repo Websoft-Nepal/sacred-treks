@@ -29,9 +29,15 @@
                         <input type="text"  value="{{$blog->title}}" class="form-control" id="title"
                             aria-describedby="textHelp">
                     </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control"  id="image">
+                    <div class="my-3">
+                        <label for="image" class="form-label">Current Image</label>
+                        <div>
+                            <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                rel="noopener noreferrer">
+                                <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
+                                    width="200px" alt="blog image" srcset="">
+                            </a>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
