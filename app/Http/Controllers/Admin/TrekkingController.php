@@ -53,7 +53,7 @@ class TrekkingController extends BaseController
 
     public function show($id)
     {
-        $trekking = Trekking::findOrFail($id);
+        $trekking = Trekking::with('location')->findOrFail($id);
         return view('pages.trekking.view', ['trekking' => $trekking]);
     }
 

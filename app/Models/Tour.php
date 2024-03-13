@@ -13,6 +13,6 @@ class Tour extends Model
 
     public function transportation(): BelongsTo
     {
-        return $this->belongsTo(TourTransportation::class, 'transporation_id', 'id');
+        return $this->belongsTo(TourTransportation::class, 'transportation_id', 'id');
     }
 }

@@ -23,8 +23,6 @@
                 <h6 class="m-0 font-weight-bold text-primary">View Trekking</h6>
             </div>
             <div class="card-body">
-
-
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="title" class="form-control" value="{{ $trekking->title }}" id="title"

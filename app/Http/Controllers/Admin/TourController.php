@@ -53,8 +53,8 @@ class TourController extends BaseController
 
     public function show($id)
     {
-        $tour = Tour::findOrFail($id);
-        return view('pages.tour.view', compact('tour'));
+        $tour = Tour::with('transportation')->findOrFail($id);
+        return view('pages.tour.view', ['tour' => $tour]);
     }
     public function edit($id)
     {

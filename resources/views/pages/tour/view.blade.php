@@ -32,7 +32,7 @@
 
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
-                    <input type="text" class="form-control" value="{{ $transportation->slug }}" id="slug"
+                    <input type="text" class="form-control" value="{{ $tour->slug }}" id="slug"
                         aria-describedby="textHelp">
                 </div>
 
@@ -40,10 +40,10 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Image</label>
                         <div>
-                            <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                            <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
-                                    width="400px" alt="blog image" srcset="">
+                                <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                    width="400px" alt="tour image" srcset="">
                             </a>
                         </div>
                     </div>
@@ -53,10 +53,10 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Map image</label>
                         <div>
-                            <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                            <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
-                                    width="400px" alt="blog image" srcset="">
+                                <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                    width="400px" alt="tour image" srcset="">
                             </a>
                         </div>
                     </div>
@@ -109,9 +109,9 @@
 
                 <div class="mb-3">
                     <div class="form-group">
-                        <label for="transportation"> Transportation
+                        <label for="transportation" class="form-label"> Transportation
                             Medium</label>
-                        <input type="text" value="$tour->transportation">
+                        <input type="text"class="form-control" value="{{$tour->transportation->name}}">
                     </div>
                 </div>
 
