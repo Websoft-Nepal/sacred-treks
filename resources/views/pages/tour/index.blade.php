@@ -32,7 +32,7 @@
                             <tr>
                                 <th>S.N</th>
                                 <th>Title</th>
-                                <th>slug</th>
+                                <th>Status</th>
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
@@ -43,7 +43,11 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$tour->title}}</td>
-                                <td>{{$tour->slug}}</td>
+                                <td>
+                                    <span class="badge text-white {{ $tour->status == 1 ? 'bg-success' : 'bg-danger' }}">
+                                        {{ $tour->status == 1 ? 'Active' : 'Inactive' }}
+                                    </span>
+                                </td>
                                 <td>
                                     <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}"
                                         target="_blank" rel="noopener noreferrer">
