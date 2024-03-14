@@ -24,3 +24,7 @@ Route::get('/admin/profile',[HomeController::class,'profile'])->name('admin.prof
 // Admin routes
 
 include __DIR__ . '/admin.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
