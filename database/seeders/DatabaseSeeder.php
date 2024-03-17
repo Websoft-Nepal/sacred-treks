@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             PrivacySeeder::class,
             SocialMediaSeeder::class,
             TermsConditionSeeder::class,
-            
+            UserSeeder::class,
         ]);
     }
 }

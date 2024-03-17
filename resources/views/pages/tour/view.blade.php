@@ -41,9 +41,9 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Image</label>
                         <div>
-                            <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
+                            <a href="{{ asset( $tour->image) }}" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                <img src="{{ asset( $tour->image) }}" class="img-fluid"
                                     width="400px" alt="tour image" srcset="">
                             </a>
                         </div>
@@ -54,9 +54,9 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Map image</label>
                         <div>
-                            <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
+                            <a href="{{ asset( $tour->image) }}" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                <img src="{{ asset( $tour->image) }}" class="img-fluid"
                                     width="400px" alt="tour image" srcset="">
                             </a>
                         </div>
@@ -68,6 +68,13 @@
                         Duration</label>
                     <input type="text" name="duration" class="form-control" value="{{ $tour->duration }}" id="duration"
                         aria-describedby="textHelp" placeholder="5 days">
+                </div>
+
+                <div class="mb-3">
+                    <label for="place" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                        Place</label>
+                    <input type="text" name="place" class="form-control" value="{{ $tour->place }}"
+                        id="place" aria-describedby="textHelp">
                 </div>
 
                 <div class="mb-3">

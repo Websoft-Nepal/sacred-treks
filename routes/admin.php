@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\TrekkingLocationController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
-Route::prefix('admin')->name("admin.")->group(function () {
+Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     //ContactUs Route

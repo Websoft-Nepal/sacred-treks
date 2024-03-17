@@ -19,7 +19,7 @@ class TourController extends BaseController
     public function create()
     {
         $transportations = TourTransportation::all();
-        return view('pages.tour.create',['transportations' => $transportations]);
+        return view('pages.tour.create', ['transportations' => $transportations]);
     }
 
     public function store(Request $request)
@@ -28,7 +28,9 @@ class TourController extends BaseController
             'title' => 'required|string|max:255',
             'status' => 'in:on',
             'image' => 'required|image|max:2048',
+            'map' => 'image|max:2048',
             'duration' => 'required|string|max:255',
+            'place' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'boundary' => 'required|in:national,international',
             'transportation_id' => 'required|exists:tour_transportations,id',
@@ -39,10 +41,14 @@ class TourController extends BaseController
         $tour->status = $request->has('status') ? true : false;
         $tour->duration = $request->duration;
         $tour->cost = $request->cost;
+        $tour->place = $request->place;
         $tour->boundary = $request->boundary;
         $tour->transportation_id = $request->transportation_id;
         $tour->slug = $this->generateSlug($request->title, $tour);
         $tour->image = $this->uploadImage($request->image, "uploads/tour");
+        if ($request->hasFile('map')) {
+            $tour->map = $this->uploadImage($request->map, "uploads/tour");
+        }
         $tour->description = $request->description;
         $tour->save();
 
@@ -60,7 +66,7 @@ class TourController extends BaseController
     {
         $transportations = TourTransportation::all();
         $tour = Tour::findOrFail($id);
-        return view('pages.tour.edit', compact('tour','transportations'));
+        return view('pages.tour.edit', compact('tour', 'transportations'));
     }
 
     public function update(Request $request, $id)
@@ -69,7 +75,9 @@ class TourController extends BaseController
             'title' => 'required|string|max:255',
             'status' => 'in:on',
             'image' => 'image|max:2048',
+            'map' => 'image|max:2048',
             'duration' => 'required|string|max:255',
+            'place' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'boundary' => 'required|in:national,international',
             'transportation_id' => 'required|exists:tour_transportations,id',
@@ -81,6 +89,7 @@ class TourController extends BaseController
         $tour->status = $request->has('status') ? true : false;
         $tour->duration = $request->duration;
         $tour->cost = $request->cost;
+        $tour->place = $request->place;
         $tour->boundary = $request->boundary;
         $tour->transportation_id = $request->transportation_id;
         $tour->slug = str::slug($request->slug);
@@ -91,7 +100,10 @@ class TourController extends BaseController
             // Delete the previous image if exists
             if ($tour->image) {
                 try {
-                    $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                    $tem = explode('/', $tour->image);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
@@ -108,7 +120,11 @@ class TourController extends BaseController
             // Delete the previous image if exists
             if ($tour->map) {
                 try {
-                    $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
+                    $tem = explode('/', $tour->map);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
+                    // $filePath = $tour->map;
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
@@ -133,7 +149,10 @@ class TourController extends BaseController
         if ($tour->image) {
             try {
                 // Storage::delete($tour->image);
-                $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                $tem = explode('/', $tour->image);
+                $n = count($tem);
+                $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                 unlink($filePath);
             } catch (\Exception $e) {
                 // Handle deletion error

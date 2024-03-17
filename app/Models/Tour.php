@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Tour extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','status','image','slug','description','duration','cost','boundary','maps','transportation_id'];
+    protected $fillable = ['title','status','image','place','slug','description','duration','cost','boundary','maps','transportation_id'];
 
     public function transportation(): BelongsTo
     {

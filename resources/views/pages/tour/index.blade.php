@@ -49,9 +49,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}"
+                                    <a href="{{ asset( $tour->image) }}"
                                         target="_blank" rel="noopener noreferrer">
-                                        <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}"
+                                        <img src="{{ asset( $tour->image) }}"
                                             width="60px" alt="tour image" srcset="">
                                     </a>
                                 </td>

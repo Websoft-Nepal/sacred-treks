@@ -54,9 +54,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Current Image</label>
                             <div>
-                                <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
+                                <a href="{{ asset( $tour->image) }}" target="_blank"
                                     rel="noopener noreferrer">
-                                    <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                    <img src="{{ asset( $tour->image) }}" class="img-fluid"
                                         width="400px" alt="tour image" srcset="">
                                 </a>
                             </div>
@@ -78,9 +78,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Map image</label>
                             <div>
-                                <a href="{{ asset('storage/uploads/tour/' . $tour->image) }}" target="_blank"
+                                <a href="{{ asset( $tour->image) }}" target="_blank"
                                     rel="noopener noreferrer">
-                                    <img src="{{ asset('storage/uploads/tour/' . $tour->image) }}" class="img-fluid"
+                                    <img src="{{ asset( $tour->image) }}" class="img-fluid"
                                         width="400px" alt="tour image" srcset="">
                                 </a>
                             </div>
@@ -113,7 +113,7 @@
                         <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Status</label>
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">
-                            <input type="checkbox" class="custom-control-input" id="status" @checked($tour->status)>
+                            <input type="checkbox" class="custom-control-input" name="status" id="status" @checked($tour->status)>
                             <label class="custom-control-label" for="status">Status</label>
                             <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not.
                                 (active or not)</small>
@@ -132,6 +132,18 @@
                             id="cost" placeholder="50.00" aria-describedby="textHelp">
                     </div>
                     @error('cost')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
+                        <label for="place" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Place</label>
+                        <input type="text" name="place" class="form-control" value="{{ $tour->place }}"
+                            id="place" placeholder="50.00" aria-describedby="textHelp">
+                    </div>
+                    @error('place')
                         <div class="text-danger">
                             {{ $message }}
                         </div>

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('map')->nullable();
             $table->string('duration');
+            $table->string('place');
             $table->double('cost')->default(0);
             $table->enum('boundary', ['national', 'international'])->default('national');
             $table->unsignedBigInteger('transportation_id');

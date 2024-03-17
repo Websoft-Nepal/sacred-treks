@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\TourController;
+use App\Http\Controllers\Api\TrekkingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/tour',[TourController::class,'index']);
 Route::post('/tour/{slug}',[TourController::class,'show']);
+
+Route::get('trekking',[TrekkingController::class,'index']);
+Route::post('/trekking/{slug}',[TrekkingController::class,'show']);

@@ -19,7 +19,7 @@ class TrekkingController extends BaseController
     public function create()
     {
         $locations = TrekkingLocation::all();
-        return view('pages.trekking.create',['locations' => $locations]);
+        return view('pages.trekking.create', ['locations' => $locations]);
     }
 
     public function store(Request $request)
@@ -61,7 +61,7 @@ class TrekkingController extends BaseController
     {
         $trekking = Trekking::findorFail($id);
         $locations = TrekkingLocation::all();
-        return view('pages.trekking.edit', ['trekking' => $trekking,'locations'=>$locations]);
+        return view('pages.trekking.edit', ['trekking' => $trekking, 'locations' => $locations]);
     }
 
     public function update(Request $request, string $id)
@@ -90,7 +90,9 @@ class TrekkingController extends BaseController
             // Delete the previous image if exists
             if ($trekking->image) {
                 try {
-                    $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                    $tem = explode('/', $trekking->image);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
@@ -123,7 +125,9 @@ class TrekkingController extends BaseController
         if ($trekking->image) {
             try {
                 // Storage::delete($trekking->image);
-                $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                $tem = explode('/', $trekking->image);
+                $n = count($tem);
+                $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                 unlink($filePath);
             } catch (\Exception $e) {
                 // Handle deletion error

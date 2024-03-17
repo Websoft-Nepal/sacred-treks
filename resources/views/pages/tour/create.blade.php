@@ -97,6 +97,18 @@
                     @enderror
 
                     <div class="mb-3">
+                        <label for="place" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Place</label>
+                        <input type="text" name="place" class="form-control" value="{{ old('place') }}"
+                            id="place" aria-describedby="textHelp">
+                    </div>
+                    @error('place')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
                         <label for="boundary" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Boundary</label>
                         <!-- Default checked national -->

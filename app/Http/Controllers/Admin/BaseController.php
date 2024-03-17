@@ -13,7 +13,9 @@ class BaseController extends Controller
         $filename = Str::uuid()->toString() . '-' . time() . '.' . $image->getClientOriginalExtension();
         // $image->move($location, $filename);
         // $filepath = $filename->store($location);
-        $filepath = $image->storeAs($location, $filename,'public');
+        $temp = $filename;
+        $filename ="storage/".$location."/".$filename;
+        $filepath = $image->storeAs($location, $temp,'public');
 
         return $filename;
     }

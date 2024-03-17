@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,9 @@ Route::get('/admin/profile',[HomeController::class,'profile'])->name('admin.prof
 
 // Admin routes
 
+Auth::routes();
 include __DIR__ . '/admin.php';
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

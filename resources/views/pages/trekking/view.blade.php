@@ -39,9 +39,9 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Image</label>
                         <div>
-                            <a href="{{ asset('storage/uploads/trekking/' . $trekking->image) }}" target="_blank"
+                            <a href="{{ asset( $trekking->image) }}" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="{{ asset('storage/uploads/trekking/' . $trekking->image) }}" class="img-fluid"
+                                <img src="{{ asset( $trekking->image) }}" class="img-fluid"
                                     width="400px" alt="trekking image" srcset="">
                             </a>
                         </div>
