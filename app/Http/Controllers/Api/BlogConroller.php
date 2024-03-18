@@ -17,5 +17,17 @@ class BlogConroller extends BaseController
         }
 
     }
+    public function show($slug){
+        try{
+            $blog = Blog::where('slug',$slug)->first();
+            if($blog != null){
+                return $this->SendResponse($blog,"Blog data fetched successfully.");
+            }else{
+                return $this->SendResponse("Data not found","Cannot fetch blog data.",404);
+            }
+        }catch(\Throwable $th){
+            return $this->SendError(throw $th,"Cannot fetch blogs data.",500);
+        }
+    }
 
 }

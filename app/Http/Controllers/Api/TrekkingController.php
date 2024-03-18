@@ -19,7 +19,19 @@ class TrekkingController extends BaseController
             ];
             return $this->SendResponse($data,"Trekking data fetched successfully");
         } catch (\Throwable $th) {
-            return $this->SendError(throw $th,"Cannot fetch trekkign data",500);
+            return $this->SendError(throw $th,"Cannot fetch trekking data",500);
+        }
+    }
+    public function show($slug){
+        try{
+            $trekking = Trekking::where('slug',$slug)->first();
+            if($trekking != null){
+                return $this->SendResponse($trekking,"Trekking data fetched successfully");
+            }else{
+                return $this->SendResponse("Data not found","Cannot fetch trekking data",404);
+            }
+        }catch(\Throwable $th){
+            return $this->SendError(throw $th,"Cannot fetch data",500);
         }
     }
 
