@@ -47,6 +47,26 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="featureimg1" class="form-label">Feature image 1</label>
+                        <input type="file" class="form-control" name="featureimg1" id="featureimg1">
+                        @error('featureimg1')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="featureimg2" class="form-label">Feature image 2</label>
+                        <input type="file" class="form-control" name="featureimg2" id="featureimg2">
+                        @error('featureimg2')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Duration</label>
                         <input type="text" name="duration" class="form-control" value="{{ old('duration') }}"

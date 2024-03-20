@@ -48,6 +48,26 @@
                     @enderror
 
                     <div class="mb-3">
+                        <label for="featureimg1" class="form-label">Feature image 1</label>
+                        <input type="file" class="form-control" name="featureimg1" id="featureimg1">
+                        @error('featureimg1')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="featureimg2" class="form-label">Feature image 2</label>
+                        <input type="file" class="form-control" name="featureimg2" id="featureimg2">
+                        @error('featureimg2')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="map" class="form-label">Map</label>
                         <input type="file" class="form-control" name="map" id="map">
                     </div>
@@ -75,7 +95,8 @@
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">
                             <input type="checkbox" class="custom-control-input" name="status" id="status" checked>
                             <label class="custom-control-label" for="status">Status</label>
-                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not. (active or not)</small>
+                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not.
+                                (active or not)</small>
                         </div>
                     </div>
                     @error('status')
@@ -140,7 +161,7 @@
                                 Medium</label>
                             <select class="form-control" name="transportation_id" id="transportation">
                                 @foreach ($transportations as $transport)
-                                    <option value="{{$transport->id}}">{{$transport->name}}</option>
+                                    <option value="{{ $transport->id }}">{{ $transport->name }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -29,6 +29,8 @@ class TourController extends BaseController
             'status' => 'in:on',
             'image' => 'required|image|max:2048',
             'map' => 'image|max:2048',
+            'featureimg1' => 'image|max:2048',
+            'featureimg2' => 'image|max:2048',
             'duration' => 'required|string|max:255',
             'place' => 'required|string|max:255',
             'cost' => 'required|numeric',
@@ -48,6 +50,13 @@ class TourController extends BaseController
         $tour->image = $this->uploadImage($request->image, "uploads/tour");
         if ($request->hasFile('map')) {
             $tour->map = $this->uploadImage($request->map, "uploads/tour");
+        }
+        if($request->hasFile('featureimg1')){
+            $tour->featureimg1 = $this->uploadImage($request->featureimg1, "uploads/tour");
+        }
+
+        if($request->hasFile("featureimg2")){
+            $tour->featureimg2 = $this->uploadImage($request->featureimg2, "uploads/tour");
         }
         $tour->description = $request->description;
         $tour->save();
@@ -75,6 +84,8 @@ class TourController extends BaseController
             'title' => 'required|string|max:255',
             'status' => 'in:on',
             'image' => 'image|max:2048',
+            'featureimg1' => 'image|max:2048',
+            'featureimg2' => 'image|max:2048',
             'map' => 'image|max:2048',
             'duration' => 'required|string|max:255',
             'place' => 'required|string|max:255',
@@ -142,6 +153,47 @@ class TourController extends BaseController
             // $tour->image = $request->file('image')->store('uploads/tour');
             $tour->image = $this->uploadImage($request->map, "uploads/tour");
         }
+
+        if ($request->hasFile('featureimg1')) {
+            if ($tour->featureimg1) {
+                $tem = strtolower($tour->featureimg1);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $tour->featureimg1);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
+                }
+            }
+            $tour->featureimg1 = $this->uploadImage($request->featureimg1, "uploads/tour");
+        }
+
+        if ($request->hasFile("featureimg2")) {
+            if ($tour->featureimg2) {
+                $tem = strtolower($tour->featureimg2);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $tour->featureimg2);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
+                }
+            }
+            $tour->featureimg2 = $this->uploadImage($request->featureimg2, "uploads/tour");
+        }
+
         $tour->save();
 
         drakify('success');
@@ -162,6 +214,39 @@ class TourController extends BaseController
                     $n = count($tem);
                     $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+        }
+        if ($tour->featureimg1) {
+            $tem = strtolower($tour->featureimg1);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $tour->featureimg1);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+        }
+
+        if ($tour->featureimg2) {
+            $tem = strtolower($tour->featureimg2);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $tour->featureimg2);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error

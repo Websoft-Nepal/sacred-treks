@@ -49,6 +49,31 @@
                     </div>
                 @endif
 
+                @if ($trekking->featureimg1 != null)
+                    <div class="my-3">
+                        <label for="image" class="form-label">Current Feature Image 1</label>
+                        <div>
+                            <a href="{{ asset($trekking->featureimg1) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($trekking->featureimg1) }}" class="img-fluid" width="400px"
+                                    alt="blog image" srcset="">
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+
+                @if ($trekking->featureimg2 != null)
+                    <div class="my-3">
+                        <label for="featureimg2" class="form-label">Current Feature Image 2</label>
+                        <div>
+                            <a href="{{ asset($trekking->featureimg2) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($trekking->featureimg2) }}" class="img-fluid" width="400px"
+                                    alt="blog featureimg2" srcset="">
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
                 @if ($tour->map != null)
                     <div class="my-3">
                         <label for="image" class="form-label">Map image</label>

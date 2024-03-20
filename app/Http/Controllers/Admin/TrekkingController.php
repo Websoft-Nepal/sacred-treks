@@ -28,6 +28,8 @@ class TrekkingController extends BaseController
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|max:2048',
+            'featureimg1' => 'image|max:2048',
+            'featureimg2' => 'image|max:2048',
             'status' => 'in:on',
             'duration' => 'required|string',
             'cost' => 'required|numeric',
@@ -44,6 +46,15 @@ class TrekkingController extends BaseController
         $trekking->slug = $this->generateSlug($request->title, $trekking);
         $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
         $trekking->description = $request->description;
+
+        if($request->hasFile('featureimg1')){
+            $trekking->featureimg1 = $this->uploadImage($request->featureimg1, "uploads/trekking");
+        }
+
+        if($request->hasFile("featureimg2")){
+            $trekking->featureimg2 = $this->uploadImage($request->featureimg2, "uploads/trekking");
+        }
+
         $trekking->save();
 
         drakify('success');
@@ -70,6 +81,8 @@ class TrekkingController extends BaseController
             'title' => 'required|string|max:255',
             'slug' => $this->slugValidate('trekkings', $id),
             'image' => 'image|max:2048',
+            'featureimg1' => 'image|max:2048',
+            'featureimg2' => 'image|max:2048',
             'status' => 'in:on',
             'duration' => 'required|string',
             'cost' => 'required|numeric',
@@ -105,10 +118,51 @@ class TrekkingController extends BaseController
                     }
                 }
             }
+
             // Upload the new image
             // $trekking->image = $request->file('image')->store('uploads/trekking');
 
             $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
+        }
+
+        if ($request->hasFile('featureimg1')) {
+            if ($trekking->featureimg1) {
+                $tem = strtolower($trekking->featureimg1);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $trekking->featureimg1);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
+                }
+            }
+            $trekking->featureimg1 = $this->uploadImage($request->featureimg1, "uploads/trekking");
+        }
+
+        if ($request->hasFile("featureimg2")) {
+            if ($trekking->featureimg2) {
+                $tem = strtolower($trekking->featureimg2);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $trekking->featureimg2);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
+                }
+            }
+            $trekking->featureimg2 = $this->uploadImage($request->featureimg2, "uploads/trekking");
         }
 
         $trekking->save();
@@ -146,6 +200,43 @@ class TrekkingController extends BaseController
                 }
             }
         }
+
+        if ($trekking->featureimg1) {
+            $tem = strtolower($trekking->featureimg1);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $trekking->featureimg1);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+        }
+
+
+        if ($trekking->featureimg2) {
+            $tem = strtolower($trekking->featureimg2);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $trekking->featureimg2);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+        }
+
+
         $trekking->delete();
 
         drakify('success');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Trekking extends Model
 {
@@ -29,5 +30,25 @@ class Trekking extends Model
     public function bookings(): HasMany
     {
         return $this->hasMany(Trekking::class, 'trekking_id', 'id');
+    }
+
+    /**
+     * Get the trekkingCostInclude associated with the Trekking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function trekkingCostInclude(): HasOne
+    {
+        return $this->hasOne(TrekkingCostInclude::class, 'trekking_id', 'id');
+    }
+
+    /**
+     * Get all of the trekkingItinerary for the Trekking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function trekkingItinerary(): HasMany
+    {
+        return $this->hasMany(TrekkingItinerary::class, 'trekking_id', 'id');
     }
 }

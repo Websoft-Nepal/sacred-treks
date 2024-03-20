@@ -39,10 +39,34 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Image</label>
                         <div>
-                            <a href="{{ asset( $trekking->image) }}" target="_blank"
-                                rel="noopener noreferrer">
-                                <img src="{{ asset( $trekking->image) }}" class="img-fluid"
-                                    width="400px" alt="trekking image" srcset="">
+                            <a href="{{ asset($trekking->image) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($trekking->image) }}" class="img-fluid" width="400px"
+                                    alt="trekking image" srcset="">
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($trekking->featureimg1 != null)
+                    <div class="my-3">
+                        <label for="image" class="form-label">Current Feature Image 1</label>
+                        <div>
+                            <a href="{{ asset($trekking->featureimg1) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($trekking->featureimg1) }}" class="img-fluid" width="400px"
+                                    alt="blog image" srcset="">
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+
+                @if ($trekking->featureimg2 != null)
+                    <div class="my-3">
+                        <label for="featureimg2" class="form-label">Current Feature Image 2</label>
+                        <div>
+                            <a href="{{ asset($trekking->featureimg2) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($trekking->featureimg2) }}" class="img-fluid" width="400px"
+                                    alt="blog featureimg2" srcset="">
                             </a>
                         </div>
                     </div>
@@ -76,13 +100,14 @@
                 <div class="mb-3">
                     <div class="form-group">
                         <label for="location"> Location</label>
-                        <div class="form-control">{{$trekking->location->location}}</div>
+                        <div class="form-control">{{ $trekking->location->location }}</div>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $trekking->description !!}</div>
+                    <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $trekking->description !!}
+                    </div>
                 </div>
 
             </div>

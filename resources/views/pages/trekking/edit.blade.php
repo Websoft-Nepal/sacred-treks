@@ -73,6 +73,52 @@
                         @enderror
                     </div>
 
+                    @if ($trekking->featureimg1 != null)
+                        <div class="my-3">
+                            <label for="image" class="form-label">Current Feature Image 1</label>
+                            <div>
+                                <a href="{{ asset( $trekking->featureimg1) }}" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="{{ asset( $trekking->featureimg1) }}" class="img-fluid"
+                                        width="400px" alt="blog image" srcset="">
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="mb-3">
+                        <label for="featureimg1" class="form-label">Feature Image 1</label>
+                        <input type="file" class="form-control" name="featureimg1" id="featureimg1">
+                        @error('featureimg1')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    @if ($trekking->featureimg2 != null)
+                        <div class="my-3">
+                            <label for="featureimg2" class="form-label">Current Feature Image 2</label>
+                            <div>
+                                <a href="{{ asset( $trekking->featureimg2) }}" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <img src="{{ asset( $trekking->featureimg2) }}" class="img-fluid"
+                                        width="400px" alt="blog featureimg2" srcset="">
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="mb-3">
+                        <label for="featureimg2" class="form-label">Feature Image 2</label>
+                        <input type="file" class="form-control" name="featureimg2" id="featureimg2">
+                        @error('featureimg2')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Duration</label>
