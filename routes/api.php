@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\AboutUsController;
+use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\PrivacyController;
+use App\Http\Controllers\Api\TermsConditionController;
+use App\Http\Controllers\Api\TourBookingController;
 use App\Http\Controllers\Api\TourController;
+use App\Http\Controllers\Api\TrekkingBookingController;
 use App\Http\Controllers\Api\TrekkingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +27,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/tour',[TourController::class,'index']);
-Route::post('/tour/{slug}',[TourController::class,'show']);
+Route::get('/tour/{slug}',[TourController::class,'show']);
+Route::get('/tour/category/{trasnportation_id}',[TourController::class,'category']);
 
 Route::get('trekking',[TrekkingController::class,'index']);
-Route::post('/trekking/{slug}',[TrekkingController::class,'show']);
+Route::get('/trekking/{slug}',[TrekkingController::class,'show']);
+Route::get('/trekking/category/{location_id}',[TrekkingController::class,'category']);
+
+Route::post('contactus',[ContactUsController::class,'store']);
+
+Route::get('privacy',[PrivacyController::class,'index']);
+Route::get('terms-condition',[TermsConditionController::class,'index']);
+Route::get('aboutus',[AboutUsController::class,'index']);
+
+// Booking
+Route::post('tour-booking',[TourBookingController::class,'store']);
+Route::post('trekking-booking',[TrekkingBookingController::class,'store']);

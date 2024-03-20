@@ -88,19 +88,27 @@ class TrekkingController extends BaseController
         // Check if a new image is uploaded
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
+
             if ($trekking->image) {
-                try {
-                    $tem = explode('/', $trekking->image);
-                    $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
-                    unlink($filePath);
-                } catch (\Exception $e) {
-                    // Handle deletion error
-                    dd($e->getMessage());
+                $tem = strtolower($trekking->image);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $trekking->image);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
                 }
             }
             // Upload the new image
-            $trekking->image = $request->file('image')->store('uploads/trekking');
+            // $trekking->image = $request->file('image')->store('uploads/trekking');
+
+            $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
         }
 
         $trekking->save();
@@ -123,15 +131,19 @@ class TrekkingController extends BaseController
         $trekking = Trekking::findOrFail($id);
 
         if ($trekking->image) {
-            try {
-                // Storage::delete($trekking->image);
-                $tem = explode('/', $trekking->image);
-                $n = count($tem);
-                $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
-                unlink($filePath);
-            } catch (\Exception $e) {
-                // Handle deletion error
-                dd($e->getMessage());
+            $tem = strtolower($trekking->image);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $trekking->image);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
             }
         }
         $trekking->delete();

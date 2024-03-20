@@ -17,6 +17,7 @@ class ContactSeeder extends Seeder
         $contact->email = "xyz@gmail.com";
         $contact->phone = "9872346778";
         $contact->fax = "2947489";
+        $contact->location = "Pokhara, Nepal";
         $contact->save();
     }
 }

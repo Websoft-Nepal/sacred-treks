@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\TourTransportationController;
 use App\Http\Controllers\Admin\TrekkingController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\TourBookingController;
+use App\Http\Controllers\Admin\TrekkingBookingController;
 use App\Http\Controllers\Admin\TrekkingLocationController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -127,5 +129,21 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::post('store',[TourTransportationController::class,'store'])->name('store');
         Route::put('update/{id}',[TourTransportationController::class,'update'])->name('update');
         Route::delete('destroy/{id}',[TourTransportationController::class,'destroy'])->name('destroy');
+    });
+
+    // Tour Booking
+    Route::prefix('tour-booking')->name('tour.booking.')->group(function (){
+        Route::get('/',[TourBookingController::class,'index'])->name('index');
+        Route::get('show/{id}',[TourBookingController::class,'show'])->name('show');
+        Route::put('update/{id}',[TourBookingController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[TourBookingController::class,'destroy'])->name('destroy');
+    });
+
+    // Trekking Booking
+    Route::prefix('trekking-booking')->name('trekking.booking.')->group(function (){
+        Route::get('/',[TrekkingBookingController::class,'index'])->name('index');
+        Route::get('show/{id}',[TrekkingBookingController::class,'show'])->name('show');
+        Route::put('update/{id}',[TrekkingBookingController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[TrekkingBookingController::class,'destroy'])->name('destroy');
     });
 });

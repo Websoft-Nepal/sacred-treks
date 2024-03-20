@@ -33,7 +33,6 @@
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" class="form-control" value="{{ $tour->slug }}" id="slug"
-                    <input type="text" class="form-control" value="{{ $tour->slug }}" id="slug"
                         aria-describedby="textHelp">
                 </div>
 

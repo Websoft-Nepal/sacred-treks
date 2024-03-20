@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->boolean('status')->default(true);
             $table->string('image');
+            $table->string('featureimg1')->nullable();
+            $table->string('featureimg2')->nullable();
             $table->string('duration');
             $table->double('cost')->default(0);
             $table->unsignedBigInteger('location_id');

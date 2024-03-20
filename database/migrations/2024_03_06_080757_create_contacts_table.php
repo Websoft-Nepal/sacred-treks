@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('fax');
             $table->string('phone');
+            $table->string('location');
+            $table->text('map')->nullable();
             $table->timestamps();
         });
     }

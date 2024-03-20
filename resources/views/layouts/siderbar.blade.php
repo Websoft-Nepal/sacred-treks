@@ -66,6 +66,22 @@
         </div>
     </li>
 
+    {{-- Bookings  --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBooking"
+            aria-expanded="true" aria-controls="collapseBooking">
+            <i class="fas fa-compass"></i>
+            <span>Bookings</span>
+        </a>
+        <div id="collapseBooking" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Bookings:</h6>
+                <a class="collapse-item" href="{{ route('admin.tour.booking.index') }}">Tours</a>
+                <a class="collapse-item" href="{{ route('admin.trekking.booking.index') }}">Trekkings</a>
+            </div>
+        </div>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{route('admin.social.index')}}">
             <i class="fas fa-globe"></i>

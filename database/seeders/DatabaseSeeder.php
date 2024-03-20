@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
             SocialMediaSeeder::class,
             TermsConditionSeeder::class,
             UserSeeder::class,
+            TourSeeder::class,
+            TrekkingSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

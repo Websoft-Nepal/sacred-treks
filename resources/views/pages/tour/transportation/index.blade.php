@@ -19,36 +19,35 @@
         {{-- </div> --}}
         <div class="p-1">
 
-            <a href="{{ route('admin.trekking.create') }}" class="btn btn-primary btn-sm">Create</a>
-            <<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal"
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal"
                 data-whatever="@mdo">Create</button>
 
-                <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="createModalLabel">Add Transportation
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createModalLabel">Add Transportation
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('admin.transportation.store') }}" method="POST">
                             <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Transportation:</label>
-                                        <input type="text" class="form-control" name="name" id="recipient-name">
-                                    </div>
+                                @csrf
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Transportation:</label>
+                                    <input type="text" class="form-control" name="name" id="recipient-name">
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="Submit" class="btn btn-primary">Add</button>
                             </div>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
         </div>
         <div class="card shadow mb-4">
@@ -97,7 +96,7 @@
                                                                     name="transportation" id="recipient-name"
                                                                     value="$transportation->name">
                                                                 @error('transportation')
-                                                                    <div class="text-danger">{{$message}}</div>
+                                                                    <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
                                                     </div>

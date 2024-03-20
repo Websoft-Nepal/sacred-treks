@@ -31,17 +31,18 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <form>
+                        <form method="POST" action = "{{ route('admin.location.store') }}">
+                            @csrf
+                            <div class="modal-body">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Location:</label>
                                     <input type="text" class="form-control" name="location" id="recipient-name">
                                 </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="Submit" class="btn btn-primary">Add</button>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="Submit" class="btn btn-primary">Add</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -70,10 +71,10 @@
                                     <td>
                                         {{-- Edit button modal  --}}
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                            data-target="#editModal{{$location->id}}" data-whatever="@mdo">Edit</button>
+                                            data-target="#editModal{{ $location->id }}" data-whatever="@mdo">Edit</button>
 
                                         {{-- Modal  --}}
-                                        <div class="modal fade" id="editModal{{$location->id}}" tabindex="-1"
+                                        <div class="modal fade" id="editModal{{ $location->id }}" tabindex="-1"
                                             aria-labelledby="editModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -84,27 +85,27 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST">
+                                                    <form method="POST" action="{{ route('admin.location.store') }}">
+                                                        <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="recipient-name"
                                                                     class="col-form-label">Location:</label>
-                                                                <input type="text" class="form-control" name="location" value="{{$location->location}}"
-                                                                    id="recipient-name">
+                                                                <input type="text" class="form-control" name="location"
+                                                                    value="{{ $location->location }}" id="recipient-name">
                                                             </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="Submit" class="btn btn-primary">Add</button>
-                                                    </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="Submit" class="btn btn-primary">Add</button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {{-- delete button------- --}}
-                                        <form action="{{ route('admin.trekking.destroy', $location->id) }}" method="post"
+                                        <form action="{{ route('admin.location.destroy', $location->id) }}" method="post"
                                             class="d-inline">
                                             @csrf
                                             @method('delete')

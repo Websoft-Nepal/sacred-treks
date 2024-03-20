@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Trekking extends Model
 {
@@ -18,5 +19,15 @@ class Trekking extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(TrekkingLocation::class, 'location_id', 'id');
+    }
+
+    /**
+     * Get all of the bookings for the Trekking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Trekking::class, 'trekking_id', 'id');
     }
 }

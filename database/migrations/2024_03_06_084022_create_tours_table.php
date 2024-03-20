@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->boolean('status')->default(true);
             $table->string('image');
+            $table->string('featureimg1')->nullable();
+            $table->string('featureimg2')->nullable();
             $table->string('map')->nullable();
             $table->string('duration');
             $table->string('place');

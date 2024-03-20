@@ -12,7 +12,7 @@ class TourController extends BaseController
 {
     public function index()
     {
-        $tours = Tour::latest()->paginate(10);
+        $tours = Tour::latest()->get();
         return view('pages.tour.index', compact('tours'));
     }
 
@@ -99,15 +99,19 @@ class TourController extends BaseController
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
             if ($tour->image) {
-                try {
-                    $tem = explode('/', $tour->image);
-                    $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
-                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
-                    unlink($filePath);
-                } catch (\Exception $e) {
-                    // Handle deletion error
-                    dd($e->getMessage());
+                $tem = strtolower($tour->image);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $tour->image);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
                 }
             }
             // Upload the new image
@@ -119,16 +123,19 @@ class TourController extends BaseController
         if ($request->hasFile('map')) {
             // Delete the previous image if exists
             if ($tour->map) {
-                try {
-                    $tem = explode('/', $tour->map);
-                    $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
-                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
-                    // $filePath = $tour->map;
-                    unlink($filePath);
-                } catch (\Exception $e) {
-                    // Handle deletion error
-                    dd($e->getMessage());
+                $tem = strtolower($tour->map);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $tour->map);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
                 }
             }
             // Upload the new image
@@ -147,26 +154,35 @@ class TourController extends BaseController
         $tour = Tour::findOrFail($id);
 
         if ($tour->image) {
-            try {
-                // Storage::delete($tour->image);
-                $tem = explode('/', $tour->image);
-                $n = count($tem);
-                $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
-                // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
-                unlink($filePath);
-            } catch (\Exception $e) {
-                // Handle deletion error
-                dd($e->getMessage());
+            $tem = strtolower($tour->image);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $tour->image);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
             }
         }
         if ($tour->map) {
-            try {
-                // Storage::delete($tour->image);
-                $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
-                unlink($filePath);
-            } catch (\Exception $e) {
-                // Handle deletion error
-                dd($e->getMessage());
+            $tem = strtolower($tour->map);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $tour->map);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
             }
         }
         $tour->delete();
