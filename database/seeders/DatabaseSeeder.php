@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             TourSeeder::class,
             TrekkingSeeder::class,
             BlogSeeder::class,
+            TestimonialSeeder::class,
         ]);
     }
 }

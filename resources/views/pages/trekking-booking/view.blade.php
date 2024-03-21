@@ -79,6 +79,13 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="payment" class="form-label">
+                        Payment Gateway</label>
+                    <input type="text" name="payment" class="form-control" value="{{ $trekkingBooking->payment }}" id="payment"
+                        placeholder="50.00" aria-describedby="textHelp">
+                </div>
+
+                <div class="mb-3">
                     <label for="address" class="form-label">
                         Address</label>
                     <input type="text" name="address" class="form-control" value="{{ $trekkingBooking->address }}" id="cost" aria-describedby="textHelp">

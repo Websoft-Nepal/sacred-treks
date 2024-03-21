@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Mail\TrekkingBookingMail;
 use App\Models\TrekkingBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TrekkingBookingController extends BaseController
 {
@@ -21,6 +23,8 @@ class TrekkingBookingController extends BaseController
             'address' => 'nullable|string|max:255',
             'message' => 'nullable|string',
             'trekking_id' => 'required|exists:trekkings,id',
+            'cost' => 'required|numeric',
+            'payment' => 'payment',
         ]);
         if($validat->fails()){
             return $this->SendError($validat->messages(),"Cannot book the trekking",400);
@@ -35,10 +39,13 @@ class TrekkingBookingController extends BaseController
                 'address' => $request->address,
                 'message' => $request->message,
                 'trekking_id' => $request->trekking_id,
+                'cost' => $request->cost,
+                'payment' => $request->payment,
             ];
             DB::beginTransaction();
             try{
-                TrekkingBooking::create($data);
+                $trekkingBooking = TrekkingBooking::create($data);
+                Mail::to($trekkingBooking->email)->send(new TrekkingBookingMail($trekkingBooking));
                 DB::commit();
                 return $this->SendResponse("Success","Trekking Booked successfully",200);
             }catch(\Throwable $th){

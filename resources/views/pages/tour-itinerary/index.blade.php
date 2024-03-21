@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('page-title', 'Trekking Itinerary')
+@section('page-title', 'Tour Itinerary')
 @section('main-section')
     <!-- Begin Page Content -->
     <div class="container-fluid">
         {{-- <div class="row"> --}}
         <div>
-            <h4 class="page-title text-left">Trekking Itinerary</h4>
+            <h4 class="page-title text-left">Tour Itinerary</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{route('admin.trekking.index')}}">Trekking</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.tour.index')}}">Tour</a>
                 </li>
                 <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Itinerary</a></li>
 
@@ -31,11 +31,11 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form method="POST" action = "{{ route('admin.trekking.itinerary.store') }}">
+                        <form method="POST" action = "{{ route('admin.tour.itinerary.store') }}">
                             @csrf
                             <div class="modal-body">
 
-                                    <input type="text" class="form-control" name="trekking_id" hidden value="{{$trekking_id}}" id="recipient-name">
+                                    <input type="text" class="form-control" name="tour_id" hidden value="{{$tour_id}}" id="recipient-name">
 
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Day:</label>
@@ -71,7 +71,7 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Trekking Itinerary</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Tour Itinerary</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -85,51 +85,51 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($trekkingItineraries as $trekkingItinerary)
+                            @foreach ($tourItineraries as $tourItinerary)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $trekkingItinerary->day }}</td>
-                                    <td>{{ $trekkingItinerary->title }}</td>
+                                    <td>{{ $tourItinerary->day }}</td>
+                                    <td>{{ $tourItinerary->title }}</td>
                                     <td>
                                         {{-- Edit button modal  --}}
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                            data-target="#editModal{{ $trekkingItinerary->id }}" data-whatever="@mdo">Edit</button>
+                                            data-target="#editModal{{ $tourItinerary->id }}" data-whatever="@mdo">Edit</button>
 
                                         {{-- Modal  --}}
-                                        <div class="modal fade" id="editModal{{ $trekkingItinerary->id }}" tabindex="-1"
+                                        <div class="modal fade" id="editModal{{ $tourItinerary->id }}" tabindex="-1"
                                             aria-labelledby="editModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel">Edit trekkingItinerary</h5>
+                                                        <h5 class="modal-title" id="editModalLabel">Edit tourItinerary</h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="{{ route('admin.trekking.itinerary.update',$trekkingItinerary->id) }}">
+                                                    <form method="POST" action="{{ route('admin.tour.itinerary.update',$tourItinerary->id) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="modal-body">
-                                                            <input type="text" class="form-control" name="trekking_id" hidden value="{{$trekkingItinerary->Trekking->id}}" id="recipient-name">
+                                                            <input type="text" class="form-control" name="tour_id" hidden value="{{$tourItinerary->tour->id}}" id="recipient-name">
 
                                                             <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label">Day:</label>
-                                                                <input type="text" class="form-control" name="day" value="{{$trekkingItinerary->day}}" id="recipient-day">
+                                                                <input type="text" class="form-control" name="day" value="{{$tourItinerary->day}}" id="recipient-day">
                                                             </div>
                                                             @error('day')
                                                                 <div class="text-danger">{{$message}}</div>
                                                             @enderror
                                                             <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label">Title:</label>
-                                                                <input type="text" class="form-control" name="title" value="{{$trekkingItinerary->title}}" id="recipient-title">
+                                                                <input type="text" class="form-control" name="title" value="{{$tourItinerary->title}}" id="recipient-title">
                                                             </div>
                                                             @error('title')
                                                                 <div class="text-danger">{{$message}}</div>
                                                             @enderror
                                                             <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label">Answer:</label>
-                                                                <input type="text" class="form-control" name="answer" value="{{$trekkingItinerary->answer}}" id="recipient-answer">
+                                                                <input type="text" class="form-control" name="answer" value="{{$tourItinerary->answer}}" id="recipient-answer">
                                                             </div>
                                                             @error('answer')
                                                                 <div class="text-danger">{{$message}}</div>
@@ -146,7 +146,7 @@
                                         </div>
 
                                         {{-- delete button------- --}}
-                                        <form action="{{ route('admin.trekking.itinerary.destroy', $trekkingItinerary->id) }}" method="post"
+                                        <form action="{{ route('admin.tour.itinerary.destroy', $tourItinerary->id) }}" method="post"
                                             class="d-inline">
                                             @csrf
                                             @method('delete')

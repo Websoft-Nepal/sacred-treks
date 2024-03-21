@@ -22,12 +22,14 @@ class TestimonialController extends BaseController
     {
         $request->validate([
             'name' => 'required|string',
+            'review' => 'required|numeric|max:5|min:0',
             'description' => 'required|string',
-            'image' => 'image|max:2048',
+            'image' => 'required|image|max:2048',
         ]);
 
         $testimonial = new testimonial();
         $testimonial->name = $request->name;
+        $testimonial->review = $request->review;
         $testimonial->description = $request->description;
         $testimonial->image = $this->uploadImage($request->image, "uploads/testimonials");
         $testimonial->save();
@@ -51,12 +53,14 @@ class TestimonialController extends BaseController
     {
         $request->validate([
             'name' => 'required|string',
+            'review' => 'required|numeric|max:5|min:0',
             'description' => 'required|string',
             'image' => 'image|max:2048',
         ]);
 
         $testimonial = testimonial::findorFail($id);
         $testimonial->name = $request->name;
+        $testimonial->review = $request->review;
         $testimonial->description = $request->description;
         $testimonial->status = $request->has('status') ? $request->status : $testimonial->status;
         if ($request->hasFile('image')) {

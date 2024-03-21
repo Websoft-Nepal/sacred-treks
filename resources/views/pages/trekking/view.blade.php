@@ -16,7 +16,10 @@
         </div>
         {{-- </div> --}}
         <div class="p-1">
-            <a href="{{ route('admin.trekking.index') }}" class="btn btn-primary btn-sm">View</a>
+            <a href="{{ route('admin.trekking.index') }}" class="btn btn-primary btn-sm">View index</a>
+            <a name="" id="" class="btn btn-sm btn-primary" href="{{route("admin.trekking.itinerary.index",$trekking->id)}}" role="button">Itinerary</a>
+            <a name="" id="" class="btn btn-sm btn-primary" href="{{route("admin.trekking.cost.index",$trekking->id)}}" role="button">Cost details</a>
+
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">

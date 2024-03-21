@@ -82,6 +82,22 @@
         </div>
     </li>
 
+    {{-- Testimonials  --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTestimonials"
+            aria-expanded="true" aria-controls="collapseTestimonials">
+            <i class="fas fa-compass"></i>
+            <span>Testimonials</span>
+        </a>
+        <div id="collapseTestimonials" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Testimonials:</h6>
+                <a class="collapse-item" href="{{ route('admin.testimonial.create') }}">create</a>
+                <a class="collapse-item" href="{{ route('admin.testimonial.index') }}">index</a>
+            </div>
+        </div>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{route('admin.social.index')}}">
             <i class="fas fa-globe"></i>

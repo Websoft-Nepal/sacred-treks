@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TrekkingBooking extends Model
 {
     use HasFactory;
-    protected $fillable = ['firstName','lastName','email','status','noOfAdults','noOfChildren','number','address','message','trekking_id'];
+    protected $fillable = ['firstName','lastName','email','status','noOfAdults','noOfChildren','number','address', 'cost','payment','message','trekking_id'];
     /**
      * Get the trekkingBooking that owns the TrekkingBooking
      *

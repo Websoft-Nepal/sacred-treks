@@ -9,11 +9,15 @@ use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\Admin\TourCostIncludeController;
 use App\Http\Controllers\Admin\TourTransportationController;
 use App\Http\Controllers\Admin\TrekkingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TourBookingController;
+use App\Http\Controllers\Admin\TourItineraryController;
 use App\Http\Controllers\Admin\TrekkingBookingController;
+use App\Http\Controllers\Admin\TrekkingCostIncludeController;
+use App\Http\Controllers\Admin\TrekkingItineraryController;
 use App\Http\Controllers\Admin\TrekkingLocationController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -35,6 +39,22 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('/show/{trekking}', [TrekkingController::class, 'show'])->name('show');
         Route::put('update/{trekking}', [TrekkingController::class, 'update'])->name('update');
         Route::delete('destroy/{trekking}', [TrekkingController::class, 'destroy'])->name('destroy');
+
+        // Itinerary
+        Route::prefix('itinerary')->name('itinerary.')->group(function (){
+            Route::get('/{trekking_id}',[TrekkingItineraryController::class,'index'])->name('index');
+            Route::post('store',[TrekkingItineraryController::class,'store'])->name('store');
+            Route::put('update/{id}',[TrekkingItineraryController::class,'update'])->name('update');
+            Route::delete('destroy/{id}',[TrekkingItineraryController::class,'destroy'])->name('destroy');
+        });
+
+        // Cost details
+        Route::prefix('cost')->name('cost.')->group(function (){
+            Route::get('/{trekking_id}',[TrekkingCostIncludeController::class,'index'])->name('index');
+            Route::post('store',[TrekkingCostIncludeController::class,'store'])->name('store');
+            Route::put('update/{id}',[TrekkingCostIncludeController::class,'update'])->name('update');
+            Route::delete('destroy/{id}',[TrekkingCostIncludeController::class,'destroy'])->name('destroy');
+        });
     });
     // blog Route
     Route::prefix('blog')->name('blog.')->group(function () {
@@ -56,6 +76,22 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('/{tour}/edit', [TourController::class, 'edit'])->name('edit');
         Route::put('/update/{tour}', [TourController::class, 'update'])->name('update');
         Route::delete('/destroy/{tour}', [TourController::class, 'destroy'])->name('destroy');
+
+        // Itinerary
+        Route::prefix('itinerary')->name('itinerary.')->group(function (){
+            Route::get('/{tour_id}',[TourItineraryController::class,'index'])->name('index');
+            Route::post('store',[TourItineraryController::class,'store'])->name('store');
+            Route::put('update/{id}',[TourItineraryController::class,'update'])->name('update');
+            Route::delete('destroy/{id}',[TourItineraryController::class,'destroy'])->name('destroy');
+        });
+
+        // Cost details
+        Route::prefix('cost')->name('cost.')->group(function (){
+            Route::get('/{tour_id}',[TourCostIncludeController::class,'index'])->name('index');
+            Route::post('store',[TourCostIncludeController::class,'store'])->name('store');
+            Route::put('update/{id}',[TourCostIncludeController::class,'update'])->name('update');
+            Route::delete('destroy/{id}',[TourCostIncludeController::class,'destroy'])->name('destroy');
+        });
     });
     // social media
     Route::prefix('social')->name('social.')->group(function () {

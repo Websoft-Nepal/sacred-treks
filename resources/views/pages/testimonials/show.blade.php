@@ -23,10 +23,15 @@
                 <h6 class="m-0 font-weight-bold text-primary">View Testimonial</h6>
             </div>
             <div class="card-body">
-               
+
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" value="{{$testimonial->name}}" class="form-control" id="name"
+                            aria-describedby="textHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Review</label>
+                        <input type="text" name="review" value="{{ $testimonial->review}}" class="form-control" id="review"
                             aria-describedby="textHelp">
                     </div>
                     <div class="my-3">
@@ -42,7 +47,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="3">{{$testimonial->description}}</textarea>
-                    
+
                     </div>
             </div>
         </div>

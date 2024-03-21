@@ -36,6 +36,16 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label for="name" class="form-label">Review</label>
+                        <input type="text" name="review" class="form-control" id="review"
+                            aria-describedby="textHelp">
+                        @error('review')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="image">
                         @error('image')

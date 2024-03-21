@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Mail\TourBookingMail;
 use App\Models\TourBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TourBookingController extends BaseController
 {
@@ -21,6 +23,8 @@ class TourBookingController extends BaseController
             'address' => 'nullable|string|max:255',
             'message' => 'nullable|string',
             'tour_id' => 'required|exists:tours,id',
+            'cost' => 'required|numeric',
+            'payment' => 'required',
         ]);
         if($validat->fails()){
             return $this->SendError($validat->messages(),"Cannot book the tour",400);
@@ -35,10 +39,13 @@ class TourBookingController extends BaseController
                 'address' => $request->address,
                 'message' => $request->message,
                 'tour_id' => $request->tour_id,
+                'cost' => $request->cost,
+                'payment' => $request->payment,
             ];
             DB::beginTransaction();
             try{
-                TourBooking::create($data);
+                $tourBooking = TourBooking::create($data);
+                Mail::to($tourBooking->email)->send(new TourBookingMail($tourBooking));
                 DB::commit();
                 return $this->SendResponse("Success","Tour Booked successfully",200);
             }catch(\Throwable $th){

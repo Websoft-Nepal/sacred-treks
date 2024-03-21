@@ -113,6 +113,13 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="payment" class="form-label">
+                        Payment Gateway</label>
+                    <input type="text" name="payment" class="form-control" value="{{ $trekkingBooking->payment }}" id="payment"
+                         aria-describedby="textHelp">
+                </div>
+
+                <div class="mb-3">
                     <label for="message" class="form-label">Message</label>
                     <div>{!! $tourBooking->message !!}</div>
                 </div>

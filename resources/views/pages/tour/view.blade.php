@@ -16,7 +16,9 @@
         </div>
         {{-- </div> --}}
         <div class="p-1">
-            <a href="{{ route('admin.tour.index') }}" class="btn btn-primary btn-sm">View</a>
+            <a href="{{ route('admin.tour.index') }}" class="btn btn-primary btn-sm">View index</a>
+            <a href="{{ route('admin.tour.itinerary.index',$tour->id) }}" class="btn btn-primary btn-sm">Itinerary</a>
+            <a href="{{ route('admin.tour.cost.index',$tour->id) }}" class="btn btn-primary btn-sm">Cost details</a>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -49,12 +51,12 @@
                     </div>
                 @endif
 
-                @if ($trekking->featureimg1 != null)
+                @if ($tour->featureimg1 != null)
                     <div class="my-3">
                         <label for="image" class="form-label">Current Feature Image 1</label>
                         <div>
-                            <a href="{{ asset($trekking->featureimg1) }}" target="_blank" rel="noopener noreferrer">
-                                <img src="{{ asset($trekking->featureimg1) }}" class="img-fluid" width="400px"
+                            <a href="{{ asset($tour->featureimg1) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($tour->featureimg1) }}" class="img-fluid" width="400px"
                                     alt="blog image" srcset="">
                             </a>
                         </div>
@@ -62,12 +64,12 @@
                 @endif
 
 
-                @if ($trekking->featureimg2 != null)
+                @if ($tour->featureimg2 != null)
                     <div class="my-3">
                         <label for="featureimg2" class="form-label">Current Feature Image 2</label>
                         <div>
-                            <a href="{{ asset($trekking->featureimg2) }}" target="_blank" rel="noopener noreferrer">
-                                <img src="{{ asset($trekking->featureimg2) }}" class="img-fluid" width="400px"
+                            <a href="{{ asset($tour->featureimg2) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($tour->featureimg2) }}" class="img-fluid" width="400px"
                                     alt="blog featureimg2" srcset="">
                             </a>
                         </div>

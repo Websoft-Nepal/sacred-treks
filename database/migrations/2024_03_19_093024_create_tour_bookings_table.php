@@ -22,6 +22,8 @@ return new class extends Migration
             $table->integer('noOfChildren')->default(0);
             $table->string('number');
             $table->string('address')->nullable();
+            $table->string('payment');
+            $table->double('cost');
             $table->text('message')->nullable();
             $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
             $table->timestamps();
