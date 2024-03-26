@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('featureimg1')->nullable();
             $table->string('featureimg2')->nullable();
             $table->string('map')->nullable();
+            $table->unsignedBigInteger('count')->default(0);
             $table->string('duration');
             $table->string('place');
             $table->double('cost')->default(0);

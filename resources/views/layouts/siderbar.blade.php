@@ -3,10 +3,10 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{ env('APP_NAME') }}</div>
     </a>
 
     <!-- Divider -->
@@ -41,17 +41,27 @@
         </div>
     </li>
 
+    {{-- Blog  --}}
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.blog.index') }}">
-            <i class="fas fa-book-open"></i>
-            <span>Blog</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog"
+            aria-expanded="true" aria-controls="collapseBlog">
+            <i class="fas fa-blog"></i>
+            <span>Blog</span>
+        </a>
+        <div id="collapseBlog" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Blog:</h6>
+                <a class="collapse-item" href="{{ route('admin.blog.create') }}">create</a>
+                <a class="collapse-item" href="{{ route('admin.blog.index') }}">index</a>
+            </div>
+        </div>
     </li>
 
     {{-- Tour  --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTour"
             aria-expanded="true" aria-controls="collapseTour">
-            <i class="fas fa-compass"></i>
+            <i class="fas fa-shuttle-van"></i>
             <span>Tour</span>
         </a>
         <div id="collapseTour" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -70,7 +80,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBooking"
             aria-expanded="true" aria-controls="collapseBooking">
-            <i class="fas fa-compass"></i>
+            <i class="fas fa-book"></i>
             <span>Bookings</span>
         </a>
         <div id="collapseBooking" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -86,7 +96,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTestimonials"
             aria-expanded="true" aria-controls="collapseTestimonials">
-            <i class="fas fa-compass"></i>
+            <i class="fas fa-users"></i>
             <span>Testimonials</span>
         </a>
         <div id="collapseTestimonials" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -98,25 +108,75 @@
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.social.index')}}">
+    {{-- <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.social.index') }}">
             <i class="fas fa-globe"></i>
             <span>Social Media</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.privacy.index')}}">
+        <a class="nav-link" href="{{ route('admin.privacy.index') }}">
             <i class="fas fa-lock"></i>
             <span>Privacy</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.terms.index')}}">
+        <a class="nav-link" href="{{ route('admin.terms.index') }}">
             <i class="fas fa-file-alt"></i>
             <span>Terms</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.contact.index')}}">
+        <a class="nav-link" href="{{ route('admin.contact.index') }}">
             <i class="fas fa-envelope"></i>
             <span>Contact</span></a>
+    </li> --}}
+
+    {{-- Site configs and terms  --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSiteConfig"
+            aria-expanded="true" aria-controls="collapseSiteConfig">
+            <i class="fas fa-cogs"></i>
+            <span>Site Configs and terms</span>
+        </a>
+        <div id="collapseSiteConfig" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Site Configs:</h6>
+                <a class="collapse-item" href="{{ route('admin.about.index') }}">
+                    <i class="fas fa-envelope"></i>
+                    <span>About us</span></a>
+                <a class="collapse-item" href="{{ route('admin.contact.index') }}">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span></a>
+                <a class="collapse-item" href="{{ route('admin.social.index') }}">
+                    <i class="fas fa-globe"></i>
+                    <span>Social Media</span></a>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Terms:</h6>
+                <a class="collapse-item" href="{{ route('admin.privacy.index') }}">
+                    <i class="fas fa-lock"></i>
+                    <span>Privacy</span></a>
+                    <a class="collapse-item" href="{{ route('admin.terms.index') }}">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Terms</span></a>
+
+            </div>
+        </div>
+    </li>
+
+    {{-- Pages  --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-newspaper"></i>
+            <span>Pages</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pages:</h6>
+                <a class="collapse-item" href="{{ route('admin.page.home.index') }}">Home Page</a>
+                <a class="collapse-item" href="{{ route('admin.page.blog.index') }}">Blog Page</a>
+                <a class="collapse-item" href="{{ route('admin.page.tour.index') }}">Tour Page</a>
+                <a class="collapse-item" href="{{ route('admin.page.trekking.index') }}">Trekking Page</a>
+            </div>
+        </div>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

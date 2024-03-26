@@ -183,6 +183,16 @@
                             {{ $message }}
                         </div>
                     @enderror
+
+                    <div class="mb-3">
+                        <label for="costDescription" class="form-label">Cost Include Description</label>
+                        <textarea class="form-control" name="costDescription" id="description" rows="3"></textarea>
+                    </div>
+                    @error('costDescription')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
             </div>
@@ -194,6 +204,11 @@
 @push('scriptaddon')
     ClassicEditor
     .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+    ClassicEditor
+    .create( document.querySelector( '#description' ) )
     .catch( error => {
     console.error( error );
     } );

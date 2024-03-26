@@ -72,3 +72,11 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    ClassicEditor
+    .create( document.querySelector( '#description' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+
+@endpush

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('featureimg1')->nullable();
             $table->string('featureimg2')->nullable();
             $table->string('duration');
+            $table->unsignedBigInteger('count')->default(0);
             $table->double('cost')->default(0);
             $table->unsignedBigInteger('location_id');
             $table->string('slug');

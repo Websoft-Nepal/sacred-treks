@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Tour;
+use App\Models\TourCostInclude;
 use App\Models\TourTransportation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -37,6 +38,7 @@ class TourController extends BaseController
             'boundary' => 'required|in:national,international',
             'transportation_id' => 'required|exists:tour_transportations,id',
             'description' => 'nullable|string',
+            'costDescription' => 'nullable|string',
         ]);
         $tour = new Tour();
         $tour->title = $request->title;
@@ -61,6 +63,11 @@ class TourController extends BaseController
         $tour->description = $request->description;
         $tour->save();
 
+        $tourCost = new TourCostInclude();
+        $tourCost->description = $request->costDescription;
+        $tourCost->tour_id = $tour->id;
+        $tourCost->save();
+
         drakify('success');
 
         return redirect()->route('admin.tour.index');
@@ -69,13 +76,18 @@ class TourController extends BaseController
     public function show($id)
     {
         $tour = Tour::with('transportation')->findOrFail($id);
-        return view('pages.tour.view', ['tour' => $tour]);
+        $tourCost = TourCostInclude::where('tour_id',$id)->first();
+        $tourCost = optional($tourCost);
+        return view('pages.tour.view', ['tour' => $tour,'tourCost' => $tourCost]);
     }
     public function edit($id)
     {
         $transportations = TourTransportation::all();
         $tour = Tour::findOrFail($id);
-        return view('pages.tour.edit', compact('tour', 'transportations'));
+        $tourCost = TourCostInclude::where('tour_id',$id)->first();
+        $tourCost = optional($tourCost);
+
+        return view('pages.tour.edit', compact('tour', 'transportations','tourCost'));
     }
 
     public function update(Request $request, $id)
@@ -94,6 +106,7 @@ class TourController extends BaseController
             'transportation_id' => 'required|exists:tour_transportations,id',
             'slug' => $this->slugValidate("tours", $id),
             'description' => 'nullable|string',
+            'costDescription' => 'nullable|string',
         ]);
         $tour = Tour::findOrFail($id);
         $tour->title = $request->title;
@@ -195,6 +208,10 @@ class TourController extends BaseController
         }
 
         $tour->save();
+
+        $tourCost = TourCostInclude::where('tour_id',$id)->first();
+        $tourCost->description = $request->costDescription;
+        $tourCost->save();
 
         drakify('success');
 

@@ -184,7 +184,15 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="costDescription" class="form-label">Cost Include Description</label>
+                        <textarea class="form-control" name="costDescription" id="costDescription" rows="3">{{$trekkingCost->description }}</textarea>
+                    </div>
+                    @error('costDescription')
+                        {{$message}}
+                    @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="{{ route('admin.trekking.itinerary.index',$trekking->id) }}" class="mx-3 btn btn-primary btn-sm">View Itinerary</a>
 
                 </form>
             </div>
@@ -196,6 +204,11 @@
 @push('scriptaddon')
     ClassicEditor
     .create( document.querySelector( '#description' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+    ClassicEditor
+    .create( document.querySelector( '#costDescription' ) )
     .catch( error => {
     console.error( error );
     } );

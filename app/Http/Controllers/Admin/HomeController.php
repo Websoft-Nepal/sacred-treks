@@ -3,13 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subscriber;
+use App\Models\Tour;
+use App\Models\TourBooking;
+use App\Models\Trekking;
+use App\Models\TrekkingBooking;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('home');
+        $tourCount = Tour::count();
+        $trekkingCount = Trekking::count();
+        $tourPending = TourBooking::where('status','unverify')->count();
+        $trekkingPending = TrekkingBooking::where('status','unverify')->count();
+        $subscribers = Subscriber::all();
+        return view('home',compact('tourCount','trekkingCount','tourPending','trekkingPending','subscribers'));
     }
 
     public function table(){

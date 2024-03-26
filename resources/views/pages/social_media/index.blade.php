@@ -28,23 +28,35 @@
                         <label for="youtube" class="form-label">Youtube</label>
                         <input type="text" name="youtube" value="{{$social->youtube}}"  class="form-control" id="youtube"
                             aria-describedby="textHelp">
-                    </div>  
+                    </div>
+                    @error('youtube')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="facebook" class="form-label">Facebook</label>
                         <input type="text" name="facebook" value="{{$social->facebook}}" class="form-control" id="facebook"
                             aria-describedby="textHelp">
-                    </div>  
+                    </div>
+                    @error('facebook')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="instagram" class="form-label">Instagram</label>
                         <input type="text" name="instagram" value="{{$social->instagram}}" class="form-control" id="instagram"
                             aria-describedby="textHelp">
-                    </div>   
+                    </div>
+                    @error('instagram')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="twitter" class="form-label">Twitter</label>
                         <input type="text" name="twitter" value="{{$social->twitter}}" class="form-control" id="twitter"
                             aria-describedby="textHelp">
-                    </div>   
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                    @error('twitter')
+                        {{$message}}
+                    @enderror
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

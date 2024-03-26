@@ -151,7 +151,12 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <div>{!! $tour->description !!}</div>
+                    <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $tour->description !!}</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="costDescription" class="form-label">Cost Include Description</label>
+                    <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $tourCost->description !!}
                 </div>
 
 

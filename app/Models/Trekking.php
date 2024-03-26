@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Trekking extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','status','image','slug','description','duration','cost','location_id'];
+    protected $fillable = ['title','status','image','slug','description','count','duration','cost','location_id'];
     /**
      * Get the location that owns the Trekking
      *

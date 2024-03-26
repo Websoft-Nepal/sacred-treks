@@ -28,19 +28,28 @@
                         <label for="phone" class="form-label">Phone</label>
                         <input type="text" name="phone" value="{{$contact->phone}}"  class="form-control" id="youtube"
                             aria-describedby="textHelp">
-                    </div>  
+                    </div>
+                    @error('phone')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="fax" class="form-label">Fax</label>
                         <input type="text" name="fax" value="{{$contact->fax}}" class="form-control" id="facebook"
                             aria-describedby="textHelp">
-                    </div>  
+                    </div>
+                    @error('fax')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" value="{{$contact->email}}" class="form-control" id="instagram"
                             aria-describedby="textHelp">
-                    </div>   
-                     
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                    @error('email')
+                        {{$message}}
+                    @enderror
+
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

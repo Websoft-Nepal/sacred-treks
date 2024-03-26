@@ -29,8 +29,15 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TourSeeder::class,
             TrekkingSeeder::class,
+            TourCostIncludeSeeder::class,
+            TrekkingCostIncludeSeeder::class,
             BlogSeeder::class,
             TestimonialSeeder::class,
+            BlogPageSeeder::class,
+            TourPageSeeder::class,
+            TrekkingPageSeeder::class,
+            HomePageSeeder::class,
+            GallerySeeder::class,
         ]);
     }
 }

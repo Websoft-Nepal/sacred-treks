@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="3">{{$testimonial->description}}</textarea>
+                        <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $testimonial->description !!}
 
                     </div>
             </div>

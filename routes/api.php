@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Api\AboutUsController;
+use App\Http\Controllers\Api\CompanyInfoController;
 use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\PagesController;
 use App\Http\Controllers\Api\PrivacyController;
+use App\Http\Controllers\Api\SubscribeController;
 use App\Http\Controllers\Api\TermsConditionController;
+use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\TourBookingController;
 use App\Http\Controllers\Api\TourController;
 use App\Http\Controllers\Api\TrekkingBookingController;
@@ -26,14 +31,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Tour
 Route::get('/tour',[TourController::class,'index']);
 Route::get('/tour/{slug}',[TourController::class,'show']);
 Route::get('/tour/category/{trasnportation_id}',[TourController::class,'category']);
 
+// Trekking
 Route::get('trekking',[TrekkingController::class,'index']);
 Route::get('/trekking/{slug}',[TrekkingController::class,'show']);
 Route::get('/trekking/category/{location_id}',[TrekkingController::class,'category']);
 
+// Contact us
 Route::post('contactus',[ContactUsController::class,'store']);
 
 Route::get('privacy',[PrivacyController::class,'index']);
@@ -43,3 +51,27 @@ Route::get('aboutus',[AboutUsController::class,'index']);
 // Booking
 Route::post('tour-booking',[TourBookingController::class,'store']);
 Route::post('trekking-booking',[TrekkingBookingController::class,'store']);
+
+// Pages
+Route::prefix('page')->group(function(){
+    Route::get('home',[PagesController::class,'home']);
+    Route::get('tour',[PagesController::class,'tour']);
+    Route::get('trekking',[PagesController::class,'trekking']);
+    Route::get('blog',[PagesController::class,'blog']);
+});
+
+// Gallery
+Route::get('gallery',[PagesController::class,'gallery']);
+
+// Blog
+Route::get('blog',[BlogController::class,'index']);
+Route::get('blog/{slug}',[BlogController::class,'show']);
+
+// Subscribe
+Route::post('subscribe',[SubscribeController::class,'store']);
+
+// Testimonials
+Route::get('testimonial',[TestimonialController::class,'index']);
+
+// Contact and socialmedia
+Route::get('company-info',[CompanyInfoController::class,'index']);

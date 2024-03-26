@@ -2,14 +2,19 @@
 
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BlogPageController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\TourCostIncludeController;
+use App\Http\Controllers\Admin\TourPageController;
 use App\Http\Controllers\Admin\TourTransportationController;
 use App\Http\Controllers\Admin\TrekkingController;
 use App\Http\Controllers\Admin\TestimonialController;
@@ -19,6 +24,7 @@ use App\Http\Controllers\Admin\TrekkingBookingController;
 use App\Http\Controllers\Admin\TrekkingCostIncludeController;
 use App\Http\Controllers\Admin\TrekkingItineraryController;
 use App\Http\Controllers\Admin\TrekkingLocationController;
+use App\Http\Controllers\Admin\TrekkingPageController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -181,5 +187,43 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('show/{id}',[TrekkingBookingController::class,'show'])->name('show');
         Route::put('update/{id}',[TrekkingBookingController::class,'update'])->name('update');
         Route::delete('destroy/{id}',[TrekkingBookingController::class,'destroy'])->name('destroy');
+    });
+
+    // Pages
+    Route::prefix('page')->name('page.')->group(function (){
+        Route::prefix('home')->name('home.')->group(function (){
+            Route::get('/',[HomePageController::class,'index'])->name('index');
+            Route::put('update/{id}',[HomePageController::class,'update'])->name('update');
+
+        });
+        Route::prefix('tour')->name('tour.')->group(function (){
+            Route::get('/',[TourPageController::class,'index'])->name('index');
+            Route::put('update/{id}',[TourPageController::class,'update'])->name('update');
+
+        });
+        Route::prefix('trekking')->name('trekking.')->group(function (){
+            Route::get('/',[TrekkingPageController::class,'index'])->name('index');
+            Route::put('update/{id}',[TrekkingPageController::class,'update'])->name('update');
+
+        });
+        Route::prefix('blog')->name('blog.')->group(function (){
+            Route::get('/',[BlogPageController::class,'index'])->name('index');
+            Route::put('update/{id}',[BlogPageController::class,'update'])->name('update');
+
+        });
+    });
+
+    // Gallery
+    Route::prefix('gallery')->name('gallery.')->group(function (){
+        Route::get('/',[GalleryController::class,'index'])->name('index');
+        Route::post('store',[GalleryController::class,'store'])->name('store');
+        Route::put('update/{id}',[GalleryController::class,'update'])->name('update');
+        Route::delete('delete/{id}',[GalleryController::class,'destroy'])->name('destroy');
+    });
+
+    // Subscriber
+    Route::prefix('subscriber')->name('subscriber.')->group(function (){
+        Route::get('/',[SubscriberController::class,'index'])->name('index');
+        Route::delete('delete/{id}',[SubscriberController::class,'destroy'])->name('destroy');
     });
 });

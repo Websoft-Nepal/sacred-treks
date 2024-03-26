@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Mail\TourBookingMail;
+use App\Models\Tour;
 use App\Models\TourBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,9 @@ class TourBookingController extends BaseController
             DB::beginTransaction();
             try{
                 $tourBooking = TourBooking::create($data);
+                $tour = Tour::where('id',$tourBooking->tour_id);
+                $tour->count ++;
+                $tour->save();
                 Mail::to($tourBooking->email)->send(new TourBookingMail($tourBooking));
                 DB::commit();
                 return $this->SendResponse("Success","Tour Booked successfully",200);

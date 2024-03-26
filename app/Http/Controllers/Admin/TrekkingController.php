@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController;
 use App\Models\Trekking;
+use App\Models\TrekkingCostInclude;
 use App\Models\TrekkingLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -35,6 +36,7 @@ class TrekkingController extends BaseController
             'cost' => 'required|numeric',
             'location_id' => 'required|exists:trekking_locations,id',
             'description' => 'nullable|string',
+            'costDescription' => 'nullable|string',
         ]);
 
         $trekking = new Trekking();
@@ -47,6 +49,7 @@ class TrekkingController extends BaseController
         $trekking->image = $this->uploadImage($request->image, "uploads/trekking");
         $trekking->description = $request->description;
 
+
         if($request->hasFile('featureimg1')){
             $trekking->featureimg1 = $this->uploadImage($request->featureimg1, "uploads/trekking");
         }
@@ -57,6 +60,11 @@ class TrekkingController extends BaseController
 
         $trekking->save();
 
+        $trekkingCost = new TrekkingCostInclude();
+        $trekkingCost->trekking_id = $trekking->id;
+        $trekkingCost->description = $request->costDescription;
+        $trekkingCost->save();
+
         drakify('success');
 
         return redirect()->route('admin.trekking.index');
@@ -65,14 +73,18 @@ class TrekkingController extends BaseController
     public function show($id)
     {
         $trekking = Trekking::with('location')->findOrFail($id);
-        return view('pages.trekking.view', ['trekking' => $trekking]);
+        $trekkingCost = TrekkingCostInclude::where('trekking_id',$id)->first();
+        $trekkingCost = optional($trekkingCost);
+        return view('pages.trekking.view', ['trekking' => $trekking, 'trekkingCost' => $trekkingCost]);
     }
 
     public function edit(string $id)
     {
         $trekking = Trekking::findorFail($id);
         $locations = TrekkingLocation::all();
-        return view('pages.trekking.edit', ['trekking' => $trekking, 'locations' => $locations]);
+        $trekkingCost = TrekkingCostInclude::where('trekking_id',$id)->first();
+        $trekkingCost = optional($trekkingCost);
+        return view('pages.trekking.edit', ['trekking' => $trekking, 'locations' => $locations,'trekkingCost' => $trekkingCost]);
     }
 
     public function update(Request $request, string $id)
@@ -88,6 +100,7 @@ class TrekkingController extends BaseController
             'cost' => 'required|numeric',
             'location_id' => 'required|exists:trekking_locations,id',
             'description' => 'nullable|string',
+            'costDescription' => 'nullable|string',
         ]);
         $trekking = Trekking::findOrFail($id);
         $trekking->title = $request->title;
@@ -166,6 +179,10 @@ class TrekkingController extends BaseController
         }
 
         $trekking->save();
+
+        $trekkingCost = TrekkingCostInclude::where('trekking_id',$id)->first();
+        $trekkingCost->description = $request->costDescription;
+        $trekkingCost->save();
 
         // notify()->success('Welcome to Laravel Notify ⚡️');
 

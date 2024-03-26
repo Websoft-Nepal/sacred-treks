@@ -26,7 +26,7 @@
                 <form action="{{ route('admin.trekking.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
+                        <label for="title" class="form-label"><span class="text-danger h3"><sup>*</sup></span>Title</label>
                         <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}"
                             aria-describedby="textHelp">
                         @error('title')
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
+                        <label for="image" class="form-label"><span class="text-danger h3"><sup>*</sup></span>Image</label>
                         <input type="file" class="form-control" name="image" id="image">
                         @error('image')
                             <div class="text-danger">
@@ -130,6 +130,14 @@
                             </div>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="costDescription" class="form-label">Cost Include Description</label>
+                        <textarea class="form-control" name="costDescription" id="costDescription" rows="3"></textarea>
+                    </div>
+                    @error('costDescription')
+                        {{$message}}
+                    @enderror
                     <button type="submit" class="btn btn-primary">Create</button>
 
                 </form>
@@ -142,6 +150,12 @@
 @push('scriptaddon')
     ClassicEditor
     .create( document.querySelector( '#description' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+
+    ClassicEditor
+    .create( document.querySelector( '#costDescription' ) )
     .catch( error => {
     console.error( error );
     } );

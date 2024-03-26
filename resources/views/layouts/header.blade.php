@@ -20,6 +20,8 @@
     <!-- Custom styles for this page -->
     <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
+    <script src="{{asset('vendor/chart.js/Chart.bundle.min.js')}}"></script>
+
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
@@ -27,7 +29,8 @@
     @notifyCss
 
     {{-- For ckeditor --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script> --}}
+    <script src="{{asset('vendor/ckeditor5-build-classic/ckeditor.js')}}"></script>
 
 </head>
 

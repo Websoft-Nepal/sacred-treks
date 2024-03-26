@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Admin\BaseController;
+use App\Models\Gallery;
+use Illuminate\Http\Request;
+
+class GalleryController extends BaseController
+{
+    public function index()
+    {
+        $gallery = Gallery::paginate(10);
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:2048',
+            'category' => 'required|string|max:200',
+        ]);
+        $gallery = new Gallery();
+        $gallery->category = $request->category;
+
+        $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
+        $gallery->save();
+        drakify('success');
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'image|max:2048',
+            'category' => 'required|string|max:200',
+        ]);
+        $gallery = Gallery::findOrFail($id);
+        if ($request->hasFile('image')) {
+            // Delete the previous image if exists
+            if ($gallery->image) {
+                $tem = strtolower($gallery->image);
+                if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                    try {
+                        $tem = explode('/', $gallery->image);
+                        $n = count($tem);
+                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        // $filePath = storage_path('app/public/uploads/tour/' . $gallery->image);
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        dd($e->getMessage());
+                    }
+                }
+            }
+            // Upload the new image
+            // $gallery->image = $request->file('image')->store('uploads/tour');
+            $gallery->image = $this->uploadImage($request->image, "uploads/tour");
+        }
+    }
+    public function destroy($id)
+    {
+        $gallery = Gallery::findOrFail($id);
+        if ($gallery->image) {
+            $tem = strtolower($gallery->image);
+            if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
+
+                try {
+                    $tem = explode('/', $gallery->image);
+                    $n = count($tem);
+                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/tour/' . $gallery->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    dd($e->getMessage());
+                }
+            }
+        }
+        $gallery->delete();
+    }
+}

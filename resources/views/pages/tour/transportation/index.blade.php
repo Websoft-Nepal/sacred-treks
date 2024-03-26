@@ -39,6 +39,9 @@
                                     <label for="recipient-name" class="col-form-label">Transportation:</label>
                                     <input type="text" class="form-control" name="name" id="recipient-name">
                                 </div>
+                                @error('name')
+                                    {{ $message }}
+                                @enderror
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -87,8 +90,9 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.transportation.update', $transportation->id) }}">
+                                                        <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="recipient-name"
                                                                     class="col-form-label">transportation:</label>
@@ -99,12 +103,12 @@
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="Submit" class="btn btn-primary">Add</button>
-                                                    </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="Submit" class="btn btn-primary">Update</button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>

@@ -16,6 +16,28 @@ class TourController extends BaseController
             foreach($category as $catg){
                 $catg['link'] = url("api/tour/category/{$catg->id}");
             }
+            foreach ($tours as $tour) {
+                if ($tour['image'] != null) {
+                    if(substr_count($tour['image'],'http')<1){
+                        $tour['image'] = config('app.url') . "/" . $tour['image'];
+                    }
+                }
+                if ($tour['featureimg1'] != null) {
+                    if(substr_count($tour['featureimg1'],'http')<1){
+                        $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
+                    }
+                }
+                if ($tour['featureimg2'] != null) {
+                    if(substr_count($tour['featureimg2'],'http')<1){
+                        $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
+                    }
+                }
+                if ($tour['map'] != null) {
+                    if(substr_count($tour['map'],'http')<1){
+                        $tour['map'] = config('app.url') . "/" . $tour['map'];
+                    }
+                }
+            }
             $data = [
                 'tours' => $tours,
                 'category' => $category,
@@ -28,9 +50,29 @@ class TourController extends BaseController
     }
     public function show($slug){
         try{
-            $tour = Tour::where('slug',$slug)->with('transportation')->first();
+            $tour = Tour::where('slug',$slug)->with('transportation','tourItinerary','tourCostInclude')->first();
             if($tour == NULL){
                 return $this->SendError("Unauthorize","Data not found",400);
+            }
+            if ($tour['image'] != null) {
+                if(substr_count($tour['image'],'http')<1){
+                    $tour['image'] = config('app.url') . "/" . $tour['image'];
+                }
+            }
+            if ($tour['featureimg1'] != null) {
+                if(substr_count($tour['featureimg1'],'http')<1){
+                    $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
+                }
+            }
+            if ($tour['featureimg2'] != null) {
+                if(substr_count($tour['featureimg2'],'http')<1){
+                    $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
+                }
+            }
+            if ($tour['map'] != null) {
+                if(substr_count($tour['map'],'http')<1){
+                    $tour['map'] = config('app.url') . "/" . $tour['map'];
+                }
             }
             return $this->SendResponse($tour,"Tour data fetched successfully");
         }
@@ -40,7 +82,8 @@ class TourController extends BaseController
     }
     public function category($transportation_id){
         try{
-            $tours = Tour::where('transportation_id',$transportation_id)->where('status',1)->with('transportation')->paginate(10);
+            $tours = Tour::where('transportation_id',$transportation_id)->where('status',1)->with('transportation','tourItinerary','tourCostInclude')
+            ->paginate(10);
             if($tours == NULL){
                 return $this->SendError("Unauthorize","Data not found",400);
             }

@@ -31,6 +31,9 @@
                         <input type="text" name="title" value="{{ $blog->title }}" class="form-control" id="title"
                             aria-describedby="textHelp">
                     </div>
+                    @error('title')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="image">
@@ -47,11 +50,17 @@
                             </div>
                         @endif
                     </div>
+                    @error('image')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="slug" class="form-label">Slug</label>
                         <input type="text" class="form-control" value="{{ $blog->slug }}" name="slug"
                             id="slug">
                     </div>
+                    @error('slug')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="status" class="form-label">
                             Status</label>
@@ -70,8 +79,11 @@
                         <label for="editor" class="form-label">Description</label>
                         <textarea class="form-control" name="description" id="editor" rows="3">{{ $blog->description }}</textarea>
                     </div>
+                    @error('description')
+                        {{ $message }}
+                    @enderror
 
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
 
                 </form>
             </div>

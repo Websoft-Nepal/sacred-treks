@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Tour extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','status','image','place','slug','description','duration','cost','boundary','maps','transportation_id'];
+    protected $fillable = ['title','status','image','place','slug','description','duration','cost','count','boundary','maps','transportation_id'];
 
     public function transportation(): BelongsTo
     {

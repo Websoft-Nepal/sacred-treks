@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Mail\TrekkingBookingMail;
+use App\Models\Trekking;
 use App\Models\TrekkingBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,6 +46,9 @@ class TrekkingBookingController extends BaseController
             DB::beginTransaction();
             try{
                 $trekkingBooking = TrekkingBooking::create($data);
+                $trekking = Trekking::where('id',$trekkingBooking->trekking_id);
+                $trekking->count++;
+                $trekking->save();
                 Mail::to($trekkingBooking->email)->send(new TrekkingBookingMail($trekkingBooking));
                 DB::commit();
                 return $this->SendResponse("Success","Trekking Booked successfully",200);

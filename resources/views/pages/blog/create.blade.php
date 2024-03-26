@@ -29,10 +29,16 @@
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="title" class="form-control" id="title" aria-describedby="textHelp">
                 </div>
+                @error('title')
+                    {{$message}}
+                @enderror
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" name="image" id="image">
                 </div>
+                @error('image')
+                    {{$message}}
+                @enderror
                 <div class="mb-3">
                     <label for="status" class="form-label">
                         Status</label>
@@ -52,6 +58,9 @@
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                 </div>
+                @error('description')
+                    {{ $message }}
+                @enderror
                 <button type="submit" class="btn btn-primary">Create</button>
 
                </form>

@@ -28,13 +28,19 @@
                         <label for="title" class="form-label">Title</label>
                         <input type="text" name="title" value="{{$terms->title}}"  class="form-control" id="youtube"
                             aria-describedby="textHelp">
-                    </div>  
+                    </div>
+                    @error('title')
+                        {{$message}}
+                    @enderror
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control"  name="description" id="description" rows="3">{{$terms->description}}</textarea>
                     </div>
-                       
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    @error('description')
+                        {{$message}}
+                    @enderror
+
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>
@@ -42,3 +48,11 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    ClassicEditor
+    .create( document.querySelector( '#description' ) )
+    .catch( error => {
+    console.error( error );
+    } );
+
+@endpush

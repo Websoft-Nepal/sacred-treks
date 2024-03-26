@@ -113,6 +113,11 @@
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label for="costDescription" class="form-label">Cost Include Description</label>
+                    <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $trekkingCost->description !!}
+                </div>
+
             </div>
         </div>
 
