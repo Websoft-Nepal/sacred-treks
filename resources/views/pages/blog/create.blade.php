@@ -70,3 +70,6 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    CKEDITOR.replace('description');
+@endpush

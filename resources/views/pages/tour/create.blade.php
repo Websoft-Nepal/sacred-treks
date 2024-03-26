@@ -202,14 +202,6 @@
     <!-- /.container-fluid -->
 @endsection
 @push('scriptaddon')
-    ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-    console.error( error );
-    } );
-    ClassicEditor
-    .create( document.querySelector( '#description' ) )
-    .catch( error => {
-    console.error( error );
-    } );
+    CKEDITOR.replace('editor');
+    CKEDITOR.replace('description');
 @endpush

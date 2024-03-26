@@ -148,15 +148,7 @@
     <!-- /.container-fluid -->
 @endsection
 @push('scriptaddon')
-    ClassicEditor
-    .create( document.querySelector( '#description' ) )
-    .catch( error => {
-    console.error( error );
-    } );
+CKEDITOR.replace('description');
 
-    ClassicEditor
-    .create( document.querySelector( '#costDescription' ) )
-    .catch( error => {
-    console.error( error );
-    } );
+CKEDITOR.replace('costDescription');
 @endpush

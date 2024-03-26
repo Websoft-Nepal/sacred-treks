@@ -40,8 +40,10 @@
 
                     <div class="mb-3">
                         <div class="mb-3">
-                            <label for="slug" class="form-label"><span class="text-danger h3"><sup>*</sup></span> Slug</label>
-                            <input type="text"  class="form-control" name="slug" value="{{$tour->slug}}" id="slug" aria-describedby="textHelp">
+                            <label for="slug" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                                Slug</label>
+                            <input type="text" class="form-control" name="slug" value="{{ $tour->slug }}"
+                                id="slug" aria-describedby="textHelp">
                         </div>
                         @error('slug')
                             <div class="text-danger">
@@ -54,10 +56,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Current Image</label>
                             <div>
-                                <a href="{{ asset( $tour->image) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $tour->image) }}" class="img-fluid"
-                                        width="400px" alt="tour image" srcset="">
+                                <a href="{{ asset($tour->image) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($tour->image) }}" class="img-fluid" width="400px" alt="tour image"
+                                        srcset="">
                                 </a>
                             </div>
                         </div>
@@ -78,10 +79,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Current Feature Image 1</label>
                             <div>
-                                <a href="{{ asset( $tour->featureimg1) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $tour->featureimg1) }}" class="img-fluid"
-                                        width="400px" alt="blog image" srcset="">
+                                <a href="{{ asset($tour->featureimg1) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($tour->featureimg1) }}" class="img-fluid" width="400px"
+                                        alt="blog image" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -101,10 +101,9 @@
                         <div class="my-3">
                             <label for="featureimg2" class="form-label">Current Feature Image 2</label>
                             <div>
-                                <a href="{{ asset( $tour->featureimg2) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $tour->featureimg2) }}" class="img-fluid"
-                                        width="400px" alt="blog featureimg2" srcset="">
+                                <a href="{{ asset($tour->featureimg2) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($tour->featureimg2) }}" class="img-fluid" width="400px"
+                                        alt="blog featureimg2" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -124,10 +123,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Map image</label>
                             <div>
-                                <a href="{{ asset( $tour->image) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $tour->image) }}" class="img-fluid"
-                                        width="400px" alt="tour image" srcset="">
+                                <a href="{{ asset($tour->image) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($tour->image) }}" class="img-fluid" width="400px"
+                                        alt="tour image" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -159,9 +157,11 @@
                         <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Status</label>
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">
-                            <input type="checkbox" class="custom-control-input" name="status" id="status" @checked($tour->status)>
+                            <input type="checkbox" class="custom-control-input" name="status" id="status"
+                                @checked($tour->status)>
                             <label class="custom-control-label" for="status">Status</label>
-                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not.
+                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or
+                                not.
                                 (active or not)</small>
                         </div>
                     </div>
@@ -227,7 +227,8 @@
                                 Medium</label>
                             <select class="form-control" name="transportation_id" id="transportation">
                                 @foreach ($transportations as $transport)
-                                    <option value="{{$transport->id}}" @selected($transport->id == $tour->transportation_id)>{{$transport->name}}</option>
+                                    <option value="{{ $transport->id }}" @selected($transport->id == $tour->transportation_id)>
+                                        {{ $transport->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -252,7 +253,7 @@
 
                     <div class="mb-3">
                         <label for="costDescription" class="form-label">Cost Include Description</label>
-                        <textarea class="form-control" name="costDescription" id="description" rows="3">{{$tourCost->description}}</textarea>
+                        <textarea class="form-control" name="costDescription" id="description" rows="3">{{ $tourCost->description }}</textarea>
                     </div>
                     @error('costDescription')
                         <div class="text-danger">
@@ -260,7 +261,8 @@
                         </div>
                     @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ route('admin.tour.itinerary.index',$tour->id) }}" class="mx-3 btn btn-primary btn-sm">Itinerary</a>
+                    <a href="{{ route('admin.tour.itinerary.index', $tour->id) }}"
+                        class="mx-3 btn btn-primary btn-sm">Itinerary</a>
                 </form>
             </div>
         </div>
@@ -269,14 +271,6 @@
     <!-- /.container-fluid -->
 @endsection
 @push('scriptaddon')
-    ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-    console.error( error );
-    } );
-    ClassicEditor
-    .create( document.querySelector( '#description' ) )
-    .catch( error => {
-    console.error( error );
-    } );
+    CKEDITOR.replace('editor');
+    CKEDITOR.replace('description');
 @endpush
