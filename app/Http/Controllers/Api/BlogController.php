@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
-class BlogConroller extends BaseController
+class BlogController extends BaseController
 {
     public function index(){
         try {

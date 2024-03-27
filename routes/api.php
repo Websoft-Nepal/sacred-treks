@@ -1,7 +1,6 @@
 <?php
-
-use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Api\AboutUsController;
+use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CompanyInfoController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\PagesController;
@@ -64,7 +63,7 @@ Route::prefix('page')->group(function(){
 Route::get('gallery',[PagesController::class,'gallery']);
 
 // Blog
-Route::get('blog',[BlogController::class,'index']);
+Route::get('blogs',[BlogController::class,'index']);
 Route::get('blog/{slug}',[BlogController::class,'show']);
 
 // Subscribe

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
+            $table->longText('conclusion');
             $table->string('image');
             $table->boolean('status')->default(true);
             $table->longText('description');

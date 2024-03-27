@@ -25,8 +25,9 @@ class BlogSeeder extends Seeder
                 'title' => $faker->sentence(5),
                 'slug' => $faker->slug,
                 'image' => $faker->imageUrl(),
+                'conclusion' => $faker->paragraphs(2, true),
                 'status' => $faker->boolean(90), // 90% chance of true
-                'description' => $faker->paragraphs(3, true), // Generate 3 paragraphs of text
+                'description' => $faker->paragraphs(10, true), // Generate 3 paragraphs of text
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

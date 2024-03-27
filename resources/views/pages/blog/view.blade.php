@@ -23,7 +23,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">View Blog</h6>
             </div>
             <div class="card-body">
-                
+
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text"  value="{{$blog->title}}" class="form-control" id="title"
@@ -45,9 +45,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="editor" class="form-label">Description</label>
-                        <textarea class="form-control"  id="editor" rows="3">{{$blog->description}}</textarea>
+                        <textarea class="form-control"  id="editor" rows="3">{!!$blog->description!!}</textarea>
                     </div>
-                   
+
+                    <div class="mb-3">
+                        <label for="conclusion" class="form-label">Conclusion</label>
+                        <textarea class="form-control" name="conclusion" id="conclusion" rows="3">{!! $blog->conclusion !!}</textarea>
+                    </div>
+
 
                 </form>
             </div>

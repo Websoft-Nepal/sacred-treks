@@ -27,6 +27,7 @@ class BlogController extends BaseController
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|max:2048',
+            'conclusion' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
@@ -34,6 +35,7 @@ class BlogController extends BaseController
         $blog->title = $request->title;
         $blog->status = $request->has('status') ? true : false;
         $blog->slug = $this->generateSlug($request->title, $blog);
+        $blog->conclusion = $request->conclusion;
         $blog->image = $this->uploadImage($request->image,"uploads/blog");
         $blog->description = $request->description;
         $blog->save();
@@ -54,6 +56,7 @@ class BlogController extends BaseController
         ]);
         $blog = Blog::findorFail($id);
         $blog->title = $request->title;
+        $blog->conclusion = $request->conclusion;
         $blog->description = $request->description;
         $blog->status = $request->has('status') ? true : false;
         $blog->slug = str::slug($request->slug);

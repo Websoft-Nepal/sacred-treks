@@ -61,6 +61,14 @@
                 @error('description')
                     {{ $message }}
                 @enderror
+
+                <div class="mb-3">
+                    <label for="conclusion" class="form-label">Conclusion</label>
+                    <textarea class="form-control" name="conclusion" id="conclusion" rows="3"></textarea>
+                </div>
+                @error('conclusion')
+                    {{ $message }}
+                @enderror
                 <button type="submit" class="btn btn-primary">Create</button>
 
                </form>
@@ -72,4 +80,5 @@
 @endsection
 @push('scriptaddon')
     CKEDITOR.replace('description');
+    CKEDITOR.replace('conclusion');
 @endpush
