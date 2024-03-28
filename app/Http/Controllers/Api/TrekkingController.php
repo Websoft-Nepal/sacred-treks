@@ -21,17 +21,17 @@ class TrekkingController extends BaseController
             if ($trekkings != null) {
                 foreach ($trekkings as $trekking) {
                     if ($trekking['image'] != null) {
-                        if(substr_count($trekking['image'],'http')<1){
+                        if (substr_count($trekking['image'], 'http') < 1) {
                             $trekking['image'] = config('app.url') . "/" . $trekking['image'];
                         }
                     }
                     if ($trekking['featureimg1'] != null) {
-                        if(substr_count($trekking['featureimg1'],'http')<1){
+                        if (substr_count($trekking['featureimg1'], 'http') < 1) {
                             $trekking['featureimg1'] = config('app.url') . "/" . $trekking['featureimg1'];
                         }
                     }
                     if ($trekking['featureimg2'] != null) {
-                        if(substr_count($trekking['featureimg2'],'http')<1){
+                        if (substr_count($trekking['featureimg2'], 'http') < 1) {
                             $trekking['featureimg2'] = config('app.url') . "/" . $trekking['featureimg2'];
                         }
                     }
@@ -52,23 +52,43 @@ class TrekkingController extends BaseController
     public function show($slug)
     {
         try {
-            $trekking = Trekking::where('slug', $slug)->with('trekkingItinerary','trekkingCostInclude')->first();
+            $trekking = Trekking::where('slug', $slug)->with('trekkingItinerary', 'trekkingCostInclude')->first();
             if ($trekking != null) {
                 if ($trekking['image'] != null) {
-                    if(substr_count($trekking['image'],'http')<1){
+                    if (substr_count($trekking['image'], 'http') < 1) {
                         $trekking['image'] = config('app.url') . "/" . $trekking['image'];
                     }
                 }
                 if ($trekking['featureimg1'] != null) {
-                    if(substr_count($trekking['featureimg1'],'http')<1){
+                    if (substr_count($trekking['featureimg1'], 'http') < 1) {
                         $trekking['featureimg1'] = config('app.url') . "/" . $trekking['featureimg1'];
                     }
                 }
                 if ($trekking['featureimg2'] != null) {
-                    if(substr_count($trekking['featureimg2'],'http')<1){
+                    if (substr_count($trekking['featureimg2'], 'http') < 1) {
                         $trekking['featureimg2'] = config('app.url') . "/" . $trekking['featureimg2'];
                     }
                 }
+
+                // For parsing the html content in the description and change into text
+
+                $html_list = $trekking->trekkingCostInclude->description;
+                $html_list = trim($html_list);
+                if ((str_contains($html_list, "<ul><li>")) || (str_contains($html_list, "<ol><li>"))) {
+                    $html_list = explode("</li>", $html_list);
+                    // dd($lists);
+                    $list = [];
+                    $tem = "";
+                    $i = 0;
+                    foreach ($html_list as $l) {
+                        $tem = strip_tags($l);
+                        $list[$i++] = $tem;
+                    }
+                    unset($list[--$i]);
+                }else{
+                    dd("Doesn't contain list");
+                }
+                $trekking->trekkingCostInclude->description = $list;
                 return $this->SendResponse($trekking, "Trekking data fetched successfully");
             } else {
                 return $this->SendResponse("Data not found", "Cannot fetch trekking data", 404);
@@ -81,7 +101,7 @@ class TrekkingController extends BaseController
     public function category($location_id)
     {
         try {
-            $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary','trekkingCostInclude')->paginate(10);
+            $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude')->paginate(10);
             if ($trekkings != null) {
                 $data = [
                     'trekkings' => $trekkings,
