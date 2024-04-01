@@ -8,22 +8,24 @@ use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $home = HomePage::first();
-        return view('display-pages.home-page.index',compact('home'));
+        return view('display-pages.home-page.index', compact('home'));
     }
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'heading'=>'required|string|max:255',
-            'subheading'=>'required|string',
-            'headimg1'=>'image|max:2048',
-            'headimg2'=>'image|max:2048',
-            'bookimg'=>'image|max:2048',
-            'gallery_title'=>'required|string|max:255',
-            'trekking_title'=>'required|string|max:255',
-            'trekking_slogan'=>'required|string',
-            'feature_title'=>'required|string|max:255',
-            'footer'=>'required|string',
+            'heading' => 'required|string|max:255',
+            'subheading' => 'required|string',
+            'headimg1' => 'image|max:2048',
+            'headimg2' => 'image|max:2048',
+            'bookimg' => 'image|max:2048',
+            'gallery_title' => 'required|string|max:255',
+            'trekking_title' => 'required|string|max:255',
+            'trekking_slogan' => 'required|string',
+            'feature_title' => 'required|string|max:255',
+            'footer' => 'required|string',
         ]);
         $home = HomePage::findOrFail($id);
         $home->heading  = $request->heading;
@@ -103,9 +105,9 @@ class HomePageController extends Controller
         $home->save();
         drakify('success');
         return redirect()->route('admin.page.home.index');
-
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $home = HomePage::findOrFail($id);
         if ($home->headimg1) {
             $tem = strtolower($home->headimg1);

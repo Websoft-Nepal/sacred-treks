@@ -29,7 +29,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Total no. of Tours</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tourCount}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $tourCount }}</div>
                             </div>
                             <div class="col-auto">
                                 {{-- <i class="fas fa-calendar fa-2x text-gray-300"></i> --}}
@@ -48,7 +48,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Total no. of Trekkings</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$trekkingCount}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $trekkingCount }}</div>
                             </div>
                             <div class="col-auto">
                                 {{-- <i class="fas fa-dollar-sign fa-2x text-gray-300"></i> --}}
@@ -67,7 +67,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Pending Tours</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$tourPending}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $tourPending }}</div>
 
                             </div>
                             <div class="col-auto">
@@ -86,7 +86,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Pending Trekkings</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$trekkingPending}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $trekkingPending }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -179,7 +179,7 @@
                             <span class="mr-2">
                                 <i class="fas fa-circle text-info"></i> Referral
                             </span> --}}
-                            {{-- @foreach ($data as $item)
+        {{-- @foreach ($data as $item)
                                 <span class="mr-2">
                                     <i class="fas fa-circle text-primary"></i> {{ $item->label }}: {{ $item->value }}%
                                 </span>
