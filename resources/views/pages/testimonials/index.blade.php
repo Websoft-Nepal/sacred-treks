@@ -43,15 +43,16 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $testimonial->name }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/uploads/testimonials/' . $testimonial->image) }}"
-                                            target="_blank" rel="noopener noreferrer">
-                                            <img src="{{ asset('storage/uploads/testimonials/' . $testimonial->image) }}"
-                                                width="60px" alt="Testimonial image" srcset="">
+                                        <a href="{{ asset($testimonial->image) }}" target="_blank"
+                                            rel="noopener noreferrer">
+                                            <img src="{{ asset($testimonial->image) }}" width="60px"
+                                                alt="Testimonial image" srcset="">
                                         </a>
                                     </td>
 
                                     <td>
-                                        <span class="badge  {{$testimonial->status === 'inactive' ? 'bg-danger' : 'bg-success'}} text-white">{{$testimonial->status}}</span>
+                                        <span
+                                            class="badge  {{ $testimonial->status === 'inactive' ? 'bg-danger' : 'bg-success' }} text-white">{{ $testimonial->status }}</span>
                                     </td>
                                     <td>
                                         <!-- Button view modal -->
@@ -60,8 +61,8 @@
                                         <a href="{{ route('admin.testimonial.show', $testimonial->id) }}"
                                             class="btn btn-success btn-sm">View</a>
                                         {{-- delete button------- --}}
-                                        <form action="{{ route('admin.testimonial.destroy', $testimonial->id) }}" method="post"
-                                            class="d-inline">
+                                        <form action="{{ route('admin.testimonial.destroy', $testimonial->id) }}"
+                                            method="post" class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"
