@@ -9,15 +9,13 @@ use Illuminate\Support\Str;
 
 class BaseController extends Controller
 {
-    public function uploadImage($image, $location = 'uploads/'){
+    public function uploadImage($image, $location = 'uploads/')
+    {
         $filename = Str::uuid()->toString() . '-' . time() . '.' . $image->getClientOriginalExtension();
-        // $image->move($location, $filename);
-        // $filepath = $filename->store($location);
-        $temp = $filename;
-        $filename ="storage/".$location."/".$filename;
-        $filepath = $image->storeAs($location, $temp,'public');
+        $image->move($location, $filename);
+        $filePath = $location . '/' . $filename;
 
-        return $filename;
+        return $filePath;
     }
 
     protected function slugValidate(string $tableName, $ignoreId = null): string
@@ -31,7 +29,7 @@ class BaseController extends Controller
         return 'required|' . $uniqueRule . '|min:3|regex:/^[a-z0-9-]+$/';
     }
 
-    public function generateSlug($title,$modelName):string
+    public function generateSlug($title, $modelName): string
     {
         $slug = Str::slug($title);
 
