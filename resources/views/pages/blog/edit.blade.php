@@ -41,9 +41,9 @@
                             <div class="my-3">
                                 <label for="image" class="form-label">Current Image</label>
                                 <div>
-                                    <a href="{{ asset('storage/uploads/blog/' . $blog->image) }}" target="_blank"
+                                    <a href="{{ asset( $blog->image) }}" target="_blank"
                                         rel="noopener noreferrer">
-                                        <img src="{{ asset('storage/uploads/blog/' . $blog->image) }}" class="img-fluid"
+                                        <img src="{{ asset( $blog->image) }}" class="img-fluid"
                                             width="200px" alt="blog image" srcset="">
                                     </a>
                                 </div>

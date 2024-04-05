@@ -293,4 +293,8 @@ class TourController extends BaseController
 
         return redirect()->route('admin.tour.index');
     }
+
+    public function trash(){
+
+    }
 }
