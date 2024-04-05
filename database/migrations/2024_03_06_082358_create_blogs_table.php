@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longText('conclusion');
             $table->string('image');
             $table->boolean('status')->default(true);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

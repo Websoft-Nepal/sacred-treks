@@ -10,7 +10,7 @@ class BlogController extends BaseController
 {
     public function index(){
         try {
-            $blogs = Blog::all();
+            $blogs = Blog::where('status',1)->get();
             return $this->SendResponse($blogs,"Blogs fetched successfully.");
         } catch (\Throwable $th) {
             return $this->SendError(throw $th,"Cannot fetch blogs data.",500);

@@ -31,12 +31,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Tour
-Route::get('/tour',[TourController::class,'index']);
+Route::get('/tour',[TourController::class,'index'])->name("api.tour");
 Route::get('/tour/{slug}',[TourController::class,'show']);
 Route::get('/tour/category/{trasnportation_id}',[TourController::class,'category']);
 
 // Trekking
-Route::get('trekking',[TrekkingController::class,'index']);
+Route::get('trekking',[TrekkingController::class,'index'])->name("api.trekking");
 Route::get('/trekking/{slug}',[TrekkingController::class,'show']);
 Route::get('/trekking/category/{location_id}',[TrekkingController::class,'category']);
 

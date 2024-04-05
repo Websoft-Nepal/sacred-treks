@@ -102,6 +102,9 @@ class TourController extends BaseController
     }
     public function category($transportation_id){
         try{
+            if($transportation_id<0){
+                return redirect()->route('api.tour');
+            }
             $tours = Tour::where('transportation_id',$transportation_id)->where('status',1)->with('transportation','tourItinerary','tourCostInclude')
             ->paginate(10);
             if($tours == NULL){

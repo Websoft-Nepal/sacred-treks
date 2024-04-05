@@ -100,6 +100,9 @@ class TrekkingController extends BaseController
 
     public function category($location_id)
     {
+        if($location_id<0){
+            return redirect()->route('api.tour');
+        }
         try {
             $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude')->paginate(10);
             if ($trekkings != null) {
