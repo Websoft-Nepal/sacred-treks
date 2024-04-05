@@ -85,7 +85,9 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="{{ route('admin.location.store') }}">
+                                                    <form method="POST" action="{{ route('admin.location.update',$location->id) }}">
+                                                        @csrf
+                                                        @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="recipient-name"
@@ -97,7 +99,7 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-danger"
                                                                 data-dismiss="modal">Close</button>
-                                                            <button type="Submit" class="btn btn-primary">Add</button>
+                                                            <button type="Submit" class="btn btn-primary">Update</button>
                                                         </div>
                                                     </form>
                                                 </div>
