@@ -26,9 +26,9 @@
                 <form action="{{ route('admin.testimonial.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label"><span class="text-danger">*</span>Name</label>
                         <input type="text" name="name" class="form-control" id="name"
-                            aria-describedby="textHelp">
+                            aria-describedby="textHelp" value="{{old('name')}}">
                         @error('name')
                             <div class="text-danger">
                                 {{ $message }}
@@ -36,9 +36,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Review</label>
+                        <label for="name" class="form-label"><span class="text-danger">*</span>Review</label>
                         <input type="text" name="review" class="form-control" id="review"
-                            aria-describedby="textHelp">
+                            aria-describedby="textHelp" value="{{old('review')}}">
                         @error('review')
                             <div class="text-danger">
                                 {{ $message }}
@@ -46,7 +46,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
+                        <label for="image" class="form-label"><span class="text-danger">*</span>Image</label>
                         <input type="file" class="form-control" name="image" id="image">
                         @error('image')
                             <div class="text-danger">
@@ -54,6 +54,17 @@
                             </div>
                         @enderror
                     </div>
+                    <div class=" mb-3">
+                        <label class="form-label" for="inputGroupSelect01">Status</label>
+                        <select class="form-select form-control" name="status" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="active" @selected($testimonial->status == "active")>Active</option>
+                            <option value="inactive" @selected($testimonial->status == "inactive") >Inactive</option>
+                        </select>
+                    </div>
+                    @error('status')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="3"></textarea>

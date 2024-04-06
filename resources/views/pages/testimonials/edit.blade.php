@@ -20,14 +20,14 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Add Testimonials</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Edit Testimonials</h6>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.testimonial.update',[$testimonial->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
+                        <label for="name" class="form-label"><span class="text-danger">*</span>Name</label>
                         <input type="text" name="name" value="{{ $testimonial->name }}" class="form-control"
                             id="name" aria-describedby="textHelp">
                         @error('name')
@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Review</label>
+                        <label for="name" class="form-label"><span class="text-danger">*</span>Review</label>
                         <input type="text" name="review" value="{{ $testimonial->review}}" class="form-control" id="review"
                             aria-describedby="textHelp">
                         @error('review')
@@ -73,6 +73,9 @@
                             <option value="inactive" @selected($testimonial->status == "inactive") >Inactive</option>
                         </select>
                     </div>
+                    @error('status')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="3">{{ $testimonial->description }}</textarea>

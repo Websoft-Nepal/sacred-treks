@@ -26,14 +26,14 @@
                <form action="{{route('admin.blog.store')}}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="title" aria-describedby="textHelp">
+                    <label for="title" class="form-label"><span class="text-danger">*</span>Title</label>
+                    <input type="text" name="title" class="form-control" id="title" aria-describedby="textHelp" value="{{old('title')}}">
                 </div>
                 @error('title')
                     {{$message}}
                 @enderror
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
+                    <label for="image" class="form-label"><span class="text-danger">*</span>Image</label>
                     <input type="file" class="form-control" name="image" id="image">
                 </div>
                 @error('image')
@@ -63,7 +63,7 @@
                 @enderror
 
                 <div class="mb-3">
-                    <label for="conclusion" class="form-label">Conclusion</label>
+                    <label for="conclusion" class="form-label"><span class="text-danger">*</span>Conclusion</label>
                     <textarea class="form-control" name="conclusion" id="conclusion" rows="3"></textarea>
                 </div>
                 @error('conclusion')

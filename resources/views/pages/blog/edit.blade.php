@@ -27,7 +27,7 @@
                     @csrf
                     @method('put')
                     <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
+                        <label for="title" class="form-label"><span class="text-danger">*</span>Title</label>
                         <input type="text" name="title" value="{{ $blog->title }}" class="form-control" id="title"
                             aria-describedby="textHelp">
                     </div>
@@ -84,7 +84,7 @@
                     @enderror
 
                     <div class="mb-3">
-                        <label for="conclusion" class="form-label">Conclusion</label>
+                        <label for="conclusion" class="form-label"><span class="text-danger">*</span>Conclusion</label>
                         <textarea class="form-control" name="conclusion" id="conclusion" rows="3">{{ $blog->conclusion }}</textarea>
                     </div>
                     @error('conclusion')
