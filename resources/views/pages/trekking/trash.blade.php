@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('page-title', 'Trekking')
+@section('page-title', 'Trekking / Trash')
 @section('main-section')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -11,7 +11,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Trekking</a>
                 </li>
-                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Trekking list</a></li>
+                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Trash list</a></li>
 
             </ol>
         </div>
@@ -19,8 +19,7 @@
         {{-- </div> --}}
         <div class="p-1">
 
-            <a href="{{ route('admin.trekking.create') }}" class="btn btn-primary btn-sm">Create</a>
-            <a href="{{ route('admin.trekking.trash') }}" class="mx-3 btn btn-danger btn-sm">Trash</a>
+            <a href="{{ route('admin.trekking.index') }}" class="btn btn-primary btn-sm">View</a>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -56,20 +55,17 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <!-- Button view modal -->
-                                        <a name="" id="" class="btn btn-sm btn-success"
-                                            href="{{ route('admin.trekking.show', $trekking->id) }}" role="button">View</a>
                                         <a name="" id="" class="btn btn-sm btn-primary"
-                                            href="{{ route('admin.trekking.edit', $trekking->id) }}" role="button">Edit</a>
+                                            href="{{ route('admin.trekking.restore', $trekking->id) }}" role="button">Restore</a>
 
 
                                         {{-- delete button------- --}}
-                                        <form action="{{ route('admin.trekking.destroy', $trekking->id) }}" method="post"
+                                        <form action="{{ route('admin.trekking.forcedelete', $trekking->id) }}" method="post"
                                             class="d-inline">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"
-                                                onclick="return confirm('are you want to delete')">Trash</button>
+                                                onclick="return confirm('are you want to delete')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

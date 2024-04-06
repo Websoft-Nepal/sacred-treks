@@ -8,6 +8,7 @@ use App\Models\TrekkingCostInclude;
 use App\Models\TrekkingLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class TrekkingController extends BaseController
 {
@@ -122,12 +123,14 @@ class TrekkingController extends BaseController
                     try {
                         $tem = explode('/', $trekking->image);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                        $filePath = "uploads/trekking/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
+
                     }
                 }
             }
@@ -146,12 +149,13 @@ class TrekkingController extends BaseController
                     try {
                         $tem = explode('/', $trekking->featureimg1);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                        $filePath = "uploads/trekking/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
                     }
                 }
             }
@@ -166,12 +170,13 @@ class TrekkingController extends BaseController
                     try {
                         $tem = explode('/', $trekking->featureimg2);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                        $filePath = "uploads/trekking/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
                     }
                 }
             }
@@ -201,6 +206,24 @@ class TrekkingController extends BaseController
     {
         $trekking = Trekking::findOrFail($id);
 
+        $trekking->delete();
+
+        drakify('success');
+
+        return redirect()->route('admin.trekking.index');
+    }
+    public function trash(){
+        $trekkings = Trekking::onlyTrashed()->get();
+        return view('pages.trekking.trash',compact('trekkings'));
+    }
+    public function restore($id){
+        $trekking = Trekking::withTrashed()->findOrFail($id);
+        $trekking->restore();
+        drakify('success');
+        return redirect()->route('admin.trekking.index');
+    }
+    public function forceDelete($id){
+        $trekking = Trekking::withTrashed()->findOrFail($id);
         if ($trekking->image) {
             $tem = strtolower($trekking->image);
             if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
@@ -208,12 +231,13 @@ class TrekkingController extends BaseController
                 try {
                     $tem = explode('/', $trekking->image);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    $filePath = "uploads/trekking/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
         }
@@ -225,12 +249,13 @@ class TrekkingController extends BaseController
                 try {
                     $tem = explode('/', $trekking->featureimg1);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    $filePath = "uploads/trekking/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
         }
@@ -243,21 +268,18 @@ class TrekkingController extends BaseController
                 try {
                     $tem = explode('/', $trekking->featureimg2);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    $filePath = "uploads/trekking/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
         }
-
-
-        $trekking->delete();
-
+        $trekking->forceDelete();
         drakify('success');
-
-        return redirect()->route('admin.trekking.index');
+        return redirect()->route('admin.trekking.trash');
     }
 }

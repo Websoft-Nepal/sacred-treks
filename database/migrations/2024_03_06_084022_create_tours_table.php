@@ -29,6 +29,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->foreign('transportation_id')->references('id')->on('tour_transportations')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

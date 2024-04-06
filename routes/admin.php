@@ -45,6 +45,9 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('/show/{trekking}', [TrekkingController::class, 'show'])->name('show');
         Route::put('update/{trekking}', [TrekkingController::class, 'update'])->name('update');
         Route::delete('destroy/{trekking}', [TrekkingController::class, 'destroy'])->name('destroy');
+        Route::get('/trash',[TrekkingController::class,'trash'])->name('trash');
+        Route::get('/restore/{trekking}',[TrekkingController::class,'restore'])->name('restore');
+        Route::delete('/force-delete/{trekking}',[TrekkingController::class,'forceDelete'])->name('forcedelete');
 
         // Itinerary
         Route::prefix('itinerary')->name('itinerary.')->group(function () {
@@ -71,6 +74,9 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('/show/{blog}', [BlogController::class, 'show'])->name('show');
         Route::put('/update/{blog}', [BlogController::class, 'update'])->name('update');
         Route::delete('/destroy/{blog}', [BlogController::class, 'destroy'])->name('destroy');
+        Route::get('/trash',[BlogController::class,'trash'])->name('trash');
+        Route::get('/restore/{blog}',[BlogController::class,'restore'])->name('restore');
+        Route::delete('/force-delete/{blog}',[BlogController::class,'forceDelete'])->name('forcedelete');
     });
     // Tour Route
     Route::prefix('tour')->name('tour.')->group(function () {
@@ -82,6 +88,9 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('/{tour}/edit', [TourController::class, 'edit'])->name('edit');
         Route::put('/update/{tour}', [TourController::class, 'update'])->name('update');
         Route::delete('/destroy/{tour}', [TourController::class, 'destroy'])->name('destroy');
+        Route::get('/trash',[TourController::class,'trash'])->name('trash');
+        Route::get('/restore/{tour}',[TourController::class,'restore'])->name('restore');
+        Route::delete('/force-delete/{tour}',[TourController::class,'forceDelete'])->name('forcedelete');
 
         // Itinerary
         Route::prefix('itinerary')->name('itinerary.')->group(function () {

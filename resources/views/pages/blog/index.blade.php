@@ -20,6 +20,7 @@
         <div class="p-1">
 
             <a href="{{ route('admin.blog.create') }}" class="btn btn-primary btn-sm">Create</a>
+            <a href="{{ route('admin.blog.trash') }}" class="mx-3 btn btn-danger btn-sm">Trash</a>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -67,7 +68,7 @@
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm"
-                                                onclick="return confirm('are you want to delete')">delete</button>
+                                                onclick="return confirm('are you want to delete')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

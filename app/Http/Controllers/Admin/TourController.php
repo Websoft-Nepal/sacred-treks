@@ -8,6 +8,7 @@ use App\Models\TourCostInclude;
 use App\Models\TourTransportation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class TourController extends BaseController
 {
@@ -129,12 +130,13 @@ class TourController extends BaseController
                     try {
                         $tem = explode('/', $tour->image);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        $filePath = "uploads/tour/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                     }
                 }
             }
@@ -153,12 +155,13 @@ class TourController extends BaseController
                     try {
                         $tem = explode('/', $tour->map);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        $filePath = "uploads/tour/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                     }
                 }
             }
@@ -175,12 +178,13 @@ class TourController extends BaseController
                     try {
                         $tem = explode('/', $tour->featureimg1);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        $filePath = "uploads/tour/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                     }
                 }
             }
@@ -195,12 +199,13 @@ class TourController extends BaseController
                     try {
                         $tem = explode('/', $tour->featureimg2);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        $filePath = "uploads/tour/".$tem[$n-1];
+                        // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                     }
                 }
             }
@@ -221,7 +226,27 @@ class TourController extends BaseController
     public function destroy($id)
     {
         $tour = Tour::findOrFail($id);
+        $tour->delete();
 
+        drakify('success');
+
+        return redirect()->route('admin.tour.index');
+    }
+
+    public function trash(){
+        $tours = Tour::onlyTrashed()->get();
+        return view('pages.tour.trash', compact('tours'));
+    }
+
+    public function restore($id){
+        $tour = Tour::withTrashed()->findOrFail($id);
+        $tour->restore();
+        drakify('success');
+        return redirect()->route('admin.tour.index');
+    }
+
+    public function forceDelete($id){
+        $tour = Tour::withTrashed()->findOrFail($id);
         if ($tour->image) {
             $tem = strtolower($tour->image);
             if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
@@ -229,12 +254,13 @@ class TourController extends BaseController
                 try {
                     $tem = explode('/', $tour->image);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    $filePath = "uploads/tour/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
         }
@@ -245,12 +271,13 @@ class TourController extends BaseController
                 try {
                     $tem = explode('/', $tour->featureimg1);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    $filePath = "uploads/tour/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/tour/' . $tour->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
         }
@@ -262,39 +289,35 @@ class TourController extends BaseController
                 try {
                     $tem = explode('/', $tour->featureimg2);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    $filePath = "uploads/tour/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    Log::warning("Tour Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
         }
         if ($tour->map) {
-            $tem = strtolower($tour->map);
+            $tem = strtolower(($tour->map));
             if (!($tem[0] == 'h' && $tem[1] == 't' && $tem[2] == 't' && $tem[3] == 'p')) {
 
                 try {
                     $tem = explode('/', $tour->map);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    $filePath = "uploads/tour/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/tour/' . $tour->map);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    dd($e->getMessage(),"map image");
                 }
             }
         }
-        $tour->delete();
-
+        $tour->forceDelete();
         drakify('success');
-
-        return redirect()->route('admin.tour.index');
-    }
-
-    public function trash(){
-
+        return redirect()->route("admin.tour.trash");
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('page-title', 'Tour')
+@section('page-title', 'Tour / Trash')
 @section('main-section')
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -11,7 +11,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Tour</a>
                 </li>
-                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Tour list</a></li>
+                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Trash list</a></li>
 
             </ol>
         </div>
@@ -19,8 +19,7 @@
         {{-- </div> --}}
         <div class="p-1">
 
-            <a href="{{ route('admin.tour.create') }}" class="btn btn-primary btn-sm">Create</a>
-            <a href="{{ route('admin.tour.trash') }}" class="btn btn-danger btn-sm mx-3">View Trash</a>
+            <a href="{{ route('admin.tour.index') }}" class="btn btn-primary btn-sm">View</a>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -57,17 +56,15 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.tour.edit', $tour->id) }}"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    <a href="{{ route('admin.tour.show', $tour->id) }}"
-                                        class="btn btn-success btn-sm">View</a>
+                                    <a href="{{ route('admin.tour.restore', $tour->id) }}"
+                                        class="btn btn-primary btn-sm">Restore</a>
 
                                     {{-- delete button------- --}}
-                                    <form action="{{route('admin.tour.destroy',$tour->id)}}" method="post" class="d-inline">
+                                    <form action="{{route('admin.tour.forcedelete',$tour->id)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('are you want to delete')">Trash</button>
+                                            onclick="return confirm('are you want to delete')">Delete</button>
                                     </form>
                                 </td>
                             </tr>

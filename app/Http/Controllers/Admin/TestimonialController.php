@@ -34,7 +34,6 @@ class TestimonialController extends BaseController
         $testimonial->image = $this->uploadImage($request->image, "uploads/testimonials");
         $testimonial->save();
         return redirect()->route('admin.testimonial.index');
-
     }
 
     public function show($id)
@@ -67,7 +66,10 @@ class TestimonialController extends BaseController
             // Delete the previous image if exists
             if ($testimonial->image) {
                 try {
-                    $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
+                    $tem = explode('/', $testimonial->image);
+                    $n = count($tem);
+                    $filePath = "uploads/testimonial/" . $tem[$n - 1];
+                    // $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
@@ -85,18 +87,19 @@ class TestimonialController extends BaseController
     public function destroy($id)
     {
         $testimonial = testimonial::findorFail($id);
-        if($testimonial->image){
-            try{
+        if ($testimonial->image) {
+            try {
 
-                $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
+                $tem = explode('/', $testimonial->image);
+                $n = count($tem);
+                $filePath = "uploads/testimonial/" . $tem[$n - 1];
+                // $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
                 unlink($filePath);
-            }
-            catch(\Exception $e){
+            } catch (\Exception $e) {
                 dd($e->getMessage());
             }
         }
         $testimonial->delete();
         return redirect()->route('admin.testimonial.index');
-
     }
 }

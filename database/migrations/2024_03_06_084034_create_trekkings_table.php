@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('location_id')->references('id')->on('trekking_locations')->onDelete('cascade');
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
