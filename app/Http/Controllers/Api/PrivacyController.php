@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController;
 use App\Models\Privacy;
 use Illuminate\Http\Request;
 
-class PrivacyController extends Controller
+class PrivacyController extends BaseController
 {
     public function index(){
         try{

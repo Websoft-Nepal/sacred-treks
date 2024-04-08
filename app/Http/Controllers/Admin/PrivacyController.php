@@ -16,12 +16,13 @@ class PrivacyController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'string|required|max:255',
-            'description' => 'required|string',
+            'description' => 'required|string|min:2000',
         ]);
         $privacy =Privacy::findorFail($id);
         $privacy->title = $request->title;
         $privacy->description = $request->description;
         $privacy->update();
+        drakify('success');
         return redirect()->route('admin.privacy.index');
 
     }

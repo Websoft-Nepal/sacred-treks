@@ -9,6 +9,7 @@ use App\Models\HomePage;
 use App\Models\Tour;
 use App\Models\Trekking;
 use App\Models\TourPage;
+use App\Models\TrekkingLocation;
 use App\Models\TrekkingPage;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,11 @@ class PagesController extends BaseController
             $home = HomePage::first();
             $tourPopular = Tour::orderByDesc('count')->limit(6)->get();
             $trekkingPopular = Trekking::orderByDesc('count')->limit(6)->get();
+            foreach($trekkingPopular as $trek){
+                // $trek['boundary'] = $trek->location_id->location;
+                $location = TrekkingLocation::findOrFail($trek->location_id);
+                $trek['boundary'] = $location->location;
+            }
             $data = [
                 'home' => $home,
                 'tourPopular' => $tourPopular,
@@ -51,11 +57,23 @@ class PagesController extends BaseController
             $excludeIds = array();
             $i = 0;
             foreach($galleryfirst as $g){
+                if ($g['image'] != null) {
+                    if (substr_count($g['image'], 'http') < 1) {
+                        $g['image'] = config('app.url') . "/" . $g['image'];
+                    }
+                }
                 $excludeIds[$i++] = $g->id;
             }
             $gallerysecond = Gallery::whereNotIn('id',$excludeIds)->take(4)->get();
             if(count($gallerysecond)<1){
                 $gallerysecond = Gallery::take(4)->get();
+                foreach($gallerysecond as $sec){
+                    if ($sec['image'] != null) {
+                        if (substr_count($sec['image'], 'http') < 1) {
+                            $sec['image'] = config('app.url') . "/" . $sec['image'];
+                        }
+                    }
+                }
             }
             $data = [
                 'galleryfirst' => $galleryfirst,
