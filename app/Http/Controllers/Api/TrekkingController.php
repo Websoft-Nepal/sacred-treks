@@ -72,23 +72,23 @@ class TrekkingController extends BaseController
 
                 // For parsing the html content in the description and change into text
 
-                $html_list = $trekking->trekkingCostInclude->description;
-                $html_list = trim($html_list);
-                if ((str_contains($html_list, "<ul><li>")) || (str_contains($html_list, "<ol><li>"))) {
-                    $html_list = explode("</li>", $html_list);
-                    // dd($lists);
-                    $list = [];
-                    $tem = "";
-                    $i = 0;
-                    foreach ($html_list as $l) {
-                        $tem = strip_tags($l);
-                        $list[$i++] = $tem;
-                    }
-                    unset($list[--$i]);
-                }else{
-                    dd("Doesn't contain list");
-                }
-                $trekking->trekkingCostInclude->description = $list;
+                // $html_list = $trekking->trekkingCostInclude->description;
+                // $html_list = trim($html_list);
+                // if ((str_contains($html_list, "<ul><li>")) || (str_contains($html_list, "<ol><li>"))) {
+                //     $html_list = explode("</li>", $html_list);
+                //     // dd($lists);
+                //     $list = [];
+                //     $tem = "";
+                //     $i = 0;
+                //     foreach ($html_list as $l) {
+                //         $tem = strip_tags($l);
+                //         $list[$i++] = $tem;
+                //     }
+                //     unset($list[--$i]);
+                // }else{
+                //     dd("Doesn't contain list");
+                // }
+                // $trekking->trekkingCostInclude->description = $list;
                 return $this->SendResponse($trekking, "Trekking data fetched successfully");
             } else {
                 return $this->SendResponse("Data not found", "Cannot fetch trekking data", 404);
