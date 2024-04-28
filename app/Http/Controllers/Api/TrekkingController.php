@@ -100,12 +100,29 @@ class TrekkingController extends BaseController
 
     public function category($location_id)
     {
-        if($location_id<0){
+        if ($location_id < 0) {
             return redirect()->route('api.tour');
         }
         try {
             $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude')->paginate(10);
             if ($trekkings != null) {
+                foreach ($trekkings as $trekking) {
+                    if ($trekking['image'] != null) {
+                        if (substr_count($trekking['image'], 'http') < 1) {
+                            $trekking['image'] = config('app.url') . "/" . $trekking['image'];
+                        }
+                    }
+                    if ($trekking['featureimg1'] != null) {
+                        if (substr_count($trekking['featureimg1'], 'http') < 1) {
+                            $trekking['featureimg1'] = config('app.url') . "/" . $trekking['featureimg1'];
+                        }
+                    }
+                    if ($trekking['featureimg2'] != null) {
+                        if (substr_count($trekking['featureimg2'], 'http') < 1) {
+                            $trekking['featureimg2'] = config('app.url') . "/" . $trekking['featureimg2'];
+                        }
+                    }
+                }
                 $data = [
                     'trekkings' => $trekkings,
                 ];

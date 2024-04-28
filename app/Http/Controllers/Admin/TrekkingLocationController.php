@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class TrekkingLocationController extends Controller
 {
     public function index(){
-        $locations = TrekkingLocation::paginate(10);
+        $locations = TrekkingLocation::all( );
         return view('pages.trekking.location.index',compact('locations'));
     }
 
@@ -20,6 +20,9 @@ class TrekkingLocationController extends Controller
         $location = new TrekkingLocation();
         $location->location = $request->location;
         $location->save();
+
+        if(TrekkingLocation::where('location'))
+
         return redirect()->route('admin.location.index');
     }
 

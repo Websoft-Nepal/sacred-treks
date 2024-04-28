@@ -9,31 +9,32 @@ use Illuminate\Http\Request;
 
 class TourController extends BaseController
 {
-    public function index(){
-        try{
-            $tours = Tour::with('transportation')->where('status',1)->paginate(10);
+    public function index()
+    {
+        try {
+            $tours = Tour::with('transportation')->where('status', 1)->paginate(10);
             $category = TourTransportation::all();
-            foreach($category as $catg){
+            foreach ($category as $catg) {
                 $catg['link'] = url("api/tour/category/{$catg->id}");
             }
             foreach ($tours as $tour) {
                 if ($tour['image'] != null) {
-                    if(substr_count($tour['image'],'http')<1){
+                    if (substr_count($tour['image'], 'http') < 1) {
                         $tour['image'] = config('app.url') . "/" . $tour['image'];
                     }
                 }
                 if ($tour['featureimg1'] != null) {
-                    if(substr_count($tour['featureimg1'],'http')<1){
+                    if (substr_count($tour['featureimg1'], 'http') < 1) {
                         $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
                     }
                 }
                 if ($tour['featureimg2'] != null) {
-                    if(substr_count($tour['featureimg2'],'http')<1){
+                    if (substr_count($tour['featureimg2'], 'http') < 1) {
                         $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
                     }
                 }
                 if ($tour['map'] != null) {
-                    if(substr_count($tour['map'],'http')<1){
+                    if (substr_count($tour['map'], 'http') < 1) {
                         $tour['map'] = config('app.url') . "/" . $tour['map'];
                     }
                 }
@@ -43,34 +44,34 @@ class TourController extends BaseController
                 'category' => $category,
             ];
             return $this->SendResponse($data, "Tours data fetched successfully");
-        }
-        catch (\Exception $e){
-            return $this->SendError($e->getMessage(),"Can't fetch tours data",500);
+        } catch (\Exception $e) {
+            return $this->SendError($e->getMessage(), "Can't fetch tours data", 500);
         }
     }
-    public function show($slug){
-        try{
-            $tour = Tour::where('slug',$slug)->with('transportation','tourItinerary','tourCostInclude')->first();
-            if($tour == NULL){
-                return $this->SendError("Unauthorize","Data not found",400);
+    public function show($slug)
+    {
+        try {
+            $tour = Tour::where('slug', $slug)->with('transportation', 'tourItinerary', 'tourCostInclude')->first();
+            if ($tour == NULL) {
+                return $this->SendError("Unauthorize", "Data not found", 400);
             }
             if ($tour['image'] != null) {
-                if(substr_count($tour['image'],'http')<1){
+                if (substr_count($tour['image'], 'http') < 1) {
                     $tour['image'] = config('app.url') . "/" . $tour['image'];
                 }
             }
             if ($tour['featureimg1'] != null) {
-                if(substr_count($tour['featureimg1'],'http')<1){
+                if (substr_count($tour['featureimg1'], 'http') < 1) {
                     $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
                 }
             }
             if ($tour['featureimg2'] != null) {
-                if(substr_count($tour['featureimg2'],'http')<1){
+                if (substr_count($tour['featureimg2'], 'http') < 1) {
                     $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
                 }
             }
             if ($tour['map'] != null) {
-                if(substr_count($tour['map'],'http')<1){
+                if (substr_count($tour['map'], 'http') < 1) {
                     $tour['map'] = config('app.url') . "/" . $tour['map'];
                 }
             }
@@ -94,29 +95,50 @@ class TourController extends BaseController
             //     dd("Doesn't contain list");
             // }
             // $tour->tourCostInclude->description = $list;
-            return $this->SendResponse($tour,"Tour data fetched successfully");
-        }
-        catch(\Throwable $th){
-            return $this->SendError($th->getMessage(),"Can't fetch tours data",403);
+            return $this->SendResponse($tour, "Tour data fetched successfully");
+        } catch (\Throwable $th) {
+            return $this->SendError($th->getMessage(), "Can't fetch tours data", 403);
         }
     }
-    public function category($transportation_id){
-        try{
-            if($transportation_id<0){
+    public function category($transportation_id)
+    {
+        try {
+            if ($transportation_id < 0) {
                 return redirect()->route('api.tour');
             }
-            $tours = Tour::where('transportation_id',$transportation_id)->where('status',1)->with('transportation','tourItinerary','tourCostInclude')
-            ->paginate(10);
-            if($tours == NULL){
-                return $this->SendError("Unauthorize","Data not found",400);
+            $tours = Tour::where('transportation_id', $transportation_id)->where('status', 1)->with('transportation', 'tourItinerary', 'tourCostInclude')
+                ->paginate(10);
+            if ($tours == NULL) {
+                return $this->SendError("Unauthorize", "Data not found", 400);
+            }
+            foreach ($tours as $tour) {
+                if ($tour['image'] != null) {
+                    if (substr_count($tour['image'], 'http') < 1) {
+                        $tour['image'] = config('app.url') . "/" . $tour['image'];
+                    }
+                }
+                if ($tour['featureimg1'] != null) {
+                    if (substr_count($tour['featureimg1'], 'http') < 1) {
+                        $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
+                    }
+                }
+                if ($tour['featureimg2'] != null) {
+                    if (substr_count($tour['featureimg2'], 'http') < 1) {
+                        $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
+                    }
+                }
+                if ($tour['map'] != null) {
+                    if (substr_count($tour['map'], 'http') < 1) {
+                        $tour['map'] = config('app.url') . "/" . $tour['map'];
+                    }
+                }
             }
             $data = [
                 'tours' => $tours,
             ];
-            return $this->SendResponse($data,"Tour data fetched successfully");
-        }
-        catch(\Throwable $th){
-            return $this->SendError($th->getMessage(),"Can't fetch tours data",403);
+            return $this->SendResponse($data, "Tour data fetched successfully");
+        } catch (\Throwable $th) {
+            return $this->SendError($th->getMessage(), "Can't fetch tours data", 403);
         }
     }
 }
