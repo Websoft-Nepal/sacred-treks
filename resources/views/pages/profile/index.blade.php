@@ -25,6 +25,7 @@
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.update-profile', auth()->user()->id) }}">
+                    @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" value="{{auth()->user()->name}}" class="form-control" id="name"
