@@ -21,7 +21,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">About Us</h6>
             </div>
             <div class="card-body">
-                <form action="{{route('admin.about.update',$about->id)}}" method="POST">
+                <form action="{{route('admin.about.update',$about->id)}}" method="POST" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <div class="mb-3">
