@@ -47,7 +47,7 @@ class HomePageController extends BaseController
                         $n = count($tem);
                         $filePath = storage_path('app/public/uploads/home/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/home/' . $home->headimg1);
-                        unlink($filePath);
+                        // unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
                         // dd($e->getMessage());
@@ -69,7 +69,7 @@ class HomePageController extends BaseController
                         $n = count($tem);
                         $filePath = storage_path('app/public/uploads/home/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/home/' . $home->headimg1);
-                        unlink($filePath);
+                        // unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
                         // dd($e->getMessage());
@@ -91,7 +91,7 @@ class HomePageController extends BaseController
                         $n = count($tem);
                         $filePath = storage_path('app/public/uploads/home/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/home/' . $home->bookimg);
-                        unlink($filePath);
+                        // unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
                         // dd($e->getMessage());
