@@ -16,7 +16,7 @@ class AboutUsController extends BaseController
             $teams = Team::all();
             foreach($teams as $team){
                 if ($team['image'] != null) {
-                    $team['image'] = config('app.url') . "/" . $about['image'];
+                    $team['image'] = config('app.url') . "/" . $team['image'];
                 }
             }
             $data = [
