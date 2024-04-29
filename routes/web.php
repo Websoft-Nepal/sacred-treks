@@ -25,7 +25,7 @@ Route::put('/admin/password-update/{id}',[HomeController::class,'updatePassword'
 
 Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 include __DIR__ . '/admin.php';
 

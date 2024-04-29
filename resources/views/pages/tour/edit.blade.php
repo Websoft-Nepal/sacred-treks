@@ -123,9 +123,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Map image</label>
                             <div>
-                                <a href="{{ asset($tour->image) }}" target="_blank" rel="noopener noreferrer">
-                                    <img src="{{ asset($tour->image) }}" class="img-fluid" width="400px"
-                                        alt="tour image" srcset="">
+                                <a href="{{ asset($tour->map) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($tour->map) }}" class="img-fluid" width="400px"
+                                        alt="tour map" srcset="">
                                 </a>
                             </div>
                         </div>

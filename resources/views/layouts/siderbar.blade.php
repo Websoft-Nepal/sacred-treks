@@ -108,6 +108,29 @@
         </div>
     </li>
 
+    {{-- Teams  --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTeams"
+            aria-expanded="true" aria-controls="collapseTeams">
+            <i class="fas fa-users"></i>
+            <span>Teams</span>
+        </a>
+        <div id="collapseTeams" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Teams:</h6>
+                <a class="collapse-item" href="{{ route('admin.teams.create') }}">create</a>
+                <a class="collapse-item" href="{{ route('admin.teams.index') }}">index</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.owner.index') }}">
+            <i class="fas fa-user fa-sm fa-fw"></i>
+            <span>Owner</span></a>
+    </li>
+
     {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.social.index') }}">
             <i class="fas fa-globe"></i>

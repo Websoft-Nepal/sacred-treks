@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\Admin\TourCostIncludeController;
@@ -230,5 +232,23 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
     Route::prefix('subscriber')->name('subscriber.')->group(function () {
         Route::get('/', [SubscriberController::class, 'index'])->name('index');
         Route::delete('delete/{id}', [SubscriberController::class, 'destroy'])->name('destroy');
+    });
+
+    // Teams
+    Route::prefix('teams')->name('teams.')->group(function (){
+        Route::get('/',[TeamController::class,'index'])->name('index');
+        Route::get('/create',[TeamController::class,'create'])->name('create');
+        Route::get('/edit/{id}',[TeamController::class,'edit'])->name('edit');
+        Route::post('store',[TeamController::class,'store'])->name('store');
+        Route::put('update/{id}',[TeamController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[TeamController::class,'destroy'])->name('delete');
+        Route::delete('/force-delete/{id}',[TeamController::class,'forceDelete'])->name('forcedelete');
+    });
+
+    // Owner
+    Route::prefix('owner')->name('owner.')->group(function (){
+        Route::get('/',[OwnerController::class,'index'])->name('index');
+        Route::put('update/{id}',[OwnerController::class,'update'])->name('update');
+        Route::delete('destroy/{id}',[OwnerController::class,'destroy'])->name('delete');
     });
 });
