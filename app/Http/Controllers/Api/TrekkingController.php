@@ -104,7 +104,7 @@ class TrekkingController extends BaseController
             return redirect()->route('api.tour');
         }
         try {
-            $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude')->paginate(10);
+            $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude','location')->paginate(10);
             if ($trekkings != null) {
                 foreach ($trekkings as $trekking) {
                     if ($trekking['image'] != null) {

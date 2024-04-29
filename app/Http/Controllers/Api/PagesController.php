@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\BlogPage;
 use App\Models\Gallery;
 use App\Models\HomePage;
+use App\Models\Owner;
 use App\Models\Tour;
 use App\Models\Trekking;
 use App\Models\TourPage;
@@ -18,6 +19,7 @@ class PagesController extends BaseController
     public function home(){
         try {
             $home = HomePage::first();
+            $owner = Owner::first();
             $tourPopular = Tour::orderByDesc('count')->limit(6)->get();
             foreach ($tourPopular as $tour) {
                 if ($tour['image'] != null) {
@@ -68,6 +70,7 @@ class PagesController extends BaseController
                 'home' => $home,
                 'tourPopular' => $tourPopular,
                 'trekkingPopular' => $trekkingPopular,
+                'owner' => $owner,
             ];
             return $this->SendResponse($data,"home fetched successfully.");
         } catch (\Throwable $th) {
