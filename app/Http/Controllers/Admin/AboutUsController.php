@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseController;
 use App\Models\aboutus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class AboutUsController extends Controller
+class AboutUsController extends BaseController
 {
     public function index(){
         $about = aboutus::first();
