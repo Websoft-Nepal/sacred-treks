@@ -238,10 +238,12 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
     Route::prefix('teams')->name('teams.')->group(function (){
         Route::get('/',[TeamController::class,'index'])->name('index');
         Route::get('/create',[TeamController::class,'create'])->name('create');
+        Route::get('/trash',[TeamController::class,'trash'])->name('trash');
+        Route::get('/restore/{id}',[TeamController::class,'restore'])->name('restore');
         Route::get('/edit/{id}',[TeamController::class,'edit'])->name('edit');
         Route::post('store',[TeamController::class,'store'])->name('store');
         Route::put('update/{id}',[TeamController::class,'update'])->name('update');
-        Route::delete('destroy/{id}',[TeamController::class,'destroy'])->name('delete');
+        Route::delete('destroy/{id}',[TeamController::class,'destroy'])->name('destroy');
         Route::delete('/force-delete/{id}',[TeamController::class,'forceDelete'])->name('forcedelete');
     });
 

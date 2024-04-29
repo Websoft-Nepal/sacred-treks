@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             TrekkingPageSeeder::class,
             HomePageSeeder::class,
             GallerySeeder::class,
+            OwnerSeeder::class,
         ]);
     }
 }

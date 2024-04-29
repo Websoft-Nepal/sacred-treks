@@ -11,7 +11,7 @@ class TeamController extends BaseController
 {
     public function index(){
         $teams = Team::paginate(10);
-        return view('pages.teams.index');
+        return view('pages.teams.index',compact('teams'));
     }
     public function create(){
         return view('pages.teams.create');
@@ -27,7 +27,7 @@ class TeamController extends BaseController
         $team->name = $request->name;
         $team->position = $request->position;
         $team->image = $this->uploadImage($request->image, "uploads/teams");
-        $team->status = $request->has('status') ? $request->status : $team->status;
+        $team->status = $request->has('status') ? 1 : 0;
         $team->save();
         drakify("success");
         return redirect()->route('admin.teams.index');
@@ -76,18 +76,6 @@ class TeamController extends BaseController
     public function destroy($id)
     {
         $team = Team::findorFail($id);
-        if ($team->image) {
-            try {
-
-                $tem = explode('/', $team->image);
-                $n = count($tem);
-                $filePath = "uploads/teams/" . $tem[$n - 1];
-                // $filePath = storage_path('app/public/uploads/teamss/' . $team->image);
-                unlink($filePath);
-            } catch (\Exception $e) {
-                Log::error("Cannot delete image.\n Error => ".$e->getMessage());
-            }
-        }
         $team->delete();
         drakify('success');
         return redirect()->route('admin.teams.index');

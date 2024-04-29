@@ -1,17 +1,17 @@
 @extends('layouts.app')
-@section('page-title', 'Teams')
+@section('page-title', 'Team / Trash')
 @section('main-section')
     <!-- Begin Page Content -->
     <div class="container-fluid">
         {{-- <div class="row"> --}}
         <div>
-            <h4 class="page-title text-left">Teams Management</h4>
+            <h4 class="page-title text-left">Team Management</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Teams</a>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Team</a>
                 </li>
-                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Teams list</a></li>
+                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Trash list</a></li>
 
             </ol>
         </div>
@@ -19,12 +19,11 @@
         {{-- </div> --}}
         <div class="p-1">
 
-            <a href="{{ route('admin.teams.create') }}" class="btn btn-primary btn-sm">Create</a>
-            <a href="{{ route('admin.teams.trash') }}" class="btn btn-danger btn-sm mx-3">View Trash</a>
+            <a href="{{ route('admin.teams.index') }}" class="btn btn-primary btn-sm">View</a>
         </div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Teams</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Team</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -55,21 +54,19 @@
                                     <a href="{{ asset( $team->image) }}"
                                         target="_blank" rel="noopener noreferrer">
                                         <img src="{{ asset( $team->image) }}"
-                                            width="60px" alt="team image" srcset="">
+                                            width="60px" alt="tour image" srcset="">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.teams.edit', $team->id) }}"
-                                        class="btn btn-primary btn-sm">Edit</a>
-                                    {{-- <a href="{{ route('admin.tour.show', $team->id) }}"
-                                        class="btn btn-success btn-sm">View</a> --}}
+                                    <a href="{{ route('admin.teams.restore', $team->id) }}"
+                                        class="btn btn-primary btn-sm">Restore</a>
 
                                     {{-- delete button------- --}}
-                                    <form action="{{route('admin.teams.destroy',$team->id)}}" method="post" class="d-inline">
+                                    <form action="{{route('admin.teams.forcedelete',$team->id)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('are you want to delete')">Trash</button>
+                                            onclick="return confirm('are you want to delete')">Delete</button>
                                     </form>
                                 </td>
                             </tr>
