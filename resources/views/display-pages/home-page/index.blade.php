@@ -60,10 +60,10 @@
                     <div class="mb-3">
                         <label for="image" class="form-label">
                             <span class="text-danger h3"><sup>*</sup></span>Image</label>
-                        <input type="file" class="form-control" name="image" id="image">
+                        <input type="file" class="form-control" name="headimg1" id="image">
                     </div>
 
-                    @error('image')
+                    @error('headimg1')
                         <div class="text-danger">
                             {{ $message }}
                         </div>

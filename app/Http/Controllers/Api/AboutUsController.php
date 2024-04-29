@@ -12,7 +12,13 @@ class AboutUsController extends BaseController
     public function index(){
         try{
             $about = aboutus::first();
+            $about['image'] = config('app.url') . "/" . $about['image'];
             $teams = Team::all();
+            foreach($teams as $team){
+                if ($team['image'] != null) {
+                    $team['image'] = config('app.url') . "/" . $about['image'];
+                }
+            }
             $data = [
                 'about' => $about,
                 'teams' => $teams,

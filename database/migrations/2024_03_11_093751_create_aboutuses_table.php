@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('aboutuses', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string("image")->nullable();
+            $table->string("caption")->nullable();
             $table->longText('description');
             $table->timestamps();
         });

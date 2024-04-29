@@ -32,6 +32,38 @@
                             {{$message}}
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="caption" class="form-label">caption</label>
+                        <input type="text" name="caption" value="{{ $about->caption }}" class="form-control"
+                            id="facebook" aria-describedby="textHelp">
+                    </div>
+                    @error('caption')
+                        {{ $message }}
+                    @enderror
+
+                    @if ($about->image != null)
+                        <div class="my-3">
+                            <label for="image" class="form-label">Current Image</label>
+                            <div>
+                                <a href="{{ asset($about->image) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($about->image) }}" class="img-fluid" width="400px"
+                                        alt="owner image" srcset="">
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                    </div>
+                    @error('image')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <textarea class="form-control"  name="description" id="description" rows="3">{{$about->description}}</textarea>
