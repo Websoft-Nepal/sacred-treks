@@ -19,6 +19,21 @@ class PagesController extends BaseController
     public function home(){
         try {
             $home = HomePage::first();
+            if ($home['headimg1'] != null) {
+                if (substr_count($home['headimg1'], 'http') < 1) {
+                    $home['headimg1'] = config('app.url') . "/" . $home['headimg1'];
+                }
+            }
+            if ($home['headimg2'] != null) {
+                if (substr_count($home['headimg2'], 'http') < 1) {
+                    $home['headimg2'] = config('app.url') . "/" . $home['headimg2'];
+                }
+            }
+            if ($home['bookimg'] != null) {
+                if (substr_count($home['bookimg'], 'http') < 1) {
+                    $home['bookimg'] = config('app.url') . "/" . $home['bookimg'];
+                }
+            }
             $owner = Owner::first();
             $tourPopular = Tour::orderByDesc('count')->limit(6)->get();
             foreach ($tourPopular as $tour) {
