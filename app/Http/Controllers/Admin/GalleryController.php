@@ -54,6 +54,7 @@ class GalleryController extends BaseController
             // Upload the new image
             // $gallery->image = $request->file('image')->store('uploads/tour');
             $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
+            $gallery->category = $request->category;
         }
         $gallery->save();
         drakify('success');
@@ -79,5 +80,7 @@ class GalleryController extends BaseController
             }
         }
         $gallery->delete();
+        drakify("success");
+        return redirect()->route("admin.gallery.index");
     }
 }

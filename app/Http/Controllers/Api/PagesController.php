@@ -19,7 +19,6 @@ class PagesController extends BaseController
     public function home(){
         try {
             $home = HomePage::first();
-            $galleries = Gallery::paginate(8);
             if ($home['headimg1'] != null) {
                 if (substr_count($home['headimg1'], 'http') < 1) {
                     $home['headimg1'] = config('app.url') . "/" . $home['headimg1'];
@@ -83,17 +82,11 @@ class PagesController extends BaseController
                     }
                 }
             }
-            foreach($galleries as $gallery){
-                if (substr_count($trek['image'], 'http') < 1) {
-                    $gallery['image'] = config('app.url') . "/" . $gallery['image'];
-                }
-            }
 
             $data = [
                 'home' => $home,
                 'tourPopular' => $tourPopular,
                 'trekkingPopular' => $trekkingPopular,
-                'gallery' => $galleries,
                 'owner' => $owner,
             ];
             return $this->SendResponse($data,"home fetched successfully.");

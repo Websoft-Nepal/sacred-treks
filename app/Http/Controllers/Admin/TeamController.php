@@ -47,7 +47,7 @@ class TeamController extends BaseController
 
         $team = Team::findorFail($id);
         $team->name = $request->name;
-        $team->review = $request->review;
+        $team->position = $request->position;
         $team->description = $request->description;
         $team->status = $request->has('status') ? $request->status : $team->status;
         if ($request->hasFile('image')) {
