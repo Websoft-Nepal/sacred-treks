@@ -10,7 +10,8 @@ class GalleryController extends BaseController
 {
     public function index()
     {
-        $gallery = Gallery::paginate(10);
+        $galleries = Gallery::paginate(10);
+        return view('pages.gallery.index',compact('galleries'));
     }
     public function store(Request $request)
     {
@@ -41,19 +42,22 @@ class GalleryController extends BaseController
                     try {
                         $tem = explode('/', $gallery->image);
                         $n = count($tem);
-                        $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                        $filePath = storage_path('app/public/uploads/gallery/' . $tem[$n - 1]);
                         // $filePath = storage_path('app/public/uploads/tour/' . $gallery->image);
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        // dd($e->getMessage());
                     }
                 }
             }
             // Upload the new image
             // $gallery->image = $request->file('image')->store('uploads/tour');
-            $gallery->image = $this->uploadImage($request->image, "uploads/tour");
+            $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
         }
+        $gallery->save();
+        drakify('success');
+        return redirect()->route('admin.gallery.index');
     }
     public function destroy($id)
     {
@@ -65,12 +69,12 @@ class GalleryController extends BaseController
                 try {
                     $tem = explode('/', $gallery->image);
                     $n = count($tem);
-                    $filePath = storage_path('app/public/uploads/tour/' . $tem[$n - 1]);
+                    $filePath = storage_path('app/public/uploads/gallery/' . $tem[$n - 1]);
                     // $filePath = storage_path('app/public/uploads/tour/' . $gallery->image);
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    // dd($e->getMessage());
                 }
             }
         }

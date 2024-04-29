@@ -79,9 +79,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/uploads/gallery/' . $gallery->image) }}"
+                                        <a href="{{ asset( $gallery->image) }}"
                                             target="_blank" rel="noopener noreferrer">
-                                            <img src="{{ asset('storage/uploads/gallery/' . $gallery->image) }}"
+                                            <img src="{{ asset( $gallery->image) }}"
                                                 width="60px" alt="Trekking image" srcset="">
                                         </a>
                                     </td>
@@ -103,7 +103,9 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="{{ route('admin.gallery.update',$gallery->id) }}">
+                                                    <form method="POST" action="{{ route('admin.gallery.update',$gallery->id) }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('put')
                                                         <div class="modal-body">
                                                             <div class="modal-body">
                                                                 <div class="form-group">

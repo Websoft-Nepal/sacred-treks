@@ -168,6 +168,9 @@
                 <a class="collapse-item" href="{{ route('admin.contact.index') }}">
                     <i class="fas fa-envelope"></i>
                     <span>Contact</span></a>
+                <a class="collapse-item" href="{{ route('admin.gallery.index') }}">
+                    <i class="fas fa-envelope"></i>
+                    <span>Gallery</span></a>
                 <a class="collapse-item" href="{{ route('admin.social.index') }}">
                     <i class="fas fa-globe"></i>
                     <span>Social Media</span></a>
