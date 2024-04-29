@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->boolean('status')->default(true);
             $table->string('position');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

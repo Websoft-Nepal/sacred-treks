@@ -42,8 +42,12 @@ class OwnerController extends BaseController
                 }
             }
             // Upload the new image
-            $owner->image = $request->file('image')->store('uploads/owner');
+            $owner->image = $this->uploadImage($request->image, "uploads/owner");
+            $owner->update();
+
         }
+        drakify('success');
+        return redirect()->route('admin.owner.index');
     }
 
     public function destroy($id)
