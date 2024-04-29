@@ -14,7 +14,7 @@ class TrekkingController extends BaseController
 {
     public function index()
     {
-        $trekkings = Trekking::latest()->paginate(10);
+        $trekkings = Trekking::latest()->get();
         return view('pages.trekking.index', compact('trekkings'));
     }
 
