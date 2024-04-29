@@ -20,7 +20,7 @@ class TeamController extends BaseController
         $request->validate([
             'name' => 'required|string',
             'position' => 'required|string',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:5120',
         ]);
 
         $team = new Team();

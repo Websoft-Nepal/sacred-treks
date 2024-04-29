@@ -29,9 +29,9 @@ class TrekkingController extends BaseController
         // dd($request);
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|image|max:2048',
-            'featureimg1' => 'image|max:2048',
-            'featureimg2' => 'image|max:2048',
+            'image' => 'required|image|max:5120',
+            'featureimg1' => 'image|max:5120',
+            'featureimg2' => 'image|max:5120',
             'status' => 'in:on',
             'duration' => 'required|string',
             'cost' => 'required|numeric',
@@ -93,9 +93,9 @@ class TrekkingController extends BaseController
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => $this->slugValidate('trekkings', $id),
-            'image' => 'image|max:2048',
-            'featureimg1' => 'image|max:2048',
-            'featureimg2' => 'image|max:2048',
+            'image' => 'image|max:5120',
+            'featureimg1' => 'image|max:5120',
+            'featureimg2' => 'image|max:5120',
             'status' => 'in:on',
             'duration' => 'required|string',
             'cost' => 'required|numeric',

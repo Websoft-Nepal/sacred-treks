@@ -31,7 +31,7 @@ class BlogController extends BaseController
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:5120',
             'conclusion' => 'required|string',
             'description' => 'nullable|string',
         ]);

@@ -21,7 +21,7 @@ class OwnerController extends BaseController
         $request->validate([
             'name' => 'required|string',
             'position' => 'required|string',
-            'image' => 'image|max:2048',
+            'image' => 'image|max:5120',
         ]);
 
         $owner = Owner::findOrFail($id);

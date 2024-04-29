@@ -18,9 +18,9 @@ class HomePageController extends BaseController
         $request->validate([
             'heading' => 'required|string|max:255',
             'subheading' => 'required|string',
-            'headimg1' => 'image|max:2048',
-            'headimg2' => 'image|max:2048',
-            'bookimg' => 'image|max:2048',
+            'headimg1' => 'image|max:5120',
+            'headimg2' => 'image|max:5120',
+            'bookimg' => 'image|max:5120',
             'gallery_title' => 'required|string|max:255',
             'trekking_title' => 'required|string|max:255',
             'trekking_slogan' => 'required|string',

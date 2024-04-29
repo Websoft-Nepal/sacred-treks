@@ -15,7 +15,7 @@ class GalleryController extends BaseController
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:5120',
             'category' => 'required|string|max:200',
         ]);
         $gallery = new Gallery();
@@ -28,7 +28,7 @@ class GalleryController extends BaseController
     public function update(Request $request, $id)
     {
         $request->validate([
-            'image' => 'image|max:2048',
+            'image' => 'image|max:5120',
             'category' => 'required|string|max:200',
         ]);
         $gallery = Gallery::findOrFail($id);

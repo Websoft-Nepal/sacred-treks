@@ -24,7 +24,7 @@ class TestimonialController extends BaseController
             'name' => 'required|string',
             'review' => 'required|numeric|max:5|min:0',
             'description' => 'required|string',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:5120',
         ]);
 
         $testimonial = new testimonial();
