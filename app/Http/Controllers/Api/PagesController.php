@@ -19,7 +19,7 @@ class PagesController extends BaseController
     public function home(){
         try {
             $home = HomePage::first();
-            $galleries = Gallery::paginate(4);
+            $galleries = Gallery::paginate(8);
             if ($home['headimg1'] != null) {
                 if (substr_count($home['headimg1'], 'http') < 1) {
                     $home['headimg1'] = config('app.url') . "/" . $home['headimg1'];
