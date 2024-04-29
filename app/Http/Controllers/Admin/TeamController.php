@@ -65,7 +65,8 @@ class TeamController extends BaseController
                 }
             }
             // Upload the new image
-            $team->image = $request->file('image')->store('uploads/teams');
+            // $team->image = $request->file('image')->store('uploads/teams');
+            $team->image = $this->uploadImage($request->image, "uploads/teams");
         }
 
         $team->update();

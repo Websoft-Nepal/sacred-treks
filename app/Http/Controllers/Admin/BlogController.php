@@ -82,7 +82,8 @@ class BlogController extends BaseController
                 }
             }
             // Upload the new image
-            $blog->image = $request->file('image')->store('uploads/blog');
+            // $blog->image = $request->file('image')->store('uploads/blog');
+            $blog->image = $this->uploadImage($request->image, "uploads/blog");
         }
 
         $blog->save();

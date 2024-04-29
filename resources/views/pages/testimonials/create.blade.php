@@ -58,8 +58,8 @@
                         <label class="form-label" for="inputGroupSelect01">Status</label>
                         <select class="form-select form-control" name="status" id="inputGroupSelect01">
                             <option selected>Choose...</option>
-                            <option value="active" @selected($testimonial->status == "active")>Active</option>
-                            <option value="inactive" @selected($testimonial->status == "inactive") >Inactive</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select>
                     </div>
                     @error('status')

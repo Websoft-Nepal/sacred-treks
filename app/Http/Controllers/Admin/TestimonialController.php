@@ -96,7 +96,7 @@ class TestimonialController extends BaseController
                 // $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
                 unlink($filePath);
             } catch (\Exception $e) {
-                dd($e->getMessage());
+                // dd($e->getMessage());
             }
         }
         $testimonial->delete();
