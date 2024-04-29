@@ -50,7 +50,7 @@ class HomePageController extends BaseController
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        // dd($e->getMessage());
                     }
                 }
             }
@@ -72,7 +72,7 @@ class HomePageController extends BaseController
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        // dd($e->getMessage());
                     }
                 }
             }
@@ -94,7 +94,7 @@ class HomePageController extends BaseController
                         unlink($filePath);
                     } catch (\Exception $e) {
                         // Handle deletion error
-                        dd($e->getMessage());
+                        // dd($e->getMessage());
                     }
                 }
             }
@@ -121,7 +121,7 @@ class HomePageController extends BaseController
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    // dd($e->getMessage());
                 }
             }
         }
@@ -137,7 +137,7 @@ class HomePageController extends BaseController
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    // dd($e->getMessage());
                 }
             }
         }
@@ -153,7 +153,7 @@ class HomePageController extends BaseController
                     unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
-                    dd($e->getMessage());
+                    // dd($e->getMessage());
                 }
             }
         }
