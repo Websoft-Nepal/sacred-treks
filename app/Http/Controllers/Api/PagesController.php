@@ -19,11 +19,50 @@ class PagesController extends BaseController
         try {
             $home = HomePage::first();
             $tourPopular = Tour::orderByDesc('count')->limit(6)->get();
+            foreach ($tourPopular as $tour) {
+                if ($tour['image'] != null) {
+                    if (substr_count($tour['image'], 'http') < 1) {
+                        $tour['image'] = config('app.url') . "/" . $tour['image'];
+                    }
+                }
+                if ($tour['featureimg1'] != null) {
+                    if (substr_count($tour['featureimg1'], 'http') < 1) {
+                        $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
+                    }
+                }
+                if ($tour['featureimg2'] != null) {
+                    if (substr_count($tour['featureimg2'], 'http') < 1) {
+                        $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
+                    }
+                }
+                if ($tour['map'] != null) {
+                    if (substr_count($tour['map'], 'http') < 1) {
+                        $tour['map'] = config('app.url') . "/" . $tour['map'];
+                    }
+                }
+            }
             $trekkingPopular = Trekking::orderByDesc('count')->limit(6)->get();
+
             foreach($trekkingPopular as $trek){
                 // $trek['boundary'] = $trek->location_id->location;
                 $location = TrekkingLocation::findOrFail($trek->location_id);
                 $trek['boundary'] = $location->location;
+
+                if ($trek['image'] != null) {
+                    if (substr_count($trek['image'], 'http') < 1) {
+                        $trek['image'] = config('app.url') . "/" . $trek['image'];
+                    }
+                }
+                if ($trek['featureimg1'] != null) {
+                    if (substr_count($trek['featureimg1'], 'http') < 1) {
+                        $trek['featureimg1'] = config('app.url') . "/" . $trek['featureimg1'];
+                    }
+                }
+                if ($trek['featureimg2'] != null) {
+                    if (substr_count($trek['featureimg2'], 'http') < 1) {
+                        $trek['featureimg2'] = config('app.url') . "/" . $trek['featureimg2'];
+                    }
+                }
             }
             $data = [
                 'home' => $home,
