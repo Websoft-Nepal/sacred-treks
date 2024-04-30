@@ -16,8 +16,10 @@ use Illuminate\Http\Request;
 
 class PagesController extends BaseController
 {
-    public function home(){
+    public function home()
+    {
         try {
+            // For home page
             $home = HomePage::first();
             if ($home['headimg1'] != null) {
                 if (substr_count($home['headimg1'], 'http') < 1) {
@@ -34,10 +36,16 @@ class PagesController extends BaseController
                     $home['bookimg'] = config('app.url') . "/" . $home['bookimg'];
                 }
             }
+
+            // For owner or CEO
             $owner = Owner::first();
             $owner['image'] = config('app.url') . "/" . $owner['image'];
-            $tourPopular = Tour::orderByDesc('count')->limit(6)->get();
-            foreach ($tourPopular as $tour) {
+
+            //For Tour Popular
+            $tourPopular = collect();
+            $places = Tour::select('place')->orderByDesc('count')->distinct()->limit(6)->get();
+            foreach ($places as $place) {
+                $tour = Tour::where('place', $place->place)->with('transportation')->orderByDesc('count')->first();
                 if ($tour['image'] != null) {
                     if (substr_count($tour['image'], 'http') < 1) {
                         $tour['image'] = config('app.url') . "/" . $tour['image'];
@@ -58,10 +66,19 @@ class PagesController extends BaseController
                         $tour['map'] = config('app.url') . "/" . $tour['map'];
                     }
                 }
+                if ($tour) {
+                    $tourPopular->push($tour); // Push each tour object onto the collection
+                }
             }
-            $trekkingPopular = Trekking::orderByDesc('count')->limit(6)->get();
 
-            foreach($trekkingPopular as $trek){
+            // For popular trekking
+            $trekkingPopular = collect();
+            $locations = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(6)->get();
+            // $trekkingPopular = Trekking::orderByDesc('count')->limit(6)->get();
+
+            foreach ($locations as $trek) {
+                $trek = Trekking::where('location_id',$trek->location_id)->orderByDesc('count')->first();
+
                 // $trek['boundary'] = $trek->location_id->location;
                 $location = TrekkingLocation::findOrFail($trek->location_id);
                 $trek['boundary'] = $location->location;
@@ -81,41 +98,48 @@ class PagesController extends BaseController
                         $trek['featureimg2'] = config('app.url') . "/" . $trek['featureimg2'];
                     }
                 }
+                if ($trek) {
+                    $trekkingPopular->push($trek); // Push each tour object onto the collection
+                }
             }
 
+            // data to send
             $data = [
                 'home' => $home,
                 'tourPopular' => $tourPopular,
                 'trekkingPopular' => $trekkingPopular,
                 'owner' => $owner,
             ];
-            return $this->SendResponse($data,"home fetched successfully.");
+            return $this->SendResponse($data, "home fetched successfully.");
         } catch (\Throwable $th) {
-            return $this->SendError(throw $th,"Cannot fetch home data.",500);
+            return $this->SendError(throw $th, "Cannot fetch home data.", 500);
         }
     }
-    public function tour(){
+    public function tour()
+    {
         try {
             $tour = TourPage::first();
-            return $this->SendResponse($tour,"tour fetched successfully.");
+            return $this->SendResponse($tour, "tour fetched successfully.");
         } catch (\Throwable $th) {
-            return $this->SendError(throw $th,"Cannot fetch tour data.",500);
+            return $this->SendError(throw $th, "Cannot fetch tour data.", 500);
         }
     }
-    public function trekking(){
+    public function trekking()
+    {
         try {
             $trekking = TrekkingPage::first();
-            return $this->SendResponse($trekking,"Blogs fetched successfully.");
+            return $this->SendResponse($trekking, "Blogs fetched successfully.");
         } catch (\Throwable $th) {
-            return $this->SendError(throw $th,"Cannot fetch trekking data.",500);
+            return $this->SendError(throw $th, "Cannot fetch trekking data.", 500);
         }
     }
-    public function gallery(){
+    public function gallery()
+    {
         try {
             $galleryfirst = Gallery::take(4)->get();
             $excludeIds = array();
             $i = 0;
-            foreach($galleryfirst as $g){
+            foreach ($galleryfirst as $g) {
                 if ($g['image'] != null) {
                     if (substr_count($g['image'], 'http') < 1) {
                         $g['image'] = config('app.url') . "/" . $g['image'];
@@ -123,10 +147,10 @@ class PagesController extends BaseController
                 }
                 $excludeIds[$i++] = $g->id;
             }
-            $gallerysecond = Gallery::whereNotIn('id',$excludeIds)->take(4)->get();
-            if(count($gallerysecond)<1){
+            $gallerysecond = Gallery::whereNotIn('id', $excludeIds)->take(4)->get();
+            if (count($gallerysecond) < 1) {
                 $gallerysecond = Gallery::take(4)->get();
-                foreach($gallerysecond as $sec){
+                foreach ($gallerysecond as $sec) {
                     if ($sec['image'] != null) {
                         if (substr_count($sec['image'], 'http') < 1) {
                             $sec['image'] = config('app.url') . "/" . $sec['image'];
@@ -138,17 +162,18 @@ class PagesController extends BaseController
                 'galleryfirst' => $galleryfirst,
                 'gallerysecond' => $gallerysecond,
             ];
-            return $this->SendResponse($data,"gallery fetched successfully.");
+            return $this->SendResponse($data, "gallery fetched successfully.");
         } catch (\Throwable $th) {
-            return $this->SendError(throw $th,"Cannot fetch gallery data.",500);
+            return $this->SendError(throw $th, "Cannot fetch gallery data.", 500);
         }
     }
-    public function blog(){
+    public function blog()
+    {
         try {
             $blog = BlogPage::first();
-            return $this->SendResponse($blog,"blog fetched successfully.");
+            return $this->SendResponse($blog, "blog fetched successfully.");
         } catch (\Throwable $th) {
-            return $this->SendError(throw $th,"Cannot fetch blog data.",500);
+            return $this->SendError(throw $th, "Cannot fetch blog data.", 500);
         }
     }
 }
