@@ -70,14 +70,14 @@ class TestimonialController extends BaseController
                     $n = count($tem);
                     $filePath = "uploads/testimonial/" . $tem[$n - 1];
                     // $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
-                    unlink($filePath);
+                    // unlink($filePath);
                 } catch (\Exception $e) {
                     // Handle deletion error
                     dd($e->getMessage());
                 }
             }
             // Upload the new image
-            $testimonial->image = $request->file('image')->store('uploads/testimonials');
+            $testimonial->image = $this->uploadImage($request->image, "uploads/testimonials");
         }
 
         $testimonial->update();
@@ -94,7 +94,7 @@ class TestimonialController extends BaseController
                 $n = count($tem);
                 $filePath = "uploads/testimonial/" . $tem[$n - 1];
                 // $filePath = storage_path('app/public/uploads/testimonials/' . $testimonial->image);
-                unlink($filePath);
+                // unlink($filePath);
             } catch (\Exception $e) {
                 // dd($e->getMessage());
             }

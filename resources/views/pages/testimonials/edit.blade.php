@@ -49,9 +49,9 @@
                     <div class="my-3">
                         <label for="image" class="form-label">Current Image</label>
                         <div>
-                            <a href="{{ asset('storage/uploads/testimonials/' . $testimonial->image) }}" target="_blank"
+                            <a href="{{ asset( $testimonial->image) }}" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="{{ asset('storage/uploads/testimonials/' . $testimonial->image) }}"
+                                <img src="{{ asset( $testimonial->image) }}"
                                     class="img-fluid" width="200px" alt="Trekking image" srcset="">
                             </a>
                         </div>
