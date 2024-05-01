@@ -18,6 +18,7 @@ class OwnerController extends BaseController
 
     }
     public function update(Request $request,$id){
+        // return $id;
         $request->validate([
             'name' => 'required|string',
             'position' => 'required|string',
@@ -44,9 +45,9 @@ class OwnerController extends BaseController
             }
             // Upload the new image
             $owner->image = $this->uploadImage($request->image, "uploads/owner");
-            $owner->update();
-
+            
         }
+        $owner->update();
         drakify('success');
         return redirect()->route('admin.owner.index');
     }
