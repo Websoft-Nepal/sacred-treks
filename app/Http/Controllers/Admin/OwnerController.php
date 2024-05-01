@@ -27,6 +27,7 @@ class OwnerController extends BaseController
         $owner = Owner::findOrFail($id);
         $owner->name = $request->name;
         $owner->position = $request->position;
+        $owner->description = $request->description;
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
             if ($owner->image) {
