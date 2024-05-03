@@ -32,6 +32,7 @@ class TrekkingController extends BaseController
             'image' => 'required|image|max:5120',
             'featureimg1' => 'image|max:5120',
             'featureimg2' => 'image|max:5120',
+            'map' => 'sometimes|image|max:5120',
             'status' => 'in:on',
             'duration' => 'required|string',
             'cost' => 'required|numeric',
@@ -57,6 +58,10 @@ class TrekkingController extends BaseController
 
         if($request->hasFile("featureimg2")){
             $trekking->featureimg2 = $this->uploadImage($request->featureimg2, "uploads/trekking");
+        }
+
+        if($request->hasFile("map")){
+            $trekking->map = $this->uploadImage($request->map, "uploads/trekking");
         }
 
         $trekking->save();
@@ -96,6 +101,7 @@ class TrekkingController extends BaseController
             'image' => 'image|max:5120',
             'featureimg1' => 'image|max:5120',
             'featureimg2' => 'image|max:5120',
+            'map' => 'sometimes|image|max:5120',
             'status' => 'in:on',
             'duration' => 'required|string',
             'cost' => 'required|numeric',
@@ -181,6 +187,23 @@ class TrekkingController extends BaseController
                 }
             }
             $trekking->featureimg2 = $this->uploadImage($request->featureimg2, "uploads/trekking");
+        }
+
+        if ($request->hasFile("map")) {
+            if ($trekking->map) {
+                $tem = strtolower($trekking->map);
+
+                    try {
+                        $tem = explode('/', $trekking->map);
+                        $n = count($tem);
+                        $filePath = "uploads/trekking/".$tem[$n-1];
+                        unlink($filePath);
+                    } catch (\Exception $e) {
+                        // Handle deletion error
+                        Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
+                    }
+            }
+            $trekking->map = $this->uploadImage($request->map, "uploads/trekking");
         }
 
         $trekking->save();
@@ -277,6 +300,22 @@ class TrekkingController extends BaseController
                     Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
                 }
             }
+        }
+
+        if ($trekking->map) {
+            $tem = strtolower($trekking->map);
+
+                try {
+                    $tem = explode('/', $trekking->map);
+                    $n = count($tem);
+                    $filePath = "uploads/trekking/".$tem[$n-1];
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $tem[$n - 1]);
+                    // $filePath = storage_path('app/public/uploads/trekking/' . $trekking->image);
+                    unlink($filePath);
+                } catch (\Exception $e) {
+                    // Handle deletion error
+                    Log::warning("Trekking Image deletion failed. Error message => ".$e->getMessage());
+                }
         }
         $trekking->forceDelete();
         drakify('success');

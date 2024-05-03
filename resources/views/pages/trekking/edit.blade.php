@@ -41,7 +41,8 @@
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="slug" class="form-label">Slug</label>
-                            <input type="text" name="slug" class="form-control" value="{{$trekking->slug}}" id="slug" aria-describedby="textHelp">
+                            <input type="text" name="slug" class="form-control" value="{{ $trekking->slug }}"
+                                id="slug" aria-describedby="textHelp">
                         </div>
                         @error('slug')
                             <div class="text-danger">
@@ -54,10 +55,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Current Image</label>
                             <div>
-                                <a href="{{ asset( $trekking->image) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $trekking->image) }}" class="img-fluid"
-                                        width="400px" alt="blog image" srcset="">
+                                <a href="{{ asset($trekking->image) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($trekking->image) }}" class="img-fluid" width="400px"
+                                        alt="blog image" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -77,10 +77,9 @@
                         <div class="my-3">
                             <label for="image" class="form-label">Current Feature Image 1</label>
                             <div>
-                                <a href="{{ asset( $trekking->featureimg1) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $trekking->featureimg1) }}" class="img-fluid"
-                                        width="400px" alt="blog image" srcset="">
+                                <a href="{{ asset($trekking->featureimg1) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($trekking->featureimg1) }}" class="img-fluid" width="400px"
+                                        alt="blog image" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -100,10 +99,9 @@
                         <div class="my-3">
                             <label for="featureimg2" class="form-label">Current Feature Image 2</label>
                             <div>
-                                <a href="{{ asset( $trekking->featureimg2) }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <img src="{{ asset( $trekking->featureimg2) }}" class="img-fluid"
-                                        width="400px" alt="blog featureimg2" srcset="">
+                                <a href="{{ asset($trekking->featureimg2) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($trekking->featureimg2) }}" class="img-fluid" width="400px"
+                                        alt="blog featureimg2" srcset="">
                                 </a>
                             </div>
                         </div>
@@ -118,6 +116,28 @@
                             </div>
                         @enderror
                     </div>
+
+                    @if ($trekking->map != null)
+                        <div class="my-3">
+                            <label for="map" class="form-label">Current Map</label>
+                            <div>
+                                <a href="{{ asset($trekking->map) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ asset($trekking->map) }}" class="img-fluid" width="400px"
+                                        alt="map" srcset="">
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="mb-3">
+                        <label for="map" class="form-label">Map</label>
+                        <input type="file" class="form-control" name="map" id="map">
+                    </div>
+                    @error('map')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
                     <div class="mb-3">
                         <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
@@ -135,9 +155,11 @@
                         <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Status</label>
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">
-                            <input type="checkbox" class="custom-control-input" name="status" id="status" @checked($trekking->status)>
+                            <input type="checkbox" class="custom-control-input" name="status" id="status"
+                                @checked($trekking->status)>
                             <label class="custom-control-label" for="status">Status</label>
-                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not.
+                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or
+                                not.
                                 (active or not)</small>
                         </div>
                     </div>
@@ -164,7 +186,8 @@
                             <label for="location"><span class="text-danger h3"><sup>*</sup></span> Location</label>
                             <select class="form-control" name="location_id" id="transportation">
                                 @foreach ($locations as $location)
-                                    <option value="{{$location->id}}" @selected($location->id == $trekking->location_id)>{{$location->location}}</option>
+                                    <option value="{{ $location->id }}" @selected($location->id == $trekking->location_id)>
+                                        {{ $location->location }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -186,13 +209,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="costDescription" class="form-label">Cost Include Description</label>
-                        <textarea class="form-control" name="costDescription" id="costDescription" rows="3">{{$trekkingCost->description }}</textarea>
+                        <textarea class="form-control" name="costDescription" id="costDescription" rows="3">{{ $trekkingCost->description }}</textarea>
                     </div>
                     @error('costDescription')
-                        {{$message}}
+                        {{ $message }}
                     @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{{ route('admin.trekking.itinerary.index',$trekking->id) }}" class="mx-3 btn btn-primary btn-sm">View Itinerary</a>
+                    <a href="{{ route('admin.trekking.itinerary.index', $trekking->id) }}"
+                        class="mx-3 btn btn-primary btn-sm">View Itinerary</a>
 
                 </form>
             </div>
@@ -202,6 +226,6 @@
     <!-- /.container-fluid -->
 @endsection
 @push('scriptaddon')
-CKEDITOR.replace('description');
-CKEDITOR.replace('costDescription');
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('costDescription');
 @endpush

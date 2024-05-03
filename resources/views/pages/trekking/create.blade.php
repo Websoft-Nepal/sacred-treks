@@ -26,8 +26,9 @@
                 <form action="{{ route('admin.trekking.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="title" class="form-label"><span class="text-danger h3"><sup>*</sup></span>Title</label>
-                        <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}"
+                        <label for="title" class="form-label"><span
+                                class="text-danger h3"><sup>*</sup></span>Title</label>
+                        <input type="text" name="title" class="form-control" id="title" value="{{ old('title') }}"
                             aria-describedby="textHelp">
                         @error('title')
                             <div class="text-danger">
@@ -37,7 +38,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="image" class="form-label"><span class="text-danger h3"><sup>*</sup></span>Image</label>
+                        <label for="image" class="form-label"><span
+                                class="text-danger h3"><sup>*</sup></span>Image</label>
                         <input type="file" class="form-control" name="image" id="image">
                         @error('image')
                             <div class="text-danger">
@@ -67,6 +69,16 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="map" class="form-label">Map</label>
+                        <input type="file" class="form-control" name="map" id="map">
+                    </div>
+                    @error('map')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
                         <label for="duration" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Duration</label>
                         <input type="text" name="duration" class="form-control" value="{{ old('duration') }}"
@@ -84,7 +96,8 @@
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">
                             <input type="checkbox" class="custom-control-input" name="status" id="status" checked>
                             <label class="custom-control-label" for="status">Status</label>
-                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not. (active or not)</small>
+                            <small id="statulHelp" class="form-text text-muted">This will decide whether to show it or not.
+                                (active or not)</small>
                         </div>
                     </div>
                     @error('status')
@@ -110,7 +123,7 @@
                             <label for="location"><span class="text-danger h3"><sup>*</sup></span> Location</label>
                             <select class="form-control" name="location_id" id="transportation">
                                 @foreach ($locations as $location)
-                                    <option value="{{$location->id}}">{{$location->location}}</option>
+                                    <option value="{{ $location->id }}">{{ $location->location }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -136,7 +149,7 @@
                         <textarea class="form-control" name="costDescription" id="costDescription" rows="3"></textarea>
                     </div>
                     @error('costDescription')
-                        {{$message}}
+                        {{ $message }}
                     @enderror
                     <button type="submit" class="btn btn-primary">Create</button>
 
@@ -148,7 +161,7 @@
     <!-- /.container-fluid -->
 @endsection
 @push('scriptaddon')
-CKEDITOR.replace('description');
+    CKEDITOR.replace('description');
 
-CKEDITOR.replace('costDescription');
+    CKEDITOR.replace('costDescription');
 @endpush

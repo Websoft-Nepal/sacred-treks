@@ -17,8 +17,10 @@
         {{-- </div> --}}
         <div class="p-1">
             <a href="{{ route('admin.trekking.index') }}" class="btn btn-primary btn-sm">View index</a>
-            <a name="" id="" class="btn btn-sm btn-primary" href="{{route("admin.trekking.itinerary.index",$trekking->id)}}" role="button">Itinerary</a>
-            <a name="" id="" class="btn btn-sm btn-primary" href="{{route("admin.trekking.cost.index",$trekking->id)}}" role="button">Cost details</a>
+            <a name="" id="" class="btn btn-sm btn-primary"
+                href="{{ route('admin.trekking.itinerary.index', $trekking->id) }}" role="button">Itinerary</a>
+            <a name="" id="" class="btn btn-sm btn-primary"
+                href="{{ route('admin.trekking.cost.index', $trekking->id) }}" role="button">Cost details</a>
 
         </div>
         <div class="card shadow mb-4">
@@ -75,6 +77,18 @@
                     </div>
                 @endif
 
+                @if ($trekking->map != null)
+                    <div class="my-3">
+                        <label for="map" class="form-label">Current Map</label>
+                        <div>
+                            <a href="{{ asset($trekking->map) }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset($trekking->map) }}" class="img-fluid" width="400px" alt="map"
+                                    srcset="">
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="mb-3">
                     <label for="duration" class="form-label">
                         Duration</label>
@@ -96,8 +110,8 @@
                 <div class="mb-3">
                     <label for="cost" class="form-label">
                         Cost</label>
-                    <input type="text" name="cost" class="form-control" value="{{ $trekking->cost }}" id="cost"
-                        placeholder="50.00" aria-describedby="textHelp">
+                    <input type="text" name="cost" class="form-control" value="{{ $trekking->cost }}"
+                        id="cost" placeholder="50.00" aria-describedby="textHelp">
                 </div>
 
                 <div class="mb-3">
@@ -116,11 +130,11 @@
                 <div class="mb-3">
                     <label for="costDescription" class="form-label">Cost Include Description</label>
                     <div class="p-3" style="border: 2px solid #d1d3e2; border-radius: 0.35rem">{!! $trekkingCost->description !!}
+                    </div>
+
                 </div>
-
             </div>
-        </div>
 
-    </div>
-    <!-- /.container-fluid -->
-@endsection
+        </div>
+        <!-- /.container-fluid -->
+    @endsection

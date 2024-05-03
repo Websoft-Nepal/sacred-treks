@@ -13,7 +13,7 @@ class Trekking extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title','status','image','slug','description','count','duration','cost','location_id'];
+    protected $fillable = ['title','status','image','slug','description','map','count','duration','cost','location_id'];
     /**
      * Get the location that owns the Trekking
      *
