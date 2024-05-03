@@ -18,6 +18,7 @@ class OwnerController extends BaseController
 
     }
     public function update(Request $request,$id){
+        // return $id;
         $request->validate([
             'name' => 'required|string',
             'position' => 'required|string',
@@ -27,6 +28,7 @@ class OwnerController extends BaseController
         $owner = Owner::findOrFail($id);
         $owner->name = $request->name;
         $owner->position = $request->position;
+        $owner->description = $request->description;
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
             if ($owner->image) {
@@ -43,9 +45,9 @@ class OwnerController extends BaseController
             }
             // Upload the new image
             $owner->image = $this->uploadImage($request->image, "uploads/owner");
-            $owner->update();
-
+            
         }
+        $owner->update();
         drakify('success');
         return redirect()->route('admin.owner.index');
     }
