@@ -133,8 +133,14 @@ class TourController extends BaseController
                     }
                 }
             }
+
+            $category = TourTransportation::all();
+            foreach ($category as $catg) {
+                $catg['link'] = url("api/tour/category/{$catg->id}");
+            }
             $data = [
                 'tours' => $tours,
+                'category' => $category,
             ];
             return $this->SendResponse($data, "Tour data fetched successfully");
         } catch (\Throwable $th) {
