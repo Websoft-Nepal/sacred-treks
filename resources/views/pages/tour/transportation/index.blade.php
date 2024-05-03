@@ -116,7 +116,7 @@
 
 
                                         {{-- delete button------- --}}
-                                        <form action="{{ route('admin.trekking.destroy', $transportation->id) }}"
+                                        <form action="{{ route('admin.transportation.destroy', $transportation->id) }}"
                                             method="post" class="d-inline">
                                             @csrf
                                             @method('delete')
