@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Tour
-Route::get('/tour',[TourController::class,'index'])->name("api.tour");
+Route::get('/tour/all',[TourController::class,'index'])->name("api.tour");
 Route::get('/tour/{slug}',[TourController::class,'show']);
 Route::get('/tour/category/{trasnportation_id}',[TourController::class,'category']);
 
