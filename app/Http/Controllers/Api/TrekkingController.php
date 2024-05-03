@@ -69,6 +69,9 @@ class TrekkingController extends BaseController
                         $trekking['featureimg2'] = config('app.url') . "/" . $trekking['featureimg2'];
                     }
                 }
+                if ($trekking['map'] != null) {
+                    $trekking['map'] = config('app.url') . "/" . $trekking['map'];
+                }
 
                 // For parsing the html content in the description and change into text
 
@@ -104,7 +107,7 @@ class TrekkingController extends BaseController
             return redirect()->route('api.tour');
         }
         try {
-            $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude','location')->paginate(10);
+            $trekkings = Trekking::where('location_id', $location_id)->where('status', 1)->with('trekkingItinerary', 'trekkingCostInclude', 'location')->paginate(10);
             if ($trekkings != null) {
                 foreach ($trekkings as $trekking) {
                     if ($trekking['image'] != null) {
@@ -121,6 +124,9 @@ class TrekkingController extends BaseController
                         if (substr_count($trekking['featureimg2'], 'http') < 1) {
                             $trekking['featureimg2'] = config('app.url') . "/" . $trekking['featureimg2'];
                         }
+                    }
+                    if ($trekking['map'] != null) {
+                        $trekking['map'] = config('app.url') . "/" . $trekking['map'];
                     }
                 }
                 $data = [

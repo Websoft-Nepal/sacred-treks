@@ -77,7 +77,7 @@ class PagesController extends BaseController
             // $trekkingPopular = Trekking::orderByDesc('count')->limit(6)->get();
 
             foreach ($locations as $trek) {
-                $trek = Trekking::where('location_id',$trek->location_id)->orderByDesc('count')->first();
+                $trek = Trekking::where('location_id', $trek->location_id)->orderByDesc('count')->first();
 
                 // $trek['boundary'] = $trek->location_id->location;
                 $location = TrekkingLocation::findOrFail($trek->location_id);
@@ -97,6 +97,9 @@ class PagesController extends BaseController
                     if (substr_count($trek['featureimg2'], 'http') < 1) {
                         $trek['featureimg2'] = config('app.url') . "/" . $trek['featureimg2'];
                     }
+                }
+                if ($trek['map'] != null) {
+                    $trek['map'] = config('app.url') . "/" . $trek['map'];
                 }
                 if ($trek) {
                     $trekkingPopular->push($trek); // Push each tour object onto the collection
