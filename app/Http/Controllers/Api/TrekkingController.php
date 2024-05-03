@@ -129,8 +129,13 @@ class TrekkingController extends BaseController
                         $trekking['map'] = config('app.url') . "/" . $trekking['map'];
                     }
                 }
+                $regions = TrekkingLocation::all();
+                foreach ($regions as $region) {
+                    $region['link'] = url("api/trekking/category/{$region->id}");
+                }
                 $data = [
                     'trekkings' => $trekkings,
+                    'regions' => $regions,
                 ];
                 return $this->SendResponse($data, "Trekking data fetched successfully");
             } else {
