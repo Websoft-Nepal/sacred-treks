@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\MainGalleryController;
 use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\PrivacyController;
 use App\Http\Controllers\Admin\SocialMediaController;
@@ -226,6 +227,17 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::post('store', [GalleryController::class, 'store'])->name('store');
         Route::put('update/{id}', [GalleryController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [GalleryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Main Gallery
+    Route::prefix('main-gallery')->name('maingallery.')->group(function (){
+        Route::get('/',[MainGalleryController::class,'index'])->name('index');
+        Route::get('/trash',[MainGalleryController::class,'trash'])->name('trash');
+        Route::get('/restore/{id}',[MainGalleryController::class,'restore'])->name('restore');
+        Route::post('store',[MainGalleryController::class,'store'])->name('store');
+        Route::put('update/{id}',[MainGalleryController::class,'update'])->name('update');
+        Route::delete('delete/{id}',[MainGalleryController::class,'destroy'])->name('destroy');
+        Route::delete('/force-delete/{id}',[MainGalleryController::class,'forceDelete'])->name('forcedelete');
     });
 
     // Subscriber

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Models\BlogPage;
 use App\Models\Gallery;
 use App\Models\HomePage;
+use App\Models\MainGallery;
 use App\Models\Owner;
 use App\Models\Tour;
 use App\Models\Trekking;
@@ -168,6 +169,21 @@ class PagesController extends BaseController
             return $this->SendResponse($data, "gallery fetched successfully.");
         } catch (\Throwable $th) {
             return $this->SendError(throw $th, "Cannot fetch gallery data.", 500);
+        }
+    }
+
+    public function  mainGallery()
+    {
+        try {
+            $galleries = MainGallery::all();
+            foreach ($galleries as $gallery) {
+                if ($gallery['image'] != null) {
+                    $gallery['image'] = config('app.url') . "/" . $gallery['image'];
+                }
+            }
+            return $this->SendResponse($galleries, "gallerys fetched successfully.");
+        } catch (\Throwable $th) {
+            return $this->SendError(throw $th, "Cannot fetch gallerys data.", 500);
         }
     }
     public function blog()
