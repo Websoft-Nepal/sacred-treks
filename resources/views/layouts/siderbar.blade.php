@@ -33,10 +33,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Trekking:</h6>
                 <a class="collapse-item" href="{{ route('admin.trekking.create') }}">create</a>
-                <a class="collapse-item" href="{{ route('admin.trekking.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.trekking.index') }}">View</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Location:</h6>
-                <a class="collapse-item" href="{{ route('admin.location.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.location.index') }}">View</a>
             </div>
         </div>
     </li>
@@ -52,7 +52,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Blog:</h6>
                 <a class="collapse-item" href="{{ route('admin.blog.create') }}">create</a>
-                <a class="collapse-item" href="{{ route('admin.blog.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.blog.index') }}">View</a>
             </div>
         </div>
     </li>
@@ -68,10 +68,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tour:</h6>
                 <a class="collapse-item" href="{{ route('admin.tour.create') }}">create</a>
-                <a class="collapse-item" href="{{ route('admin.tour.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.tour.index') }}">View</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Transportation:</h6>
-                <a class="collapse-item" href="{{ route('admin.transportation.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.transportation.index') }}">View</a>
             </div>
         </div>
     </li>
@@ -103,7 +103,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Testimonials:</h6>
                 <a class="collapse-item" href="{{ route('admin.testimonial.create') }}">create</a>
-                <a class="collapse-item" href="{{ route('admin.testimonial.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.testimonial.index') }}">View</a>
             </div>
         </div>
     </li>
@@ -119,7 +119,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Teams:</h6>
                 <a class="collapse-item" href="{{ route('admin.teams.create') }}">create</a>
-                <a class="collapse-item" href="{{ route('admin.teams.index') }}">index</a>
+                <a class="collapse-item" href="{{ route('admin.teams.index') }}">View</a>
             </div>
         </div>
     </li>
@@ -169,8 +169,11 @@
                     <i class="fas fa-envelope"></i>
                     <span>Contact</span></a>
                 <a class="collapse-item" href="{{ route('admin.gallery.index') }}">
-                    <i class="fas fa-envelope"></i>
-                    <span>Gallery</span></a>
+                    <i class="fas fa-image"></i>
+                    <span>Home Gallery</span></a>
+                <a class="collapse-item" href="{{ route('admin.maingallery.index') }}">
+                    <i class="fas fa-images"></i>
+                    <span>Main Gallery</span></a>
                 <a class="collapse-item" href="{{ route('admin.social.index') }}">
                     <i class="fas fa-globe"></i>
                     <span>Social Media</span></a>

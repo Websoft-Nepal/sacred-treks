@@ -62,6 +62,9 @@ Route::prefix('page')->group(function(){
 // Gallery
 Route::get('gallery',[PagesController::class,'gallery']);
 
+// Main Gallery
+Route::get('main-gallery',[PagesController::class,'mainGallery']);
+
 // Blog
 Route::get('blogs',[BlogController::class,'index']);
 Route::get('blog/{slug}',[BlogController::class,'show']);
