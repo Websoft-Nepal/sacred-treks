@@ -92,14 +92,16 @@
                                                     </div>
                                                     <form method="POST"
                                                         action="{{ route('admin.transportation.update', $transportation->id) }}">
+                                                        @csrf
+                                                        @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="recipient-name"
                                                                     class="col-form-label">transportation:</label>
                                                                 <input type="text" class="form-control"
-                                                                    name="transportation" id="recipient-name"
-                                                                    value="$transportation->name">
-                                                                @error('transportation')
+                                                                    name="name" id="recipient-name"
+                                                                    value="{{ $transportation->name }}">
+                                                                @error('name')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
