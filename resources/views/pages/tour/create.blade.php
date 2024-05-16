@@ -90,6 +90,73 @@
                     @enderror
 
                     <div class="mb-3">
+                        <label for="start" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Start</label>
+                        <input type="text" name="start" class="form-control" value="{{ old('start') }}"
+                            id="start" aria-describedby="textHelp" >
+                    </div>
+                    @error('start')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="mb-3">
+                        <label for="finish" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Finish</label>
+                        <input type="text" name="finish" class="form-control" value="{{ old('finish') }}"
+                            id="finish" aria-describedby="textHelp" >
+                    </div>
+                    @error('finish')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="mb-3">
+                        <label for="type" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Type</label>
+                        <input type="text" name="type" class="form-control" value="{{ old('type') }}"
+                            id="type" aria-describedby="textHelp" >
+                    </div>
+                    @error('type')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="mb-3">
+                        <label for="grade" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Grade</label>
+                        <input type="text" name="grade" class="form-control" value="{{ old('grade') }}"
+                            id="grade" aria-describedby="textHelp" >
+                    </div>
+                    @error('grade')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="mb-3">
+                        <label for="max_altitude" class="form-label"><span class="text-danger h3"></span>
+                            Max Altitude</label>
+                        <input type="text" name="max_altitude" class="form-control" value="{{ old('max_altitude') }}"
+                            id="max_altitude" aria-describedby="textHelp" >
+                    </div>
+                    @error('max_altitude')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="mb-3">
+                        <label for="group_size" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
+                            Group Size</label>
+                        <input type="text" name="group_size" class="form-control" value="{{ old('group_size') }}"
+                            id="group_size" aria-describedby="textHelp" >
+                    </div>
+                    @error('group_size')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                    <div class="mb-3">
                         <label for="status" class="form-label"><span class="text-danger h3"><sup>*</sup></span>
                             Status</label>
                         <div class="custom-control custom-switch form-control" style="min-height: 55px;">

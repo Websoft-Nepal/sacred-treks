@@ -13,7 +13,7 @@ class Tour extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title','status','image','place','slug','description','duration','cost','count','boundary','maps','transportation_id'];
+    protected $fillable = ['title','status','image','place','slug','description','duration','cost','start','finish','type','grade','group_size','max_altitude','count','boundary','maps','transportation_id'];
 
     public function transportation(): BelongsTo
     {

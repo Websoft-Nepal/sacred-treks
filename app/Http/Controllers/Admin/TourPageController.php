@@ -16,9 +16,11 @@ class TourPageController extends Controller
     public function update(Request $request,$id){
         $request->validate([
             'itinerary_quotes' => 'required|string',
+            'description' => 'nullable',
         ]);
         $tour = TourPage::findOrFail($id);
         $tour->itinerary_quotes = $request->itinerary_quotes;
+        $tour->description = $request->description;
         $tour->save();
         drakify('success');
         return redirect()->route('admin.page.tour.index');

@@ -3,6 +3,7 @@ use App\Http\Controllers\Api\AboutUsController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CompanyInfoController;
 use App\Http\Controllers\Api\ContactUsController;
+use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\PagesController;
 use App\Http\Controllers\Api\PrivacyController;
 use App\Http\Controllers\Api\SubscribeController;
@@ -63,7 +64,10 @@ Route::prefix('page')->group(function(){
 Route::get('gallery',[PagesController::class,'gallery']);
 
 // Main Gallery
-Route::get('main-gallery',[PagesController::class,'mainGallery']);
+Route::get('main-gallery',[GalleryController::class,'index']);
+Route::get('gallery/category',[GalleryController::class,'category']);
+Route::get('gallery/category/{slug}',[GalleryController::class,'galleryCategory']);
+Route::get('gallery/{slug}',[GalleryController::class,'show']);
 
 // Blog
 Route::get('blogs',[BlogController::class,'index']);

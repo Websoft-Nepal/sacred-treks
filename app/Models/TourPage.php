@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TourPage extends Model
 {
     use HasFactory;
-    protected $fillable = ['itinerary_quotes'];
+    protected $fillable = ['itinerary_quotes','description'];
 }

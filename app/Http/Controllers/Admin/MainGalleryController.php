@@ -6,12 +6,13 @@ use App\Http\Controllers\Admin\BaseController;
 use App\Models\MainGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class MainGalleryController extends BaseController
 {
     public function index()
     {
-        $galleries = MainGallery::all();
+        $galleries = MainGallery::with('category')->get();
         return view('pages.main-gallery.index', compact('galleries'));
     }
 
@@ -19,11 +20,14 @@ class MainGalleryController extends BaseController
     {
         $request->validate([
             'image' => 'required|image|max:5120',
+            'category_id' => 'required|exists:gallery_categories,id',
             'title' => 'required',
         ]);
         $gallery = new MainGallery();
         $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
         $gallery->title = $request->title;
+        $gallery->category_id = $request->category_id;
+        $gallery->slug = $this->generateSlug($request->title,"MainGallery");
         $gallery->save();
         drakify('success');
         return redirect()->route('admin.maingallery.index');
@@ -34,8 +38,11 @@ class MainGalleryController extends BaseController
         $request->validate([
             'image' => 'sometimes|image|max:5120',
             'title' => 'required',
+            'category' => 'required|exists:gallery_categories,id',
+            'slug' => $this->slugValidate($request->slug, $id),
         ]);
         $gallery = MainGallery::findOrFail($id);
+        $gallery->slug = str::slug($request->slug);
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
             if ($gallery->image) {
@@ -53,6 +60,7 @@ class MainGalleryController extends BaseController
                 }
             }
             $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
+            $gallery->category_id = $request->category_id;
             $gallery->title = $request->title;
         }
         $gallery->save();

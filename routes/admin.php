@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogPageController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\HomePageController;
@@ -227,6 +228,14 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::post('store', [GalleryController::class, 'store'])->name('store');
         Route::put('update/{id}', [GalleryController::class, 'update'])->name('update');
         Route::delete('delete/{id}', [GalleryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Main Gallery Category
+    Route::prefix('main-gallery-category')->name('gallerycategory.')->group(function (){
+        Route::get('/',[GalleryCategoryController::class,'index'])->name('index');
+        Route::post('store',[GalleryCategoryController::class,'store'])->name('store');
+        Route::put('update/{id}',[GalleryCategoryController::class,'update'])->name('update');
+        Route::delete('delete/{id}',[GalleryCategoryController::class,'destroy'])->name('destroy');
     });
 
     // Main Gallery

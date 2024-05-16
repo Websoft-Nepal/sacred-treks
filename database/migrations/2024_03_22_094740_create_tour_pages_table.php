@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tour_pages', function (Blueprint $table) {
             $table->id();
             $table->string('itinerary_quotes');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

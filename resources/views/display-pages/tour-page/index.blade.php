@@ -30,6 +30,14 @@
                         <div class="text-danger">{{$message}}</div>
                     @enderror
 
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" name="description" id="description" rows="3">{{$tour->description}}</textarea>
+                    </div>
+                    @error('description')
+                        {{ $message }}
+                    @enderror
+
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
@@ -38,3 +46,7 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+@push('scriptaddon')
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('conclusion');
+@endpush

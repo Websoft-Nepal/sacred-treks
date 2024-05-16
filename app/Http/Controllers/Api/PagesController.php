@@ -22,21 +22,9 @@ class PagesController extends BaseController
         try {
             // For home page
             $home = HomePage::first();
-            if ($home['headimg1'] != null) {
-                if (substr_count($home['headimg1'], 'http') < 1) {
-                    $home['headimg1'] = config('app.url') . "/" . $home['headimg1'];
-                }
-            }
-            if ($home['headimg2'] != null) {
-                if (substr_count($home['headimg2'], 'http') < 1) {
-                    $home['headimg2'] = config('app.url') . "/" . $home['headimg2'];
-                }
-            }
-            if ($home['bookimg'] != null) {
-                if (substr_count($home['bookimg'], 'http') < 1) {
-                    $home['bookimg'] = config('app.url') . "/" . $home['bookimg'];
-                }
-            }
+            $home['headimg1'] = $this->HttpImage('headimg1',$home);
+            $home['headimg1'] = $this->HttpImage('headimg1',$home);
+            $home['bookimg'] = $this->HttpImage('bookimg',$home);
 
             // For owner or CEO
             $owner = Owner::first();
@@ -44,29 +32,29 @@ class PagesController extends BaseController
 
             //For Tour Popular
             $tourPopular = collect();
-            $places = Tour::select('place')->orderByDesc('count')->distinct()->limit(6)->get();
+            $places = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->get();
+            $tour_ids = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->pluck('id');
+            $tourCount = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->count();
+
             foreach ($places as $place) {
                 $tour = Tour::where('place', $place->place)->with('transportation')->orderByDesc('count')->first();
-                if ($tour['image'] != null) {
-                    if (substr_count($tour['image'], 'http') < 1) {
-                        $tour['image'] = config('app.url') . "/" . $tour['image'];
-                    }
+                $tour['image'] = $this->HttpImage('image',$tour);
+                $tour['featureimg1'] = $this->HttpImage('featureimg1',$tour);
+                $tour['featureimg2'] = $this->HttpImage('featureimg2',$tour);
+                $tour['map'] = $this->HttpImage('map',$tour);
+
+                if ($tour) {
+                    $tourPopular->push($tour); // Push each tour object onto the collection
                 }
-                if ($tour['featureimg1'] != null) {
-                    if (substr_count($tour['featureimg1'], 'http') < 1) {
-                        $tour['featureimg1'] = config('app.url') . "/" . $tour['featureimg1'];
-                    }
-                }
-                if ($tour['featureimg2'] != null) {
-                    if (substr_count($tour['featureimg2'], 'http') < 1) {
-                        $tour['featureimg2'] = config('app.url') . "/" . $tour['featureimg2'];
-                    }
-                }
-                if ($tour['map'] != null) {
-                    if (substr_count($tour['map'], 'http') < 1) {
-                        $tour['map'] = config('app.url') . "/" . $tour['map'];
-                    }
-                }
+            }
+
+            $tour_rems = Tour::whereNotIn('id',$tour_ids)->orderByDesc('count')->limit(8 - $tourCount)->get();
+            foreach ($tour_rems as $tour) {
+                $tour['image'] = $this->HttpImage('image',$tour);
+                $tour['featureimg1'] = $this->HttpImage('featureimg1',$tour);
+                $tour['featureimg2'] = $this->HttpImage('featureimg2',$tour);
+                $tour['map'] = $this->HttpImage('map',$tour);
+
                 if ($tour) {
                     $tourPopular->push($tour); // Push each tour object onto the collection
                 }
@@ -74,8 +62,9 @@ class PagesController extends BaseController
 
             // For popular trekking
             $trekkingPopular = collect();
-            $locations = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(6)->get();
-            // $trekkingPopular = Trekking::orderByDesc('count')->limit(6)->get();
+            $locations = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(8)->get();
+            $trekking_ids = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(8)->pluck('id');
+            $trekkingCount = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(8)->count();
 
             foreach ($locations as $trek) {
                 $trek = Trekking::where('location_id', $trek->location_id)->orderByDesc('count')->first();
@@ -84,24 +73,27 @@ class PagesController extends BaseController
                 $location = TrekkingLocation::findOrFail($trek->location_id);
                 $trek['boundary'] = $location->location;
 
-                if ($trek['image'] != null) {
-                    if (substr_count($trek['image'], 'http') < 1) {
-                        $trek['image'] = config('app.url') . "/" . $trek['image'];
-                    }
+                $trek['image'] = $this->HttpImage('image',$trek);
+                $trek['featureimg1'] = $this->HttpImage('featureimg1',$trek);
+                $trek['featureimg2'] = $this->HttpImage('featureimg2',$trek);
+                $trek['map'] = $this->HttpImage('map',$trek);
+
+                if ($trek) {
+                    $trekkingPopular->push($trek); // Push each tour object onto the collection
                 }
-                if ($trek['featureimg1'] != null) {
-                    if (substr_count($trek['featureimg1'], 'http') < 1) {
-                        $trek['featureimg1'] = config('app.url') . "/" . $trek['featureimg1'];
-                    }
-                }
-                if ($trek['featureimg2'] != null) {
-                    if (substr_count($trek['featureimg2'], 'http') < 1) {
-                        $trek['featureimg2'] = config('app.url') . "/" . $trek['featureimg2'];
-                    }
-                }
-                if ($trek['map'] != null) {
-                    $trek['map'] = config('app.url') . "/" . $trek['map'];
-                }
+            }
+
+            $trekking_rems = Trekking::whereNotIn('id',$trekking_ids)->orderByDesc('count')->limit(8 - $trekkingCount)->get();
+            foreach($trekking_rems as $trek){
+                $trek = Trekking::where('location_id', $trek->location_id)->orderByDesc('count')->first();
+                $location = TrekkingLocation::findOrFail($trek->location_id);
+                $trek['boundary'] = $location->location;
+
+                $trek['image'] = $this->HttpImage('image',$trek);
+                $trek['featureimg1'] = $this->HttpImage('featureimg1',$trek);
+                $trek['featureimg2'] = $this->HttpImage('featureimg2',$trek);
+                $trek['map'] = $this->HttpImage('map',$trek);
+
                 if ($trek) {
                     $trekkingPopular->push($trek); // Push each tour object onto the collection
                 }
@@ -144,22 +136,14 @@ class PagesController extends BaseController
             $excludeIds = array();
             $i = 0;
             foreach ($galleryfirst as $g) {
-                if ($g['image'] != null) {
-                    if (substr_count($g['image'], 'http') < 1) {
-                        $g['image'] = config('app.url') . "/" . $g['image'];
-                    }
-                }
+                $g['image'] = $this->HttpImage('image',$g);
                 $excludeIds[$i++] = $g->id;
             }
             $gallerysecond = Gallery::whereNotIn('id', $excludeIds)->take(4)->get();
             if (count($gallerysecond) < 1) {
                 $gallerysecond = Gallery::take(4)->get();
                 foreach ($gallerysecond as $sec) {
-                    if ($sec['image'] != null) {
-                        if (substr_count($sec['image'], 'http') < 1) {
-                            $sec['image'] = config('app.url') . "/" . $sec['image'];
-                        }
-                    }
+                    $sec['image'] = $this->HttpImage('image',$sec);
                 }
             }
             $data = [
@@ -177,9 +161,7 @@ class PagesController extends BaseController
         try {
             $galleries = MainGallery::all();
             foreach ($galleries as $gallery) {
-                if ($gallery['image'] != null) {
-                    $gallery['image'] = config('app.url') . "/" . $gallery['image'];
-                }
+                $gallery['image'] = $this->HttpImage('image',$gallery);
             }
             return $this->SendResponse($galleries, "gallerys fetched successfully.");
         } catch (\Throwable $th) {
@@ -193,6 +175,18 @@ class PagesController extends BaseController
             return $this->SendResponse($blog, "blog fetched successfully.");
         } catch (\Throwable $th) {
             return $this->SendError(throw $th, "Cannot fetch blog data.", 500);
+        }
+    }
+
+    private function HttpImage($name, $arr){
+        if ($arr[$name] != null) {
+            if (substr_count($arr[$name], 'http') < 1) {
+                return config('app.url') . "/" . $arr[$name];
+            }else{
+                return $arr[$name];
+            }
+        }else{
+            return null;
         }
     }
 }
