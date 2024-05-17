@@ -48,7 +48,8 @@ class TeamController extends BaseController
         $team = Team::findorFail($id);
         $team->name = $request->name;
         $team->position = $request->position;
-        $team->status = $request->has('status') ? $request->status : $team->status;
+        $team->status = $request->has('status') ? 1 : 0;
+
         if ($request->hasFile('image')) {
             // Delete the previous image if exists
             if ($team->image) {
@@ -67,8 +68,7 @@ class TeamController extends BaseController
             // $team->image = $request->file('image')->store('uploads/teams');
             $team->image = $this->uploadImage($request->image, "uploads/teams");
         }
-
-        $team->update();
+        $team->save();
         drakify('success');
         return redirect()->route('admin.teams.index');
     }
