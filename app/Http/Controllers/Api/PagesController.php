@@ -23,7 +23,7 @@ class PagesController extends BaseController
             // For home page
             $home = HomePage::first();
             $home['headimg1'] = $this->HttpImage('headimg1',$home);
-            $home['headimg1'] = $this->HttpImage('headimg1',$home);
+            $home['headimg2'] = $this->HttpImage('headimg2',$home);
             $home['bookimg'] = $this->HttpImage('bookimg',$home);
 
             // For owner or CEO
