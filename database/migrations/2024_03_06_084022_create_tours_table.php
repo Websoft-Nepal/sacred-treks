@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('finish')->nullable();
             $table->string('type')->nullable();
             $table->string('grade')->nullable();
+            $table->string('group_size')->nullable();
+            $table->string('max_altitude')->nullable();
             $table->string('duration');
             $table->string('place');
             $table->double('cost')->default(0);

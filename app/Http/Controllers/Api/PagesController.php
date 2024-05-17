@@ -156,18 +156,6 @@ class PagesController extends BaseController
         }
     }
 
-    public function  mainGallery()
-    {
-        try {
-            $galleries = MainGallery::all();
-            foreach ($galleries as $gallery) {
-                $gallery['image'] = $this->HttpImage('image',$gallery);
-            }
-            return $this->SendResponse($galleries, "gallerys fetched successfully.");
-        } catch (\Throwable $th) {
-            return $this->SendError(throw $th, "Cannot fetch gallerys data.", 500);
-        }
-    }
     public function blog()
     {
         try {

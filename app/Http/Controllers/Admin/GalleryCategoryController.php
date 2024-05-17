@@ -23,6 +23,8 @@ class GalleryCategoryController extends BaseController
         ]);
         $gallery = new GalleryCategory();
         $gallery->image = $this->uploadImage($request->image, 'uploads/gallery');
+        $gallery->category = $request->category;
+        $gallery->slug = $this->generateSlug($request->category,$gallery);
         $gallery->save();
         drakify('success');
         return redirect()->route('admin.gallerycategory.index');
@@ -33,7 +35,7 @@ class GalleryCategoryController extends BaseController
         $request->validate([
             'image' => 'sometimes|image|max:5096',
             'category' => 'required|string',
-            'slug' => $this->slugValidate($request->slug, $id),
+            'slug' => $this->slugValidate("gallery_categories", $id),
         ]);
         $gallery->category = $request->category;
         $gallery->slug = str::slug($request->slug);
@@ -47,9 +49,10 @@ class GalleryCategoryController extends BaseController
 
             }
             $gallery->image = $this->uploadImage($request->image,"uploads/gallery");
-            drakify('success');
-            return redirect()->route('admin.gallerycategory.index');
         }
+        $gallery->save();
+        drakify('success');
+        return redirect()->route('admin.gallerycategory.index');
     }
 
     public function destroy($id){

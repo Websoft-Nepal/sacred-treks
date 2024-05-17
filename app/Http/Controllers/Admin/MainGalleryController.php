@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController;
+use App\Models\GalleryCategory;
 use App\Models\MainGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,7 +14,8 @@ class MainGalleryController extends BaseController
     public function index()
     {
         $galleries = MainGallery::with('category')->get();
-        return view('pages.main-gallery.index', compact('galleries'));
+        $categories = GalleryCategory::all();
+        return view('pages.main-gallery.index', compact('galleries','categories'));
     }
 
     public function store(Request $request)
@@ -27,7 +29,7 @@ class MainGalleryController extends BaseController
         $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
         $gallery->title = $request->title;
         $gallery->category_id = $request->category_id;
-        $gallery->slug = $this->generateSlug($request->title,"MainGallery");
+        $gallery->slug = $this->generateSlug($request->title,$gallery);
         $gallery->save();
         drakify('success');
         return redirect()->route('admin.maingallery.index');
@@ -38,8 +40,8 @@ class MainGalleryController extends BaseController
         $request->validate([
             'image' => 'sometimes|image|max:5120',
             'title' => 'required',
-            'category' => 'required|exists:gallery_categories,id',
-            'slug' => $this->slugValidate($request->slug, $id),
+            'category_id' => 'required|exists:gallery_categories,id',
+            'slug' => $this->slugValidate("gallery_categories", $id),
         ]);
         $gallery = MainGallery::findOrFail($id);
         $gallery->slug = str::slug($request->slug);
@@ -60,9 +62,9 @@ class MainGalleryController extends BaseController
                 }
             }
             $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
-            $gallery->category_id = $request->category_id;
-            $gallery->title = $request->title;
         }
+        $gallery->category_id = $request->category_id;
+        $gallery->title = $request->title;
         $gallery->save();
         drakify('success');
         return redirect()->route('admin.maingallery.index');

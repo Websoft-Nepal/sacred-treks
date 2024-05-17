@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("image")->nullable();
             $table->string("title")->nullable();
+            $table->string('slug');
             $table->foreignId('category_id')->constrained('gallery_categories')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

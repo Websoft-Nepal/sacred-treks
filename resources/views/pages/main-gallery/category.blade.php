@@ -19,6 +19,8 @@
 
             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal"
                 data-whatever="@mdo">Create</button>
+            <a name="" id="" class="btn btn-sm btn-primary" href="{{route('admin.maingallery.index')}}" role="button">View Gallery</a>
+
 
 
             <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -45,7 +47,8 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="category" class="col-form-label">Category:</label>
-                                    <input type="text" class="form-control" name="category" id="category" placeholder="Annapurna">
+                                    <input type="text" class="form-control" name="category" id="category"
+                                        placeholder="Annapurna">
                                 </div>
                             </div>
                             @error('category')
@@ -89,7 +92,7 @@
                                                 srcset="">
                                         </a>
                                     </td>
-                                    <td>{{ $gallery->title }}</td>
+                                    <td>{{ $gallery->slug }}</td>
                                     <td>
                                         {{-- Edit button modal  --}}
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"

@@ -16,11 +16,14 @@
         @include('notify::components.notify')
         {{-- </div> --}}
         <div class="p-1">
+            <a name="" id="" class="btn btn-sm btn-primary" href="{{ route('admin.gallerycategory.index') }}"
+                role="button">View Category</a>
 
             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal"
                 data-whatever="@mdo">Create</button>
 
-            <a name="" id="" class="btn btn-sm btn-danger" href="{{route('admin.maingallery.trash')}}" role="button">Trash</a>
+            <a name="" id="" class="btn btn-sm btn-danger" href="{{ route('admin.maingallery.trash') }}"
+                role="button">Trash</a>
 
 
             <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -49,12 +52,15 @@
                                     <label for="category" class="col-form-label">Category:</label>
                                     <select class="form-select" name="category_id" aria-label="Default select example">
                                         <option selected>Open this select menu</option>
-                                        @dd($galleries)
-                                        @foreach ($category as $cat)
-                                        <option value="{{$cat->id}}">{{$cat->category}}</option>
-
+                                        @foreach ($categories as $category)
+                                            @if ($category->category)
+                                                <option value="{{ $category->id }}">
+                                                    {{ $category->category }}</option>
+                                            @else
+                                                <option value="" disabled>No Category</option>
+                                            @endif
                                         @endforeach
-                                      </select>
+                                    </select>
                                 </div>
                             </div>
                             @error('category_id')
@@ -99,7 +105,7 @@
                             @foreach ($galleries as $gallery)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $gallery->category_id->name }}</td>
+                                    <td>{{ $gallery->category->category }}</td>
                                     <td>
                                         <a href="{{ asset($gallery->image) }}" target="_blank" rel="noopener noreferrer">
                                             <img src="{{ asset($gallery->image) }}" width="60px" alt="Gallery image"
@@ -143,17 +149,36 @@
                                                             @enderror
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <label for="category" class="col-form-label">Category:</label>
-                                                                    <select class="form-select" name="category_id" aria-label="Default select example">
-                                                                        <option selected>Open this select menu</option>
-                                                                        @foreach ($gallery->category_id->category as $cat)
-                                                                        <option value="{{$cat->id}}">{{$cat->category}}</option>
+                                                                    <label for="category"
+                                                                        class="col-form-label">Category:</label>
+                                                                    <select class="form-select" name="category_id"
+                                                                        aria-label="Default select example">
 
+                                                                        @foreach ($categories as $category)
+                                                                            @if ($category->category)
+                                                                                <option value="{{ $category->id }}" @selected($category->id == $gallery->category_id)>
+                                                                                    {{ $category->category }}</option>
+                                                                            @else
+                                                                                <option value="" disabled>No Category
+                                                                                </option>
+                                                                            @endif
                                                                         @endforeach
-                                                                      </select>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                             @error('category_id')
+                                                                {{ $message }}
+                                                            @enderror
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="slug"
+                                                                        class="col-form-label">Slug:</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="slug" value="{{ $gallery->slug }}"
+                                                                        id="slug">
+                                                                </div>
+                                                            </div>
+                                                            @error('slug')
                                                                 {{ $message }}
                                                             @enderror
                                                             <div class="modal-body">
