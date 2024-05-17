@@ -14,7 +14,6 @@ use App\Models\TourPage;
 use App\Models\TrekkingLocation;
 use App\Models\TrekkingPage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PagesController extends BaseController
 {
@@ -23,9 +22,9 @@ class PagesController extends BaseController
         try {
             // For home page
             $home = HomePage::first();
-            $home['headimg1'] = $this->HttpImage('headimg1', $home);
-            $home['headimg1'] = $this->HttpImage('headimg1', $home);
-            $home['bookimg'] = $this->HttpImage('bookimg', $home);
+            $home['headimg1'] = $this->HttpImage('headimg1',$home);
+            $home['headimg1'] = $this->HttpImage('headimg1',$home);
+            $home['bookimg'] = $this->HttpImage('bookimg',$home);
 
             // For owner or CEO
             $owner = Owner::first();
@@ -33,62 +32,29 @@ class PagesController extends BaseController
 
             //For Tour Popular
             $tourPopular = collect();
-            // $places = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->get();
-            // $tour_ids = $places->pluck('id');
-            // $tourCount = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->count();
-            // Fetch unique places ordered by count, limited to 8
-            // Fetch unique places ordered by count, limited to 8
-            $places = Tour::select('place', DB::raw('COUNT(place) as count'))
-                ->groupBy('place')
-                ->orderByDesc('count')
-                ->limit(8)
-                ->get();
-
-            // Retrieve the corresponding ids for these places
-            $tour_ids = Tour::whereIn('place', $places->pluck('place'))->pluck('id');
-
-            // Count the number of unique places
-            $tourCount = $places->count();
+            $places = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->get();
+            // $tour_ids = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->pluck('id');
+            $tourCount = Tour::select('place')->orderByDesc('count')->distinct()->limit(8)->count();
 
             foreach ($places as $place) {
                 $tour = Tour::where('place', $place->place)->with('transportation')->orderByDesc('count')->first();
-                $tour['image'] = $this->HttpImage('image', $tour);
-                $tour['featureimg1'] = $this->HttpImage('featureimg1', $tour);
-                $tour['featureimg2'] = $this->HttpImage('featureimg2', $tour);
-                $tour['map'] = $this->HttpImage('map', $tour);
+                $tour['image'] = $this->HttpImage('image',$tour);
+                $tour['featureimg1'] = $this->HttpImage('featureimg1',$tour);
+                $tour['featureimg2'] = $this->HttpImage('featureimg2',$tour);
+                $tour['map'] = $this->HttpImage('map',$tour);
 
                 if ($tour) {
                     $tourPopular->push($tour); // Push each tour object onto the collection
                 }
             }
 
-            $tour_rems = Tour::whereNotIn('id', $tour_ids)->orderByDesc('count')->limit(8 - $tourCount)->get();
-            foreach ($tour_rems as $tour) {
-                $tour['image'] = $this->HttpImage('image', $tour);
-                $tour['featureimg1'] = $this->HttpImage('featureimg1', $tour);
-                $tour['featureimg2'] = $this->HttpImage('featureimg2', $tour);
-                $tour['map'] = $this->HttpImage('map', $tour);
-
-                if ($tour) {
-                    $tourPopular->push($tour); // Push each tour object onto the collection
-                }
-            }
 
             // For popular trekking
             $trekkingPopular = collect();
             $locations = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(8)->get();
-            // $trekking_ids = Trekking::whereIn('location_id',$locations->location_id)->pluck('id');
-            // Fetch unique location_ids ordered by count, limited to 8
-            $trekking_ids = Trekking::select('location_id', DB::raw('COUNT(location_id) as count'))
-                ->groupBy('location_id')
-                ->orderByDesc('count')
-                ->limit(8)
-                ->get()
-                ->pluck('location_id');
-
-
-            // Fetch the ids for the selected location_ids
+            // $trekking_ids = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(8)->pluck('id');
             $trekkingCount = Trekking::select('location_id')->orderByDesc('count')->distinct()->limit(8)->count();
+
             foreach ($locations as $trek) {
                 $trek = Trekking::where('location_id', $trek->location_id)->orderByDesc('count')->first();
 
@@ -96,32 +62,16 @@ class PagesController extends BaseController
                 $location = TrekkingLocation::findOrFail($trek->location_id);
                 $trek['boundary'] = $location->location;
 
-                $trek['image'] = $this->HttpImage('image', $trek);
-                $trek['featureimg1'] = $this->HttpImage('featureimg1', $trek);
-                $trek['featureimg2'] = $this->HttpImage('featureimg2', $trek);
-                $trek['map'] = $this->HttpImage('map', $trek);
+                $trek['image'] = $this->HttpImage('image',$trek);
+                $trek['featureimg1'] = $this->HttpImage('featureimg1',$trek);
+                $trek['featureimg2'] = $this->HttpImage('featureimg2',$trek);
+                $trek['map'] = $this->HttpImage('map',$trek);
 
                 if ($trek) {
                     $trekkingPopular->push($trek); // Push each tour object onto the collection
                 }
             }
 
-            $trekking_rems = Trekking::whereNotIn('id', $trekking_ids)->orderByDesc('count')->limit(8 - $trekkingCount)->get();
-
-            foreach ($trekking_rems as $trek) {
-                $trek = Trekking::where('location_id', $trek->location_id)->orderByDesc('count')->first();
-                $location = TrekkingLocation::findOrFail($trek->location_id);
-                $trek['boundary'] = $location->location;
-
-                $trek['image'] = $this->HttpImage('image', $trek);
-                $trek['featureimg1'] = $this->HttpImage('featureimg1', $trek);
-                $trek['featureimg2'] = $this->HttpImage('featureimg2', $trek);
-                $trek['map'] = $this->HttpImage('map', $trek);
-
-                if ($trek) {
-                    $trekkingPopular->push($trek); // Push each tour object onto the collection
-                }
-            }
 
             // data to send
             $data = [
@@ -160,14 +110,14 @@ class PagesController extends BaseController
             $excludeIds = array();
             $i = 0;
             foreach ($galleryfirst as $g) {
-                $g['image'] = $this->HttpImage('image', $g);
+                $g['image'] = $this->HttpImage('image',$g);
                 $excludeIds[$i++] = $g->id;
             }
             $gallerysecond = Gallery::whereNotIn('id', $excludeIds)->take(4)->get();
             if (count($gallerysecond) < 1) {
                 $gallerysecond = Gallery::take(4)->get();
                 foreach ($gallerysecond as $sec) {
-                    $sec['image'] = $this->HttpImage('image', $sec);
+                    $sec['image'] = $this->HttpImage('image',$sec);
                 }
             }
             $data = [
@@ -190,15 +140,14 @@ class PagesController extends BaseController
         }
     }
 
-    private function HttpImage($name, $arr)
-    {
+    private function HttpImage($name, $arr){
         if ($arr[$name] != null) {
             if (substr_count($arr[$name], 'http') < 1) {
                 return config('app.url') . "/" . $arr[$name];
-            } else {
+            }else{
                 return $arr[$name];
             }
-        } else {
+        }else{
             return null;
         }
     }
