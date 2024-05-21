@@ -34,11 +34,11 @@ class TourController extends BaseController
             'featureimg1' => 'image|max:5120',
             'featureimg2' => 'image|max:5120',
             'duration' => 'required|string|max:255',
-            'start' => 'required|string',
-            'finish' => 'required|string',
-            'type' => 'required|string',
-            'grade' => 'required|string',
-            'group_size' => 'required|string',
+            'start' => 'nullable|string',
+            'finish' => 'nullable|string',
+            'type' => 'nullable|string',
+            'grade' => 'nullable|string',
+            'group_size' => 'nullable|string',
             'max_altitude' => 'nullable|string',
             'place' => 'required|string|max:255',
             'cost' => 'required|numeric',
@@ -114,12 +114,12 @@ class TourController extends BaseController
             'map' => 'image|max:5120',
             'duration' => 'required|string|max:255',
             'place' => 'required|string|max:255',
-            'start' => 'required|string',
-            'finish' => 'required|string',
-            'group_size' => 'required|string',
+            'start' => 'nullable|string',
+            'finish' => 'nullable|string',
+            'group_size' => 'nullable|string',
             'max_altitude' => 'nullable|string',
-            'type' => 'required|string',
-            'grade' => 'required|string',
+            'type' => 'nullable|string',
+            'grade' => 'nullable|string',
             'cost' => 'required|numeric',
             'boundary' => 'required|in:national,international',
             'transportation_id' => 'required|exists:tour_transportations,id',
@@ -191,7 +191,7 @@ class TourController extends BaseController
             }
             // Upload the new image
             // $tour->image = $request->file('image')->store('uploads/tour');
-            $tour->image = $this->uploadImage($request->map, "uploads/tour");
+            $tour->map = $this->uploadImage($request->map, "uploads/tour");
         }
 
         if ($request->hasFile('featureimg1')) {

@@ -36,10 +36,10 @@
 <body>
 
     <div class="invoice">
-        <div class="invoice-header">Trekking Enquiry</div>
+        <div class="invoice-header">Tour Enquiry</div>
         <div class="invoice-details">
             <label for="">Name: </label> {{$data->name}}<br>
-            <label>Trekking:</label> {{$data->tripPackage}}<br>
+            <label>Tour:</label> {{$data->tripPackage}}<br>
             <label>Email:</label> {{ $data->email }}<br>
             <label>Phone Number:</label> {{ $data->phoneNumber }}<br>
             <label>Start Date:</label> {{ $data->startDate }}<br>
