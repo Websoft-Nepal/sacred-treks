@@ -52,7 +52,7 @@ class TrekkingController extends BaseController
     public function show($slug)
     {
         try {
-            $trekking = Trekking::where('slug', $slug)->with('trekkingItinerary', 'trekkingCostInclude')->first();
+            $trekking = Trekking::where('slug', $slug)->with('trekkingItinerary', 'trekkingCostInclude','location')->first();
             if ($trekking != null) {
                 if ($trekking['image'] != null) {
                     if (substr_count($trekking['image'], 'http') < 1) {
@@ -73,25 +73,8 @@ class TrekkingController extends BaseController
                     $trekking['map'] = config('app.url') . "/" . $trekking['map'];
                 }
 
-                // For parsing the html content in the description and change into text
+                $trekking['region'] = $trekking->location->location ?? null;
 
-                // $html_list = $trekking->trekkingCostInclude->description;
-                // $html_list = trim($html_list);
-                // if ((str_contains($html_list, "<ul><li>")) || (str_contains($html_list, "<ol><li>"))) {
-                //     $html_list = explode("</li>", $html_list);
-                //     // dd($lists);
-                //     $list = [];
-                //     $tem = "";
-                //     $i = 0;
-                //     foreach ($html_list as $l) {
-                //         $tem = strip_tags($l);
-                //         $list[$i++] = $tem;
-                //     }
-                //     unset($list[--$i]);
-                // }else{
-                //     dd("Doesn't contain list");
-                // }
-                // $trekking->trekkingCostInclude->description = $list;
                 return $this->SendResponse($trekking, "Trekking data fetched successfully");
             } else {
                 return $this->SendResponse("Data not found", "Cannot fetch trekking data", 404);
