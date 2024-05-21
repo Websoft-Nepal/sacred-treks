@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Mail\TourEnquiryMail;
 use App\Models\Tour;
+use App\Models\TourEnquiry;
 use App\Models\TourTransportation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class TourController extends BaseController
 {
@@ -145,6 +150,43 @@ class TourController extends BaseController
             return $this->SendResponse($data, "Tour data fetched successfully");
         } catch (\Throwable $th) {
             return $this->SendError($th->getMessage(), "Can't fetch tours data", 403);
+        }
+    }
+
+    public function enquiry(Request $request){
+        $validate = Validator::make($request->all(),[
+            'tripPackage' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phoneNumber' => 'required|min:10|max:15',
+            'startDate' => 'required|date',
+            'endDate' => "required|date|after_or_equal:startDate",
+            'travellersNo' => 'required|integer|min:1',
+        ]);
+
+        if($validate->fails()){
+            return $this->SendError($validate->errors(),"Validation fails",422);
+        }
+        try {
+            $data = new TourEnquiry();
+            $data->tripPackage = $request->tripPackage;
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->phoneNumber = $request->phoneNumber;
+            $data->startDate = $request->startDate;
+            $data->endDate = $request->endDate;
+            $data->travellersNo = $request->travellersNo;
+            $data->save();
+
+            Mail::to(config('mail.from.address'))
+                    ->send(new TourEnquiryMail($data,$request->email,$request->name));
+
+            return $this->SendResponse("Success","Tour Enquiry has been sent successfully",200);
+
+
+        } catch (\Throwable $th) {
+            Log::error("Trekking Enquiry Fails. \n Error => ".$th->getMessage());
+            return $this->SendError(throw $th, "Failed to send enquiry", 500);
         }
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BlogPageController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
@@ -201,6 +202,14 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::get('show/{id}', [TrekkingBookingController::class, 'show'])->name('show');
         Route::put('update/{id}', [TrekkingBookingController::class, 'update'])->name('update');
         Route::delete('destroy/{id}', [TrekkingBookingController::class, 'destroy'])->name('destroy');
+    });
+
+    // Enquiry
+    Route::prefix('enquiry')->name('enquiry.')->group(function (){
+        Route::get('/tour',[EnquiryController::class,'tour'])->name('tour.index');
+        Route::get('/trekking',[EnquiryController::class,'trekking'])->name('trekking.index');
+        Route::delete('/tour/delete/{id}',[EnquiryController::class,'tourDelete'])->name('tour.destroy');
+        Route::delete('/trekking/delete/{id}',[EnquiryController::class,'trekkingDelete'])->name('trekking.destroy');
     });
 
     // Pages

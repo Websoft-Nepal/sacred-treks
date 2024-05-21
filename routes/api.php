@@ -48,6 +48,10 @@ Route::get('privacy',[PrivacyController::class,'index']);
 Route::get('terms-condition',[TermsConditionController::class,'index']);
 Route::get('aboutus',[AboutUsController::class,'index']);
 
+// Enquiry
+Route::post('trekking/enquiry',[TrekkingController::class,'enquiry']);
+Route::post('tour/enquiry',[TourController::class,'enquiry']);
+
 // Booking
 Route::post('tour-booking',[TourBookingController::class,'store']);
 Route::post('trekking-booking',[TrekkingBookingController::class,'store']);
