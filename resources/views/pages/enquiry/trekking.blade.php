@@ -2,19 +2,19 @@
     use Carbon\Carbon;
 @endphp
 @extends('layouts.app')
-@section('page-title', 'Tour Booking')
+@section('page-title', 'Trekking Enquiry')
 @section('main-section')
     <!-- Begin Page Content -->
     <div class="container-fluid">
         {{-- <div class="row"> --}}
         <div>
-            <h4 class="page-title text-left">Tour Management</h4>
+            <h4 class="page-title text-left">Trekking Management</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Tour</a>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Trekking</a>
                 </li>
-                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Tour Booking list</a></li>
+                <li class="breadcrumb-item active text-primary"><a href="javascript:void(0);">Trekking Enquiry list</a></li>
 
             </ol>
         </div>
@@ -22,7 +22,7 @@
         {{-- </div> --}}
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Tour Bookings</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Trekking Enquiries</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -31,42 +31,38 @@
                             <tr>
                                 <th>S.N</th>
                                 <th>Name</th>
-                                <th>Status</th>
+                                <th>Trekking Name</th>
                                 <th>Email</th>
-                                <th>Date</th>
+                                <th>Phone</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>No. of travellers</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tourBookings as $tourBooking)
+                            @foreach ($enquiries as $enq)
 
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$tourBooking->firstName}} {{$tourBooking->lastName}}</td>
+                                <td>{{$enq->name}}</td>
+                                <td>{{$enq->tripPackage}}</td>
+                                <td>{{$enq->email}}</td>
                                 <td>
-                                    <span class="badge text-white {{ $tourBooking->status == "verify" ? 'bg-success' : 'bg-danger' }}">
-                                        {{ $tourBooking->status }}
-                                    </span>
+                                    {{$enq->phoneNumber}}
                                 </td>
+                                {{-- <td>
+                                    {{ Carbon::parse($enq->created_at)->diffForHumans() }}
+                                </td> --}}
+                                <td>{{$enq->startDate}}</td>
+                                <td>{{$enq->endDate}}</td>
+                                <td>{{$enq->travellersNo}}</td>
                                 <td>
-                                    {{$tourBooking->email}}
-                                </td>
-                                <td>
-                                    {{ Carbon::parse($tourBooking->created_at)->diffForHumans() }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.tour.booking.show', $tourBooking->id) }}"
-                                        class="btn btn-success btn-sm">View</a>
-
-                                    {{-- update button  --}}
-                                    <form action="{{route('admin.tour.booking.update',$tourBooking->id)}}" method="post" class="d-inline">
-                                        @csrf
-                                        @method('put')
-                                        <button type="submit" class="btn btn-sm" onclick="return confirm('Are you sure')">Verify</button>
-                                    </form>
+                                    {{-- <a href="{{ route('admin.tour.Enquiry.show', $enq->id) }}"
+                                        class="btn btn-success btn-sm">View</a> --}}
 
                                     {{-- delete button------- --}}
-                                    <form action="{{route('admin.tour.booking.destroy',$tourBooking->id)}}" method="post" class="d-inline">
+                                    <form action="{{route('admin.enquiry.trekking.destroy',$enq->id)}}" method="post" class="d-inline">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger btn-sm"

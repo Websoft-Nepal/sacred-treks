@@ -92,6 +92,22 @@
         </div>
     </li>
 
+    {{-- Enquiry  --}}
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEnquiry"
+            aria-expanded="true" aria-controls="collapseEnquiry">
+            <i class="fas fa-book"></i>
+            <span>Enquiries</span>
+        </a>
+        <div id="collapseEnquiry" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Enquiries:</h6>
+                <a class="collapse-item" href="{{ route('admin.enquiry.tour.index') }}">Tours</a>
+                <a class="collapse-item" href="{{ route('admin.enquiry.trekking.index') }}">Trekkings</a>
+            </div>
+        </div>
+    </li>
+
     {{-- Testimonials  --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTestimonials"
