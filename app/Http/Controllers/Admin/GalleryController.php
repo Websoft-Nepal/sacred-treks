@@ -10,7 +10,7 @@ class GalleryController extends BaseController
 {
     public function index()
     {
-        $galleries = Gallery::paginate(10);
+        $galleries = Gallery::all();
         return view('pages.gallery.index',compact('galleries'));
     }
     public function store(Request $request)
@@ -25,6 +25,7 @@ class GalleryController extends BaseController
         $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
         $gallery->save();
         drakify('success');
+        return redirect()->route('admin.gallery.index');
     }
     public function update(Request $request, $id)
     {

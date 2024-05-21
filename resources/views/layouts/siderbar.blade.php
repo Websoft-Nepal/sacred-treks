@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.home')}}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.home') }}">
         <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
@@ -99,7 +99,8 @@
             <i class="fas fa-users"></i>
             <span>Testimonials</span>
         </a>
-        <div id="collapseTestimonials" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseTestimonials" class="collapse" aria-labelledby="headingPages"
+            data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Testimonials:</h6>
                 <a class="collapse-item" href="{{ route('admin.testimonial.create') }}">create</a>
@@ -159,7 +160,8 @@
             <i class="fas fa-cogs"></i>
             <span>Site Configs and terms</span>
         </a>
-        <div id="collapseSiteConfig" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseSiteConfig" class="collapse" aria-labelledby="headingPages"
+            data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Site Configs:</h6>
                 <a class="collapse-item" href="{{ route('admin.about.index') }}">
@@ -171,6 +173,9 @@
                 <a class="collapse-item" href="{{ route('admin.gallery.index') }}">
                     <i class="fas fa-image"></i>
                     <span>Home Gallery</span></a>
+                <a class="collapse-item" href="{{ route('admin.certificate.index') }}">
+                    <i class="fas fa-image"></i>
+                    <span>Certificate</span></a>
                 <a class="collapse-item" href="{{ route('admin.maingallery.index') }}">
                     <i class="fas fa-images"></i>
                     <span>Main Gallery</span></a>
@@ -182,9 +187,9 @@
                 <a class="collapse-item" href="{{ route('admin.privacy.index') }}">
                     <i class="fas fa-lock"></i>
                     <span>Privacy</span></a>
-                    <a class="collapse-item" href="{{ route('admin.terms.index') }}">
-                        <i class="fas fa-file-alt"></i>
-                        <span>Terms</span></a>
+                <a class="collapse-item" href="{{ route('admin.terms.index') }}">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Terms</span></a>
 
             </div>
         </div>

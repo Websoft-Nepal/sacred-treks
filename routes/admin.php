@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutUsController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BlogPageController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
@@ -247,6 +248,14 @@ Route::prefix('admin')->name("admin.")->middleware('auth')->group(function () {
         Route::put('update/{id}',[MainGalleryController::class,'update'])->name('update');
         Route::delete('delete/{id}',[MainGalleryController::class,'destroy'])->name('destroy');
         Route::delete('/force-delete/{id}',[MainGalleryController::class,'forceDelete'])->name('forcedelete');
+    });
+
+    // Certificate
+    Route::prefix('certificate')->name('certificate.')->group(function (){
+        Route::get('/',[CertificateController::class,'index'])->name('index');
+        Route::post('store',[CertificateController::class,'store'])->name('store');
+        Route::put('update/{id}',[CertificateController::class,'update'])->name('update');
+        Route::delete('delete/{id}',[CertificateController::class,'destroy'])->name('destroy');
     });
 
     // Subscriber
