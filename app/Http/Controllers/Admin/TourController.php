@@ -35,7 +35,7 @@ class TourController extends BaseController
             'featureimg2' => 'image|max:5120',
             'duration' => 'required|string|max:255',
             'start' => 'required|string',
-            'finish' => 'finish|string',
+            'finish' => 'required|string',
             'type' => 'required|string',
             'grade' => 'required|string',
             'group_size' => 'required|string',
