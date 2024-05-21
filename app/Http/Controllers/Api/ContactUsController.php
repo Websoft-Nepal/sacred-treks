@@ -31,7 +31,7 @@ class ContactUsController extends BaseController
             DB::beginTransaction();
             try{
                 $contact = ContactUs::create($data);
-                $to = env('MAIL_FROM_ADDRESS') ?? "darshankc.xdezo@gmail.com";
+                $to = config('mail.from.address') ?? "darshankc.xdezo@gmail.com";
                 Mail::to($to)->send(new ContactMail($contact));
                 DB::commit();
                 return $this->SendResponse("Successfully send message","Mail send",200);
