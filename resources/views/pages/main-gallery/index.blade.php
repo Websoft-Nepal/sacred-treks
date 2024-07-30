@@ -1,4 +1,17 @@
 @extends('layouts.app')
+@push('header-link')
+    <style>
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .image-preview img {
+            max-width: 150px;
+            margin: 10px;
+        }
+    </style>
+@endpush
 @section('page-title', 'Main Gallery')
 @section('main-section')
     <!-- Begin Page Content -->
@@ -35,18 +48,10 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form method="POST" action = "{{ route('admin.maingallery.store') }}"
-                            enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.maingallery.store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="image" class="col-form-label">Image:</label>
-                                    <input type="file" class="form-control" name="image" id="image">
-                                </div>
-                            </div>
-                            @error('image')
-                                {{ $message }}
-                            @enderror
+
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="category" class="col-form-label">Category:</label>
@@ -54,8 +59,7 @@
                                         <option selected>Open this select menu</option>
                                         @foreach ($categories as $category)
                                             @if ($category->category)
-                                                <option value="{{ $category->id }}">
-                                                    {{ $category->category }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->category }}</option>
                                             @else
                                                 <option value="" disabled>No Category</option>
                                             @endif
@@ -71,13 +75,24 @@
                                     <label for="title" class="col-form-label">Title:</label>
                                     <input type="text" class="form-control" name="title" id="title">
                                 </div>
+                                @error('title')
+                                    {{ $message }}
+                                @enderror
                             </div>
-                            @error('title')
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="image" class="col-form-label">Image:</label>
+                                    <input type="file" class="form-control" name="image[]" id="image" multiple>
+                                </div>
+                            </div>
+                            @error('image')
                                 {{ $message }}
                             @enderror
+                            <div class="image-preview" id="image-preview"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 <button type="Submit" class="btn btn-primary">Add</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
                             </div>
                         </form>
                     </div>
@@ -156,7 +171,8 @@
 
                                                                         @foreach ($categories as $category)
                                                                             @if ($category->category)
-                                                                                <option value="{{ $category->id }}" @selected($category->id == $gallery->category_id)>
+                                                                                <option value="{{ $category->id }}"
+                                                                                    @selected($category->id == $gallery->category_id)>
                                                                                     {{ $category->category }}</option>
                                                                             @else
                                                                                 <option value="" disabled>No Category
@@ -224,3 +240,23 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+
+
+@push('footer-link')
+    <script>
+        document.getElementById('image').addEventListener('change', function() {
+            const imagePreview = document.getElementById('image-preview');
+            imagePreview.innerHTML = '';
+
+            Array.from(this.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    imagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+@endpush

@@ -57,7 +57,7 @@ Route::post('tour-booking',[TourBookingController::class,'store']);
 Route::post('trekking-booking',[TrekkingBookingController::class,'store']);
 
 // Pages
-Route::prefix('page')->group(function(){
+Route::prefix('page')->middleware(['throttle:api'])->group(function(){
     Route::get('home',[PagesController::class,'home']);
     Route::get('tour',[PagesController::class,'tour']);
     Route::get('trekking',[PagesController::class,'trekking']);

@@ -15,22 +15,26 @@ class MainGalleryController extends BaseController
     {
         $galleries = MainGallery::with('category')->get();
         $categories = GalleryCategory::all();
-        return view('pages.main-gallery.index', compact('galleries','categories'));
+        return view('pages.main-gallery.index', compact('galleries', 'categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|max:5120',
+            'image.*' => 'required|image|max:5120',
             'category_id' => 'required|exists:gallery_categories,id',
             'title' => 'required',
         ]);
-        $gallery = new MainGallery();
-        $gallery->image = $this->uploadImage($request->image, "uploads/gallery");
-        $gallery->title = $request->title;
-        $gallery->category_id = $request->category_id;
-        $gallery->slug = $this->generateSlug($request->title,$gallery);
-        $gallery->save();
+
+        $images = $request->file('image');
+        foreach($images as $img){
+            $gallery = new MainGallery();
+            $gallery->image = $this->uploadImage($img, "uploads/gallery");
+            $gallery->title = $request->title;
+            $gallery->category_id = $request->category_id;
+            $gallery->slug = $this->generateSlug($request->title, $gallery);
+            $gallery->save();
+        }
         drakify('success');
         return redirect()->route('admin.maingallery.index');
     }

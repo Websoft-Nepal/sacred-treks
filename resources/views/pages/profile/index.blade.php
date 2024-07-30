@@ -24,8 +24,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.update-profile', auth()->user()->id) }}">
+                <form method="POST" action="{{ route('admin.update-profile', auth()->user()->id) }}">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" value="{{auth()->user()->name}}" class="form-control" id="name"
@@ -57,7 +58,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Profile Details</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.update-password', auth()->user()->id) }}">
+                <form method="POST" action="{{ route('admin.update-password', auth()->user()->id) }}">
+                    @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label">Password</label>
                         <input type="text" name="password" class="form-control" id="name"

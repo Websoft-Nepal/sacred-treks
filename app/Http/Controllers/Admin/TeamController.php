@@ -81,34 +81,4 @@ class TeamController extends BaseController
         return redirect()->route('admin.teams.index');
     }
 
-    public function trash(){
-        $teams = Team::onlyTrashed()->get();
-        return view('pages.teams.trash', compact('teams'));
-    }
-
-    public function restore($id){
-        $team = Team::withTrashed()->findOrFail($id);
-        $team->restore();
-        drakify('success');
-        return redirect()->route('admin.teams.index');
-    }
-
-    public function forceDelete($id){
-        $team = Team::withTrashed()->findOrFail($id);
-        if ($team->image) {
-            try {
-
-                $tem = explode('/', $team->image);
-                $n = count($tem);
-                $filePath = "uploads/teams/" . $tem[$n - 1];
-                // $filePath = storage_path('app/public/uploads/teamss/' . $team->image);
-                unlink($filePath);
-            } catch (\Exception $e) {
-                Log::error("Cannot delete image.\n Error => ".$e->getMessage());
-            }
-        }
-        $team->forceDelete();
-        drakify('success');
-        return redirect()->route("admin.teams.trash");
-    }
 }
